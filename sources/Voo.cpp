@@ -1,7 +1,14 @@
+/**
+ * 
+ * Autores: Bruno Farias e Gustavo Valente
+ * 2022/2 - UFPR - PRÁTICA EM DESENVOLVIMENTO DE SOFTWARE
+ * PROF. PAULO ALMEIDA
+ * 
+*/
 #include <string>
 
-#include "./../includes/Reserva.hpp"
-#include "./../includes/Passageiro.hpp"
+// #include "./../includes/Reserva.hpp"
+// #include "./../includes/Passageiro.hpp"
 #include "./../includes/Voo.hpp"
 
 Voo::Voo(std::string numeroDoVoo, std::string partida, std::string destino, int capacidade) : numeroDoVoo(numeroDoVoo), partida(partida), destino(destino), capacidade(capacidade)

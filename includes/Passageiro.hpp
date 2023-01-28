@@ -1,31 +1,26 @@
+/**
+ * 
+ * Autores: Bruno Farias e Gustavo Valente
+ * 2022/2 - UFPR - PRÁTICA EM DESENVOLVIMENTO DE SOFTWARE
+ * PROF. PAULO ALMEIDA
+ * 
+*/
 #ifndef PASSAGEIRO_H
 #define PASSAGEIRO_H
 
-#include <string>
+#include "string"
 
-class Passageiro
-{
-public:
-    // constructor
-    Passageiro(std::string nome, std::string contato, std::string numeroPassaporte, int idade);
+// #include "./../includes/Reserva.hpp"
+#include "./../includes/Pessoa.hpp"
 
-    // getters
-    std::string getNome() const;
-    std::string getContato() const;
-    std::string getNumeroPassaporte() const;
-    int getIdade() const;
+class Passageiro : public Pessoa {
+    public:
+        // constructor
+        Passageiro(const std::string& nome, const CPF& cpf, const RG& rg, 
+               const std::string& dataDeNascimento, const unsigned long& contato, const std::string& email);
 
-    // setters
-    void setNome(std::string nome);
-    void setContato(std::string contato);
-    void setNumeroPassaporte(std::string numeroPassaporte);
-    void setIdade(int idade);
-
-private:
-    std::string nome;
-    std::string contato;
-    std::string numeroPassaporte;
-    int idade;
+    private:
+        //std::list<Reserva *> reservas;
 };
 
 #endif

@@ -1,40 +1,45 @@
+/**
+ * 
+ * Autores: Bruno Farias e Gustavo Valente
+ * 2022/2 - UFPR - PRÁTICA EM DESENVOLVIMENTO DE SOFTWARE
+ * PROF. PAULO ALMEIDA
+ * 
+*/
 #ifndef VOO_H
 #define VOO_H
 
 #include <string>
 #include <list>
 
-#include "Reserva.hpp"
+// #include "Reserva.hpp"
+class Reserva;  // Forward Declaration
+class Voo {
+    public:
+        // constructor
+        Voo(std::string numeroDoVoo, std::string partida, std::string destino, int capacidade);
 
-class Voo
-{
+        // getters
+        std::string getNumeroDoVoo() const;
+        std::string getPartida() const;
+        std::string getDestino() const;
+        int getCapacidade() const;
+        int getAssentosDisponiveis() const;
+        std::list<Reserva *> getReservas() const;
 
-public:
-    // constructor
-    Voo(std::string numeroDoVoo, std::string partida, std::string destino, int capacidade);
+        // setters
+        void setPartida(std::string partida);
+        void setDestino(std::string destino);
+        void setCapacidade(int capacidade);
+        void setAssentosDisponiveis(int assentosDisponiveis);
+        void setReservas(std::list<Reserva *> reservas);
 
-    // getters
-    std::string getNumeroDoVoo() const;
-    std::string getPartida() const;
-    std::string getDestino() const;
-    int getCapacidade() const;
-    int getAssentosDisponiveis() const;
-    std::list<Reserva *> getReservas() const;
-
-    // setters
-    void setPartida(std::string partida);
-    void setDestino(std::string destino);
-    void setCapacidade(int capacidade);
-    void setAssentosDisponiveis(int assentosDisponiveis);
-    void setReservas(std::list<Reserva *> reservas);
-
-private:
-    std::string numeroDoVoo;
-    std::string partida;
-    std::string destino;
-    int capacidade;
-    int assentosDisponiveis;
-    std::list<Reserva *> reservas;
+    private:
+        std::string numeroDoVoo;
+        std::string partida;
+        std::string destino;
+        int capacidade;
+        int assentosDisponiveis;
+        std::list<Reserva *> reservas;
 };
 
 #endif

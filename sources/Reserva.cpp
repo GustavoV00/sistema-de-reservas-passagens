@@ -1,38 +1,53 @@
-
+/**
+ * 
+ * Autores: Bruno Farias e Gustavo Valente
+ * 2022/2 - UFPR - PRÁTICA EM DESENVOLVIMENTO DE SOFTWARE
+ * PROF. PAULO ALMEIDA
+ * 
+*/
+#include <iostream>
 #include "./../includes/Reserva.hpp"
 #include "./../includes/Passageiro.hpp"
 #include "./../includes/Voo.hpp"
 
-Reserva::Reserva(Passageiro passageiro, Voo voo, int numeroDoAssento) : passageiro(passageiro), voo(voo), numeroDoAssento(numeroDoAssento)
-{
+Reserva::Reserva(const std::string& localizador, const Passageiro& passageiro, const Voo& voo, const std::string numeroDoAssento)
+    : localizador{localizador}, passageiro{passageiro}, voo{voo}, numeroDoAssento{numeroDoAssento}{
 }
 
-Passageiro Reserva::getPassageiro() const
-{
+std::string Reserva::getLocalizador() const {
+    return this->localizador;
+}
+
+void Reserva::setLocalizador(const std::string& localizador){
+    this->localizador = localizador;
+}
+
+Passageiro Reserva::getPassageiro() const{
     return this->passageiro;
 }
-
-Voo Reserva::getVoo() const
-{
-    return this->voo;
-}
-
-int Reserva::getNumeroDoAssento() const
-{
-    return this->numeroDoAssento;
-}
-
-void Reserva::setPassageiro(Passageiro passageiro)
-{
+void Reserva::setPassageiro(const Passageiro& passageiro){
     this->passageiro = passageiro;
 }
 
-void Reserva::setVoo(Voo voo)
-{
+Voo Reserva::getVoo() const{
+    return this->voo;
+}
+void Reserva::setVoo(const Voo& voo){
     this->voo = voo;
 }
 
-void Reserva::setNumeroDoAssento(int numeroDoAssento)
-{
+std::string Reserva::getNumeroDoAssento() const{
+    return this->numeroDoAssento;
+}
+void Reserva::setNumeroDoAssento(const std::string& numeroDoAssento){
     this->numeroDoAssento = numeroDoAssento;
+}
+
+void Reserva::imprimirDadosReserva() {
+    std::cout << "=================================================================================" << std::endl;
+    std::cout << "Código: " << this->getLocalizador() << std::endl;
+    std::cout << "Passageiro: " << this->getPassageiro().getNome() << std::endl;
+    std::cout << "Voo: " << this->getVoo().getNumeroDoVoo() << std::endl;
+    std::cout << "Assento: " << this->getNumeroDoAssento() << std::endl;
+    std::cout << "=================================================================================" << std::endl;
 }

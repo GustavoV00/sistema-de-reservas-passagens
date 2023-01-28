@@ -1,3 +1,10 @@
+/**
+ * 
+ * Autores: Bruno Farias e Gustavo Valente
+ * 2022/2 - UFPR - PRÁTICA EM DESENVOLVIMENTO DE SOFTWARE
+ * PROF. PAULO ALMEIDA
+ * 
+*/
 #ifndef RESERVA_HPP
 #define RESERVA_HPP
 
@@ -5,26 +12,31 @@
 #include "Voo.hpp"
 #include "Passageiro.hpp"
 
-class Reserva
-{
-private:
-    Passageiro passageiro;
-    Voo voo;
-    int numeroDoAssento;
+class Reserva {
+    public:
+        // Construtores
+        Reserva(const std::string& localizador, const Passageiro& passageiro, const Voo& voo, const std::string numeroDoAssento);
 
-public:
-    // Construtores
-    Reserva(Passageiro passageiro, Voo voo, int numeroDoAssento);
+        // getters and setters
+        std::string getLocalizador() const;
+        void setLocalizador(const std::string& localizador);
 
-    // getters
-    Passageiro getPassageiro() const;
-    Voo getVoo() const;
-    int getNumeroDoAssento() const;
+        Passageiro getPassageiro() const;
+        void setPassageiro(const Passageiro& passageiro);
 
-    // setters
-    void setPassageiro(Passageiro passageiro);
-    void setVoo(Voo voo);
-    void setNumeroDoAssento(int numeroDoAssento);
+        Voo getVoo() const;
+        void setVoo(const Voo& voo);
+
+        std::string getNumeroDoAssento() const;
+        void setNumeroDoAssento(const std::string& numeroDoAssento);
+
+        void imprimirDadosReserva();
+
+    private:
+        std::string localizador; 
+        Passageiro passageiro;
+        Voo voo;
+        std::string numeroDoAssento;
 };
 
 #endif
