@@ -13,6 +13,7 @@
 #include "Pessoa.hpp"
 #include "AgenteViagem.hpp"
 #include "Passageiro.hpp"
+#include "Reserva.hpp"
 
 class Console {
     public:
@@ -37,6 +38,11 @@ class Console {
         void editarPassageiro(std::list<Passageiro*>& passageiros);
         void excluirPassageiro(std::list<Passageiro*>& passageiros);
         void gerenciarPassageiros(std::list<Passageiro*>& passageiros);
+
+        void imprimirOpcoesGerenciamentoReservas();
+        void cadastrarReserva(std::list<AgenteViagem*>& agentes, std::list<Passageiro*>& passageiros, std::list<Reserva*>& reservas, std::list<Voo*> voos);
+        void gerenciarReservas(std::list<AgenteViagem*>& agentes, std::list<Passageiro*>& passageiros, std::list<Reserva*>& reservas, std::list<Voo*> voos);
+        
 
         void imprimeStatusLogin();
         void imprimirComandosTelaPrincipal();

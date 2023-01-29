@@ -14,6 +14,7 @@
 #include "./../includes/Pessoa.hpp"
 #include "./../includes/AgenteViagem.hpp"
 #include "./../includes/Passageiro.hpp"
+#include "./../includes/Reserva.hpp"
 #include "./../includes/CPF.hpp"
 #include "./../includes/RG.hpp"
 #include "./../includes/DocumentoInvalidoException.hpp"
@@ -28,12 +29,14 @@ class Utils{
         static void imprimirFuncoesAgentePassageiro();
         static void imprimirListaAgentes(std::list<AgenteViagem*>& agentes);
         static void imprimirListaPassageiros(std::list<Passageiro*>& passageiros);
+        static void imprimirListaReservas(std::list<Reserva*>& reservas);
+        static void imprimirListaVoos(std::list<Voo*>& voos);
         static std::string lerStringTratada(std::string mensagem);
         static CPF* lerCPFTratado(std::string mensagem);
         static RG* lerRGTratado(std::string mensagem);
         static std::string lerDataNascimentoTratada(std::string mensagem);
         static unsigned long lerTelefoneTratado(std::string mensagem);
-        
+        static int geradorNumeroAleatorio();
     private:
        
 };

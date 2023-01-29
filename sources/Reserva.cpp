@@ -49,5 +49,15 @@ void Reserva::imprimirDadosReserva() {
     std::cout << "Passageiro: " << this->getPassageiro().getNome() << std::endl;
     std::cout << "Voo: " << this->getVoo().getNumeroDoVoo() << std::endl;
     std::cout << "Assento: " << this->getNumeroDoAssento() << std::endl;
-    std::cout << "=================================================================================" << std::endl;
+    //std::cout << "=================================================================================" << std::endl;
+}
+
+Reserva* Reserva::buscaReservaLocalizador(const std::string& localizador, std::list<Reserva*> reservas){
+    std::list<Reserva*>::iterator it;
+    for (it = reservas.begin(); it != reservas.end(); it++){
+        if((*it)->getLocalizador().compare(localizador) == 0){
+            return (*it);
+        }
+    }
+    return nullptr;
 }

@@ -31,6 +31,7 @@ class Reserva {
         void setNumeroDoAssento(const std::string& numeroDoAssento);
 
         void imprimirDadosReserva();
+        static Reserva* buscaReservaLocalizador(const std::string& localizador, std::list<Reserva*> reservas);
 
     private:
         std::string localizador; 

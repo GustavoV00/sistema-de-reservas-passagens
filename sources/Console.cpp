@@ -353,3 +353,111 @@ void Console::gerenciarPassageiros(std::list<Passageiro*>& passageiros){
         std::getline(std::cin, comando);
     }
 }
+
+void Console::imprimirOpcoesGerenciamentoReservas(){
+    std::cout << std::endl;
+    std::cout << "----------------------GERENCIAMENTO DE RESERVAS-----------------------" << std::endl;
+    std::cout << "--------------------------------OPÇÕES--------------------------------" << std::endl;
+    std::cout << "1) LISTAR RESERVAS" << std::endl;
+    std::cout << "2) CRIAR RESERVA" << std::endl;
+    std::cout << "3) EDITAR RESERVA" << std::endl;
+    std::cout << "4) EXCLUIR RESERVA" << std::endl;
+    std::cout << "5) VOLTAR" << std::endl;
+    std::cout << "----------------------------------------------------------------------------" << std::endl;
+    std::cout << std::endl;
+}
+
+void Console::cadastrarReserva(std::list<AgenteViagem*>& agentes, std::list<Passageiro*>& passageiros, std::list<Reserva*>& reservas, std::list<Voo*> voos){
+    std::cout << "Adicionando passageiros..." << std::endl;
+    Utils::imprimirListaPassageiros(passageiros);
+    Passageiro *passageiroReserva{nullptr};
+    std::string termoBusca = Utils::lerStringTratada("Digite o Nome completo, CPF, RG ou Email do passageiro a ser adicionado na reserva");
+    std::list<Passageiro*>::iterator it;
+    for (it = passageiros.begin(); it != passageiros.end(); it++){
+        if((*it)->getNome() == termoBusca || (*it)->getEmail().compare(termoBusca) == 0 || std::to_string((*it)->getCpf().getNumero()).compare(termoBusca) == 0 || std::to_string((*it)->getRg().getNumero()).compare(termoBusca) == 0){
+            std::cout << std::endl << "Encontrou passageiro para adicionar: " << std::endl;
+            (*it)->imprimirDadosFormatados();
+            if(mensagemConfirmacao("Tem certeza que deseja adicionar o passageiro acima na reserva?")){
+                passageiroReserva = (*it);
+            }
+        }
+    }
+
+    if(passageiroReserva == nullptr){
+        std::cout << "Falha ao encontrar passageiro para a reserva... " << std::endl;
+        return;
+    }
+
+    std::cout << "Adicionando voos..." << std::endl;
+    Utils::imprimirListaVoos(voos);
+    Voo *vooReserva{nullptr};
+    termoBusca = Utils::lerStringTratada("Digite o Número do voo a ser adicionado na reserva");
+    std::list<Voo*>::iterator it2;
+    for (it2 = voos.begin(); it2 != voos.end(); it2++){
+        if((*it2)->getNumeroDoVoo().compare(termoBusca) == 0){
+            std::cout << std::endl << "Encontrou voo para adicionar: " << std::endl;
+            (*it2)->imprimirDadosVoo();
+
+            if((*it2)->getAssentosDisponiveis() == 0){
+                std::cout << "VOO LOTADO! NÃO SERÁ POSSÍVEL ADICIONAR NA RESERVA!" << std::endl;
+                break;
+            }
+
+            if(mensagemConfirmacao("Tem certeza que deseja adicionar o voo acima na reserva?")){
+                vooReserva = (*it2);
+            }
+        }
+    }
+
+    if(vooReserva == nullptr){
+        std::cout << "Falha ao encontrar voo para a reserva... " << std::endl;
+        return;
+    }
+
+    vooReserva->imprimirMapaDeAssentos();
+    
+    std::string localizador = "LR" + std::to_string(Utils::geradorNumeroAleatorio());
+    while (Reserva::buscaReservaLocalizador(localizador, reservas) != nullptr){
+        localizador = "LR" + std::to_string(Utils::geradorNumeroAleatorio());
+    }
+
+    std::cout << "Criou reserva com localizador: " << localizador << std::endl;
+}
+
+void Console::gerenciarReservas(std::list<AgenteViagem*>& agentes, std::list<Passageiro*>& passageiros, std::list<Reserva*>& reservas, std::list<Voo*> voos){
+    imprimeStatusLogin();
+    imprimirOpcoesGerenciamentoReservas();
+
+    std::string comando{""};
+    std::cout << "Digite o NÚMERO da opção escolhida: " << std::endl << "> ";
+    std::getline(std::cin, comando);
+    while(comando.compare("SAIR") != 0){
+        if(comando.compare("1") == 0){
+            Utils::imprimirListaReservas(reservas);
+        } else if(comando.compare("2") == 0){
+            try {
+                cadastrarReserva(agentes, passageiros, reservas, voos);
+            } catch(std::exception &e){
+                std::cout << "Falha ao cadastrar passageiro: " << e.what() << std::endl;
+            }
+        } /*else if(comando.compare("3") == 0){
+            try {
+                editarPassageiro(passageiros);
+            } catch(std::exception &e){
+                std::cout << "Falha ao excluir passageiro: " << e.what() << std::endl;
+            }
+        } else if(comando.compare("4") == 0){
+            try {
+                excluirPassageiro(passageiros);
+            } catch(std::exception &e){
+                std::cout << "Falha ao excluir passageiro: " << e.what() << std::endl;
+            }
+        } */else if(comando.compare("5") == 0){
+            break;
+        }
+
+        imprimirOpcoesGerenciamentoReservas();
+        std::cout << "> ";
+        std::getline(std::cin, comando);
+    }
+}

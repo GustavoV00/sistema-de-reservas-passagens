@@ -33,6 +33,9 @@ class Voo {
         void setAssentosDisponiveis(int assentosDisponiveis);
         void setReservas(std::list<Reserva *> reservas);
 
+        void imprimirDadosVoo();
+        void imprimirMapaDeAssentos();
+
     private:
         std::string numeroDoVoo;
         std::string partida;

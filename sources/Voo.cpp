@@ -5,14 +5,17 @@
  * PROF. PAULO ALMEIDA
  * 
 */
+#include <iostream>
 #include <string>
 
 // #include "./../includes/Reserva.hpp"
 // #include "./../includes/Passageiro.hpp"
 #include "./../includes/Voo.hpp"
+#include "./../includes/CapacidadeIncorretaException.hpp"
 
-Voo::Voo(std::string numeroDoVoo, std::string partida, std::string destino, int capacidade) : numeroDoVoo(numeroDoVoo), partida(partida), destino(destino), capacidade(capacidade)
-{
+Voo::Voo(std::string numeroDoVoo, std::string partida, std::string destino, int capacidade) : numeroDoVoo(numeroDoVoo), partida(partida), destino(destino){
+    this->setCapacidade(capacidade);
+    this->setAssentosDisponiveis(capacidade);
 }
 
 std::string Voo::getNumeroDoVoo() const
@@ -57,6 +60,9 @@ void Voo::setDestino(std::string destino)
 
 void Voo::setCapacidade(int capacidade)
 {
+    if(capacidade > 0 && capacidade % 4 != 0){
+        throw CapacidadeIncorretaException{"Capacidade inválida!", capacidade};
+    }
     this->capacidade = capacidade;
 }
 
@@ -68,4 +74,25 @@ void Voo::setAssentosDisponiveis(int assentosDisponiveis)
 void Voo::setReservas(std::list<Reserva *> reservas)
 {
     this->reservas = reservas;
+}
+
+void Voo::imprimirDadosVoo(){
+    std::cout << "=================================================================================" << std::endl;
+    std::cout << "Número: " << this->getNumeroDoVoo() << std::endl;
+    std::cout << "Partida: " << this->getPartida() << std::endl;
+    std::cout << "Destino: " << this->getDestino() << std::endl;
+    std::cout << "Capacidade: " << this->getCapacidade() << std::endl;
+    std::cout << "Assentos Disponíveis: " << this->getAssentosDisponiveis() << std::endl;
+}
+
+void Voo::imprimirMapaDeAssentos() {
+    std::cout << std::endl << "Mapa de assentos: " << std::endl;
+    for(int i = 1; i <= (int) this->getCapacidade()/4; i++){
+        std::cout << "[" << i << "A]";
+        std::cout << "[" << i << "B]";
+        std::cout << "  ";
+        std::cout << "[" << i << "C]";
+        std::cout << "[" << i << "D]";
+        std::cout << std::endl;
+    }
 }

@@ -7,6 +7,7 @@
 */
 #include <iostream>
 #include <list>
+#include<cstdlib>
 #include "./../includes/Utils.hpp"
 
 Utils::Utils(){
@@ -59,6 +60,28 @@ void Utils::imprimirListaPassageiros(std::list<Passageiro*>& passageiros){
         std::cout << "Email: " << (*it)->getEmail() << " - Telefone: " << (*it)->getContato() << " - Data de Nascimento: " << (*it)->getDataDeNascimento() << std::endl;
     }
     std::cout << "=====================================================================================" << std::endl;
+}
+
+void Utils::imprimirListaReservas(std::list<Reserva*>& reservas){
+    std::cout  << std::endl << "Reservas: " << std::endl;
+    std::list<Reserva*>::iterator it;
+    for (it = reservas.begin(); it != reservas.end(); it++){
+        std::cout << "=====================================================================================" << std::endl;
+        (*it)->imprimirDadosReserva();
+    }
+    std::cout << "=====================================================================================" << std::endl;
+
+}
+
+void Utils::imprimirListaVoos(std::list<Voo*>& voos){
+    std::cout  << std::endl << "Voos: " << std::endl;
+    std::list<Voo*>::iterator it;
+    for (it = voos.begin(); it != voos.end(); it++){
+        std::cout << "=====================================================================================" << std::endl;
+        (*it)->imprimirDadosVoo();
+    }
+    std::cout << "=====================================================================================" << std::endl;
+
 }
 
 std::string Utils::lerStringTratada(std::string mensagem){
@@ -182,5 +205,11 @@ unsigned long Utils::lerTelefoneTratado(std::string mensagem) {
     }
 
     return 0;
+}
+
+//gera um número aleatório entre 1000 e 1999
+int Utils::geradorNumeroAleatorio(){
+    srand((unsigned) time(NULL));
+    return rand() % 9000 + 1000;
 }
 

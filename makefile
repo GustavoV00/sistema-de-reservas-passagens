@@ -5,8 +5,8 @@ parametrosCompilacao=-Wall #-Wshadow
 
 all: $(nomePrograma)
 
-$(nomePrograma): main.o Pessoa.o CPF.o RG.o DocumentoInvalidoException.o Utils.o Reserva.o Passageiro.o Voo.o AgenteViagem.o Console.o DadoIncorretoException.o
-	$(compilador) -o $(nomePrograma) main.o Pessoa.o CPF.o RG.o DocumentoInvalidoException.o Utils.o Reserva.o Passageiro.o Voo.o AgenteViagem.o Console.o DadoIncorretoException.o $(parametrosCompilacao)
+$(nomePrograma): main.o Pessoa.o CPF.o RG.o DocumentoInvalidoException.o Utils.o Reserva.o Passageiro.o Voo.o AgenteViagem.o Console.o DadoIncorretoException.o CapacidadeIncorretaException.o
+	$(compilador) -o $(nomePrograma) main.o Pessoa.o CPF.o RG.o DocumentoInvalidoException.o Utils.o Reserva.o Passageiro.o Voo.o AgenteViagem.o Console.o DadoIncorretoException.o CapacidadeIncorretaException.o $(parametrosCompilacao)
 
 main.o: main.cpp
 	$(compilador) -c main.cpp $(parametrosCompilacao)
@@ -43,6 +43,9 @@ Console.o: includes/Console.hpp sources/Console.cpp
 
 DadoIncorretoException.o: includes/DadoIncorretoException.hpp sources/DadoIncorretoException.cpp
 	$(compilador) -c sources/DadoIncorretoException.cpp $(parametrosCompilacao)
+
+CapacidadeIncorretaException.o: includes/CapacidadeIncorretaException.hpp sources/CapacidadeIncorretaException.cpp
+	$(compilador) -c sources/CapacidadeIncorretaException.cpp $(parametrosCompilacao)
 
 clean:
 	rm -f *.o *.gch $(nomePrograma)

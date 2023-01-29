@@ -13,6 +13,8 @@ int main(){
 
     std::list<AgenteViagem*> agentes;
     std::list<Passageiro*> passageiros;
+    std::list<Reserva*> reservas;
+    std::list<Voo*> voos;
 
     //cria agente 'default'
     CPF cpfAgente{11111111111};
@@ -34,6 +36,9 @@ int main(){
     Passageiro *passageiro2 = new Passageiro{"Passageiro 2", cpfPassageiro2, rgPassageiro2, "02/02/1998", 04177777777, "passageiro2@gmail.com"};
     passageiros.push_back(passageiro2);
     Utils::imprimirListaPassageiros(passageiros);
+
+    Voo *voo = new Voo{"AD1234", "CWB", "POA", 120};
+    voos.push_back(voo);
     
     Pessoa *usuario{nullptr};
     bool usuarioEhAgente = false;
@@ -63,6 +68,8 @@ int main(){
             }
         } else if(comando.compare("3") == 0){
             console.gerenciarPassageiros(passageiros);
+        } else if(comando.compare("4") == 0){
+            console.gerenciarReservas(agentes, passageiros, reservas, voos);
         } else if(comando.compare("10") == 0){
             break;
         }
@@ -78,7 +85,7 @@ int main(){
     // Passageiro passageiro{"Bruno Farias", cpfBruno, rgBruno, "25/01/2001", 41998877875, "bruno43ist@yahoo.com.br"};
     // passageiro.imprimirDadosFormatados();
 
-    // Voo voo{"AD1234", "CWB", "POA", 154};
+    // 
 
     // Reserva reserva{"ABC", passageiro, voo, "13A"};
 
