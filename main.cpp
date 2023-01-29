@@ -37,7 +37,7 @@ int main(){
     passageiros.push_back(passageiro2);
     Utils::imprimirListaPassageiros(passageiros);
 
-    Voo *voo = new Voo{"AD1234", "CWB", "POA", 120};
+    Voo *voo = new Voo{"AD1234", "Curitiba", "Porto Alegre", 120, "01/01/2023", "15:30", "16:30"};
     voos.push_back(voo);
     
     Pessoa *usuario{nullptr};
@@ -54,15 +54,19 @@ int main(){
         if(comando.compare("1") == 0){
             usuario = Console::loginAgente(agentes);
             if(usuario != nullptr){
-                std::cout << "Encontrou! Logado como" << usuario->getNome() << std::endl;
+                std::cout << "Encontrou! Logado como: " << usuario->getNome() << std::endl;
                 usuarioEhAgente = true;
+                console.setUsuario(usuario);
+                console.setUsuarioEhAgente(true);
             } else {
                 std::cout << "Falha ao encontrar agente!" << std::endl;
             }
         } else if(comando.compare("2") == 0){
             usuario = Console::loginPassageiro(passageiros);
             if(usuario != nullptr){
-                std::cout << "Encontrou! Logado como" << usuario->getNome() << std::endl;
+                std::cout << "Encontrou! Logado como: " << usuario->getNome() << std::endl;
+                console.setUsuario(usuario);
+                console.setUsuarioEhAgente(false);
             } else {
                 std::cout << "Falha ao encontrar passageiro!" << std::endl;
             }
@@ -70,11 +74,17 @@ int main(){
             console.gerenciarPassageiros(passageiros);
         } else if(comando.compare("4") == 0){
             console.gerenciarReservas(agentes, passageiros, reservas, voos);
+        } else if(comando.compare("5") == 0){
+            if(console.verificaUsuarioEhAgente()){
+                console.gerenciarVoos(voos);
+            } else {
+                std::cout << "OPÇÃO PERMITIDA APENAS PARA AGENTES LOGADOS!" << std::endl;
+            }
+            
         } else if(comando.compare("10") == 0){
             break;
         }
 
-        
         console.imprimirComandosTelaPrincipal();
         std::cout << "> ";
         std::getline(std::cin, comando);
@@ -99,6 +109,15 @@ int main(){
         delete passageiros.front();
         passageiros.pop_front();
     }
+    while(!voos.empty()){
+        delete voos.front();
+        voos.pop_front();
+    }
+    while(!reservas.empty()){
+        delete reservas.front();
+        reservas.pop_front();
+    }
+
 
     return 0;
 }

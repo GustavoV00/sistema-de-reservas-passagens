@@ -44,10 +44,13 @@ void Reserva::setNumeroDoAssento(const std::string& numeroDoAssento){
 }
 
 void Reserva::imprimirDadosReserva() {
-    std::cout << "=================================================================================" << std::endl;
+    std::cout << "=============================================================================================================================" << std::endl;
     std::cout << "Código: " << this->getLocalizador() << std::endl;
-    std::cout << "Passageiro: " << this->getPassageiro().getNome() << std::endl;
-    std::cout << "Voo: " << this->getVoo().getNumeroDoVoo() << std::endl;
+    std::cout << "Passageiro: " << this->getPassageiro().getNome() << " - Email: " << this->getPassageiro().getEmail() 
+        << " - CPF: " << this->getPassageiro().getCpf().getNumero() << std::endl;
+    std::cout << "Voo: " << this->getVoo().getNumeroDoVoo() << " - Partida: " << this->getVoo().getPartida() << " - Destino: " << 
+    this->getVoo().getDestino() << " - Data: " << this->getVoo().getData() << " - Horário Partida: " << this->getVoo().getHorarioPartida() <<
+    " - Horário Chegada: " << this->getVoo().getHorarioChegada() << std::endl;
     std::cout << "Assento: " << this->getNumeroDoAssento() << std::endl;
     //std::cout << "=================================================================================" << std::endl;
 }

@@ -10,6 +10,7 @@
 
 #include "string"
 #include <list>
+#include <ctype.h>
 #include "Pessoa.hpp"
 #include "AgenteViagem.hpp"
 #include "Passageiro.hpp"
@@ -25,7 +26,7 @@ class Console {
 
         //getters and setters
         Pessoa* getUsuario() const;
-        void setCodigo(Pessoa* usuario);
+        void setUsuario(Pessoa* usuario);
 
         bool getUsuarioEhAgente() const;
         void setUsuarioEhAgente(const bool& usuarioEhAgente);
@@ -43,10 +44,15 @@ class Console {
         void cadastrarReserva(std::list<AgenteViagem*>& agentes, std::list<Passageiro*>& passageiros, std::list<Reserva*>& reservas, std::list<Voo*> voos);
         void gerenciarReservas(std::list<AgenteViagem*>& agentes, std::list<Passageiro*>& passageiros, std::list<Reserva*>& reservas, std::list<Voo*> voos);
         
+        void imprimirOpcoesGerenciamentoVoos();
+        void cadastrarVoo(std::list<Voo*>& voos);
+        void gerenciarVoos(std::list<Voo*>& voos);
 
         void imprimeStatusLogin();
         void imprimirComandosTelaPrincipal();
         static bool mensagemConfirmacao(std::string mensagem);
+
+        bool verificaUsuarioEhAgente();
        
     private:
         Pessoa *usuario;

@@ -5,8 +5,8 @@ parametrosCompilacao=-Wall #-Wshadow
 
 all: $(nomePrograma)
 
-$(nomePrograma): main.o Pessoa.o CPF.o RG.o DocumentoInvalidoException.o Utils.o Reserva.o Passageiro.o Voo.o AgenteViagem.o Console.o DadoIncorretoException.o CapacidadeIncorretaException.o
-	$(compilador) -o $(nomePrograma) main.o Pessoa.o CPF.o RG.o DocumentoInvalidoException.o Utils.o Reserva.o Passageiro.o Voo.o AgenteViagem.o Console.o DadoIncorretoException.o CapacidadeIncorretaException.o $(parametrosCompilacao)
+$(nomePrograma): main.o Pessoa.o CPF.o RG.o DocumentoInvalidoException.o Utils.o Reserva.o Passageiro.o Voo.o AgenteViagem.o Console.o DadoIncorretoException.o CapacidadeIncorretaException.o FormatoInvalidoException.o
+	$(compilador) -o $(nomePrograma) main.o Pessoa.o CPF.o RG.o DocumentoInvalidoException.o Utils.o Reserva.o Passageiro.o Voo.o AgenteViagem.o Console.o DadoIncorretoException.o CapacidadeIncorretaException.o FormatoInvalidoException.o $(parametrosCompilacao)
 
 main.o: main.cpp
 	$(compilador) -c main.cpp $(parametrosCompilacao)
@@ -46,6 +46,9 @@ DadoIncorretoException.o: includes/DadoIncorretoException.hpp sources/DadoIncorr
 
 CapacidadeIncorretaException.o: includes/CapacidadeIncorretaException.hpp sources/CapacidadeIncorretaException.cpp
 	$(compilador) -c sources/CapacidadeIncorretaException.cpp $(parametrosCompilacao)
+
+FormatoInvalidoException.o: includes/FormatoInvalidoException.hpp sources/FormatoInvalidoException.cpp
+	$(compilador) -c sources/FormatoInvalidoException.cpp $(parametrosCompilacao)
 
 clean:
 	rm -f *.o *.gch $(nomePrograma)
