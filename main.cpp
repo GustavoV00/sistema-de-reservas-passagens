@@ -20,8 +20,20 @@ int main(){
 
     AgenteViagem *agente = new AgenteViagem{"Agente 1", cpfAgente, rgAgente, "01/01/1993", 04133333333, "agente1@gmail.com", "AV1234"};
     agentes.push_back(agente);
-
     Utils::imprimirListaAgentes(agentes);
+
+    CPF cpfPassageiro1{22222222222};
+    RG rgPassageiro1{222222222};
+
+    Passageiro *passageiro1 = new Passageiro{"Passageiro 1", cpfPassageiro1, rgPassageiro1, "02/02/1996", 04166666666, "passageiro1@gmail.com"};
+    passageiros.push_back(passageiro1);
+
+    CPF cpfPassageiro2{33333333333};
+    RG rgPassageiro2{333333333};
+
+    Passageiro *passageiro2 = new Passageiro{"Passageiro 2", cpfPassageiro2, rgPassageiro2, "02/02/1998", 04177777777, "passageiro2@gmail.com"};
+    passageiros.push_back(passageiro2);
+    Utils::imprimirListaPassageiros(passageiros);
     
     Pessoa *usuario{nullptr};
     bool usuarioEhAgente = false;
@@ -77,8 +89,8 @@ int main(){
         agentes.pop_front();
     }
     while(!passageiros.empty()){
-        delete agentes.front();
-        agentes.pop_front();
+        delete passageiros.front();
+        passageiros.pop_front();
     }
 
     return 0;

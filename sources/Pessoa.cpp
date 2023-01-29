@@ -57,7 +57,7 @@ void Pessoa::setEmail(const std::string& email) {
 
 void Pessoa::imprimirDadosFormatados(){
     std::cout << "=================================================================================" << std::endl;
-    std::cout << this->getNome() << " - " << this->getCpf().getNumero() << " - " << this->getRg().getNumero() << std::endl;
-    std::cout << this->getEmail() << " - " << this->getContato() << " - " << this->getDataDeNascimento() << std::endl;
+    std::cout << "Nome: " << this->getNome() << " - CPF: " << this->getCpf().getNumero() << " - RG: " << this->getRg().getNumero() << std::endl;
+    std::cout << "Email: " << this->getEmail() << " - Telefone: " << this->getContato() << " - Data de Nascimento: " << this->getDataDeNascimento() << std::endl;
     std::cout << "=================================================================================" << std::endl;
 }

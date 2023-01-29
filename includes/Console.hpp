@@ -34,12 +34,14 @@ class Console {
 
         void imprimirOpcoesGerenciamentoPassageiros();
         void cadastrarPassageiro(std::list<Passageiro*>& passageiros);
+        void editarPassageiro(std::list<Passageiro*>& passageiros);
+        void excluirPassageiro(std::list<Passageiro*>& passageiros);
         void gerenciarPassageiros(std::list<Passageiro*>& passageiros);
 
         void imprimeStatusLogin();
         void imprimirComandosTelaPrincipal();
+        static bool mensagemConfirmacao(std::string mensagem);
        
-
     private:
         Pessoa *usuario;
         bool usuarioEhAgente;
