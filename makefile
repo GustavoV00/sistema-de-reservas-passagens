@@ -5,8 +5,8 @@ parametrosCompilacao=-Wall #-Wshadow
 
 all: $(nomePrograma)
 
-$(nomePrograma): main.o Pessoa.o CPF.o RG.o DocumentoInvalidoException.o Utils.o Reserva.o Passageiro.o Voo.o
-	$(compilador) -o $(nomePrograma) main.o Pessoa.o CPF.o RG.o DocumentoInvalidoException.o Utils.o Reserva.o Passageiro.o Voo.o $(parametrosCompilacao)
+$(nomePrograma): main.o Pessoa.o CPF.o RG.o DocumentoInvalidoException.o Utils.o Reserva.o Passageiro.o Voo.o AgenteViagem.o Console.o DadoIncorretoException.o
+	$(compilador) -o $(nomePrograma) main.o Pessoa.o CPF.o RG.o DocumentoInvalidoException.o Utils.o Reserva.o Passageiro.o Voo.o AgenteViagem.o Console.o DadoIncorretoException.o $(parametrosCompilacao)
 
 main.o: main.cpp
 	$(compilador) -c main.cpp $(parametrosCompilacao)
@@ -34,6 +34,15 @@ Passageiro.o: includes/Passageiro.hpp sources/Passageiro.cpp
 
 Voo.o: includes/Voo.hpp sources/Voo.cpp
 	$(compilador) -c sources/Voo.cpp $(parametrosCompilacao)
+
+AgenteViagem.o: includes/AgenteViagem.hpp sources/AgenteViagem.cpp
+	$(compilador) -c sources/AgenteViagem.cpp $(parametrosCompilacao)
+
+Console.o: includes/Console.hpp sources/Console.cpp
+	$(compilador) -c sources/Console.cpp $(parametrosCompilacao)
+
+DadoIncorretoException.o: includes/DadoIncorretoException.hpp sources/DadoIncorretoException.cpp
+	$(compilador) -c sources/DadoIncorretoException.cpp $(parametrosCompilacao)
 
 clean:
 	rm -f *.o *.gch $(nomePrograma)

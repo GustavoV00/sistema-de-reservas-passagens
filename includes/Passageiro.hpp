@@ -19,6 +19,8 @@ class Passageiro : public Pessoa {
         Passageiro(const std::string& nome, const CPF& cpf, const RG& rg, 
                const std::string& dataDeNascimento, const unsigned long& contato, const std::string& email);
 
+        // destructor
+        virtual ~Passageiro() = default;
     private:
         //std::list<Reserva *> reservas;
 };
