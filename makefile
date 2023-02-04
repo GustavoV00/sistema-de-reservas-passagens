@@ -1,6 +1,6 @@
 nomePrograma=srp
 compilador=g++
-parametrosCompilacao=-Wall #-Wshadow
+parametrosCompilacao=-Wall -std=c++17 #-Wshadow
 
 
 all: $(nomePrograma)
