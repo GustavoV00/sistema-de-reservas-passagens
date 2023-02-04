@@ -211,7 +211,7 @@ void Console::cadastrarPassageiro(std::list<Passageiro*>& passageiros){
 }
 bool Console::mensagemConfirmacao(std::string mensagem){
     std::string retorno{""};
-    std::cout << mensagem << "(S/n): ";
+    std::cout  << std::endl << mensagem << "(S/n): ";
     std::getline(std::cin, retorno);
     while(retorno.compare("SAIR") != 0 && retorno.compare("S") != 0 && retorno.compare("n") != 0){
         
@@ -404,16 +404,30 @@ void Console::imprimirOpcoesGerenciamentoReservas(){
 }
 
 void Console::cadastrarReserva(std::list<AgenteViagem*>& agentes, std::list<Passageiro*>& passageiros, std::list<Reserva*>& reservas, std::list<Voo*> voos){
+    if(passageiros.empty()){
+        std::cout << "Nenhum passageiro para cadastrar na reserva! Por favor, adicione um ou mais passageiros no menu 'GERENCIAR PASSAGEIROS'!" << std::endl;
+        return;
+    }
+    if(voos.empty()){
+        std::cout << "Nenhum voo para cadastrar na reserva! Por favor, adicione um ou mais voos no menu 'GERENCIAR VOOS' (apenas logado como agente)!" << std::endl;
+        return;
+    }
+    
     bool adicionouPassageiro = false;
     Passageiro *passageiroReserva{nullptr};
 
     std::cout << "Adicionando passageiro..." << std::endl;
     Utils::imprimirListaPassageiros(passageiros);
-    std::string termoBusca = Utils::lerStringTratada("Digite o Nome completo, CPF, RG ou Email do passageiro a ser adicionado na reserva");
+    std::cout << std::endl;
+
+    std::string termoBusca = Utils::lerStringTratada("Digite o Nome completo, CPF, RG ou Email do passageiro a ser adicionado na reserva ou digite 'SAIR'");
     while(!adicionouPassageiro && termoBusca.compare("SAIR") != 0){
         std::list<Passageiro*>::iterator it;
         for (it = passageiros.begin(); it != passageiros.end(); it++){
-            if((*it)->getNome() == termoBusca || (*it)->getEmail().compare(termoBusca) == 0 || std::to_string((*it)->getCpf().getNumero()).compare(termoBusca) == 0 || std::to_string((*it)->getRg().getNumero()).compare(termoBusca) == 0){
+            if((*it)->getNome() == termoBusca || (*it)->getEmail().compare(termoBusca) == 0 || 
+                std::to_string((*it)->getCpf().getNumero()).compare(termoBusca) == 0 || 
+                std::to_string((*it)->getRg().getNumero()).compare(termoBusca) == 0){
+
                 std::cout << std::endl << "Encontrou passageiro para adicionar: " << std::endl;
                 (*it)->imprimirDadosFormatados();
                 if(mensagemConfirmacao("Tem certeza que deseja adicionar o passageiro acima na reserva?")){
@@ -427,8 +441,12 @@ void Console::cadastrarReserva(std::list<AgenteViagem*>& agentes, std::list<Pass
             break;
         }
 
-        std::cout << "Falha ao encontrar passageiro!" << std::endl;
-        termoBusca = Utils::lerStringTratada("Digite o Nome completo, CPF, RG ou Email do passageiro a ser adicionado na reserva");
+        std::cout << "Falha ao encontrar passageiro! Tente novamente ou digite 'SAIR'" << std::endl;
+        termoBusca = Utils::lerStringTratada("Digite o Nome completo, CPF, RG ou Email do passageiro a ser adicionado na reserva ou digite 'SAIR'");
+    }
+
+    if(termoBusca.compare("SAIR") == 0){
+        return;
     }
     
     if(!adicionouPassageiro){
@@ -440,7 +458,7 @@ void Console::cadastrarReserva(std::list<AgenteViagem*>& agentes, std::list<Pass
     std::cout << "Adicionando voos..." << std::endl;
     Utils::imprimirListaVoos(voos);
     Voo *vooReserva{nullptr};
-    termoBusca = Utils::lerStringTratada("Digite o Número do voo a ser adicionado na reserva");
+    termoBusca = Utils::lerStringTratada("Digite o Número do voo a ser adicionado na reserva ou digite 'SAIR'");
     while(!adicionouVoo && termoBusca.compare("SAIR") != 0){
         std::list<Voo*>::iterator it2;
         for (it2 = voos.begin(); it2 != voos.end(); it2++){
@@ -465,8 +483,12 @@ void Console::cadastrarReserva(std::list<AgenteViagem*>& agentes, std::list<Pass
             break;
         }
 
-        std::cout << "Falha ao encontrar voo!" << std::endl;
-        termoBusca = Utils::lerStringTratada("Digite o Número do voo a ser adicionado na reserva");
+        std::cout << "Falha ao encontrar voo! Tente novamente ou digite 'SAIR'" << std::endl;
+        termoBusca = Utils::lerStringTratada("Digite o Número do voo a ser adicionado na reserva ou digite 'SAIR'");
+    }
+
+    if(termoBusca.compare("SAIR") == 0){
+        return;
     }
 
     if(!adicionouVoo){
@@ -474,53 +496,10 @@ void Console::cadastrarReserva(std::list<AgenteViagem*>& agentes, std::list<Pass
         return;
     }
 
-    std::list<std::string> assentosOcupados;
-    if(!vooReserva->getReservas().empty()){
-        Utils::imprimirListaReservas(vooReserva->getReservas());
-        std::list<Reserva*> reservas = vooReserva->getReservas();
-        std::list<Reserva*>::iterator it;
-        for (it = reservas.begin(); it != reservas.end(); it++){
-            std::string numeroAssentoOcupado = (*it)->getNumeroDoAssento();
-            std::cout << "ADICIONANDO " << numeroAssentoOcupado << " NA LISTA DE ASSENTOS OCUPADOS..." << std::endl;;
-            assentosOcupados.push_back(numeroAssentoOcupado);
-        }
-    }
-
-    vooReserva->imprimirMapaDeAssentos();
-    bool escolheuAssentoValido = false;
-    std::string aux{""};
-    std::string numeroAssentoReserva = Utils::lerStringTratada("Digite o assento desejado (assentos XXX estão ocupados)");
-    std::string letrasAssentos{"ABCD"};
-    while(!escolheuAssentoValido && numeroAssentoReserva.compare("SAIR") != 0){
-
-        //verifica se o assento é válido
-        for(int i = 1; i <= (int) vooReserva->getCapacidade()/4; i++){
-            for(int j = 0; j < 4; j++){
-                char letra = letrasAssentos.at(j);
-
-                if(i < 10){
-                    aux = "0";
-                }
-
-                aux = aux + std::to_string(i) + letra;
-
-                if(numeroAssentoReserva.compare(aux) == 0 && !Utils::assentoOcupado(aux, assentosOcupados)){
-                    escolheuAssentoValido = true;
-                    break;
-                }
-
-                aux = "";
-            }
-            
-        }
-
-        if(escolheuAssentoValido){
-            break;
-        }
-
-        std::cout << "Assento não é válido!" << std::endl;
-        numeroAssentoReserva = Utils::lerStringTratada("Digite o assento desejado (assentos XXX estão ocupados)");
-    }
+    std::string numeroAssentoReserva = vooReserva->escolherAssentoReserva();
+    if(numeroAssentoReserva.compare("SAIR") == 0){
+        return;
+    }  
     
     std::string localizador = "LR" + std::to_string(Utils::geradorNumeroAleatorio());
     int cont = 0;
@@ -529,12 +508,12 @@ void Console::cadastrarReserva(std::list<AgenteViagem*>& agentes, std::list<Pass
         cont++;
     }
 
-    std::cout << "Criou reserva com localizador: " << localizador << std::endl;
+    std::cout << std::endl << "Criou reserva com localizador: " << localizador << std::endl;
 
     Reserva *reserva{nullptr};
     
     try {
-        reserva = new Reserva{localizador,*passageiroReserva,*vooReserva,numeroAssentoReserva};
+        reserva = new Reserva{localizador,*passageiroReserva,vooReserva,numeroAssentoReserva};
     } catch(std::exception &e){
         std::cout << "Falha ao criar reserva: " << e.what() << std::endl;
         return;
@@ -545,8 +524,202 @@ void Console::cadastrarReserva(std::list<AgenteViagem*>& agentes, std::list<Pass
     vooReserva->adicionarReserva(reserva);
     vooReserva->setAssentosDisponiveis(vooReserva->getAssentosDisponiveis()-1);
 
+    Utils::imprimirListaVoos(voos);
+
     std::cout << std::endl << std::endl << "Resumo Reserva: " << std::endl; 
     reserva->imprimirDadosReserva();
+}
+
+void Console::excluirReserva(std::list<Reserva*>& reservas){
+    if(reservas.empty()){
+        std::cout << "Nenhuma reserva encontrada!" << std::endl;
+        return;
+    }
+
+    std::string buscaCodigo = Utils::lerStringTratada("Digite o localizador da reserva a ser excluída(cancelada) ou 'SAIR'");
+    if(buscaCodigo.compare("SAIR") == 0){
+        return;
+    }
+
+    try {
+        std::list<Reserva*>::iterator it{reservas.begin()};
+        bool encontrouReserva = false;
+        for ( ; it != reservas.end(); it++){
+            if((*it)->getLocalizador() == buscaCodigo){
+                    encontrouReserva = true;
+                    std::cout << std::endl << "Encontrou reserva para excluir: " << std::endl;
+                    (*it)->imprimirDadosReserva();
+
+                    if(mensagemConfirmacao("Tem certeza que deseja excluir a reserva acima?")){
+                        std::cout << "Excluindo reserva..." << std::endl;
+
+                        reservas.erase(it);
+                        delete *it;
+
+                        std::cout  << std::endl << "Reserva excluída com sucesso!" << std::endl;
+                        break;
+                    } else {
+                        std::cout << "NÃO vai excluir reserva..." << std::endl;
+                    }
+            }
+        }
+
+        if(!encontrouReserva){
+            std::cout << "Falha ao encontrar reserva para excluir!" << std::endl;
+        }
+    } catch (std::exception &e){
+        std::cout << "Falha ao excluir reserva! " << e.what() << std::endl;
+    }
+}
+
+void Console::editarReserva(std::list<Reserva*>& reservas, std::list<Voo*>& voos){
+    if(reservas.empty()){
+        std::cout << "Nenhuma reserva encontrada!" << std::endl;
+        return;
+    }
+
+    std::string buscaCodigo = Utils::lerStringTratada("Digite o localizador da reserva a ser editada ou 'SAIR'");
+    if(buscaCodigo.compare("SAIR") == 0){
+        return;
+    }
+
+    try {
+        std::list<Reserva*>::iterator it{reservas.begin()};
+        bool encontrouReserva = false;
+        for ( ; it != reservas.end(); it++){
+            if((*it)->getLocalizador() == buscaCodigo){
+                    encontrouReserva = true;
+                    std::cout << std::endl << "Encontrou reserva para editar: " << std::endl;
+                    (*it)->imprimirDadosReserva();
+
+                    if(mensagemConfirmacao("Tem certeza que deseja editar a reserva acima?")){
+                        std::cout << std::endl << "Editando reserva... Escolha o campo que deseja editar: " << std::endl;
+                        std::cout << "--------------------------------OPÇÕES--------------------------------" << std::endl;
+                        std::cout << "1) VOO" << std::endl;
+                        std::cout << "2) ASSENTO" << std::endl;
+                        std::cout << "3) VOLTAR" << std::endl;
+                        std::cout << "----------------------------------------------------------------------------" << std::endl;
+
+                        std::string comando{""};
+                        std::cout << "Digite o NÚMERO da opção escolhida ou 'SAIR': " << std::endl << "> ";
+                        std::getline(std::cin, comando);
+                        while(comando.compare("SAIR") != 0){
+                            if(comando.compare("1") == 0){
+                                
+                                //seleção de novo voo
+
+                                bool trocouVoo = false;
+                                std::cout << "Trocando voos voos..." << std::endl;
+                                Utils::imprimirListaVoos(voos);
+                                //Voo *vooReserva{nullptr};
+                                std::string termoBusca = Utils::lerStringTratada("Digite o Número do voo a ser adicionado na reserva ou digite 'SAIR'");
+                                while(!trocouVoo && termoBusca.compare("SAIR") != 0){
+                                    if((*it)->getVoo()->getNumeroDoVoo().compare(termoBusca) == 0){
+                                        std::cout << "É o mesmo número do voo! Não vai trocar..." << std::endl;
+                                        continue;
+                                    }
+
+                                    std::list<Voo*>::iterator it2{voos.begin()};
+                                    for ( ; it2 != voos.end(); it2++){
+                                        if((*it2)->getNumeroDoVoo().compare(termoBusca) == 0){
+                                            
+                                            std::cout << std::endl << "Encontrou voo para trocar: " << std::endl;
+                                            (*it2)->imprimirDadosVoo();
+
+                                            if((*it2)->getAssentosDisponiveis() == 0){
+                                                std::cout << "VOO LOTADO! NÃO SERÁ POSSÍVEL ADICIONAR NA RESERVA!" << std::endl;
+                                                break;
+                                            }
+
+                                            if(mensagemConfirmacao("Tem certeza que deseja adicionar o voo acima na reserva?")){
+                                                //vooReserva = (*it2);
+                                                
+                                                (*it)->getVoo()->removerReserva((*it));
+                                                (*it)->getVoo()->setAssentosDisponiveis((*it)->getVoo()->getAssentosDisponiveis()+1);
+                                                (*it)->setVoo((*it2));
+                                                
+                                                trocouVoo = true;
+                                                //seleção de novo assento
+                                                std::string numeroAssentoReserva = (*it2)->escolherAssentoReserva();
+                                                if(numeroAssentoReserva.compare("SAIR") == 0){
+                                                    std::cout << "NÃO vai alterar assento da reserva!" << std::endl;
+                                                    return;
+                                                } else {
+                                                    std::cout << std::endl << "Alterando assento da reserva de ["<<(*it)->getNumeroDoAssento()<<"] para ["<<numeroAssentoReserva<<"]!" << std::endl;
+                                                    (*it)->setNumeroDoAssento(numeroAssentoReserva);
+                                                }
+
+                                                (*it)->getVoo()->adicionarReserva((*it));
+                                                (*it)->getVoo()->setAssentosDisponiveis((*it)->getVoo()->getAssentosDisponiveis()-1);
+
+                                                std::cout << "Sucesso ao trocar voo da reserva! Assento do voo antigo foi liberado!" << std::endl;
+
+                                                break;
+                                            } else {
+                                                std::cout << "NÃO vai trocar voo da reserva!" << std::endl;
+                                            }
+                                        }
+                                    }
+
+                                    // if(vooReserva != nullptr){
+                                    //     trocouVoo = true;
+                                    //     break;
+                                    // }
+                                    if(trocouVoo){
+                                        break;
+                                    } 
+
+                                    std::cout << "Falha ao encontrar voo! Tente novamente ou digite 'SAIR'" << std::endl;
+                                    termoBusca = Utils::lerStringTratada("Digite o Número do voo a ser adicionado na reserva ou digite 'SAIR'");
+                                }
+
+                                if(termoBusca.compare("SAIR") == 0){
+                                    return;
+                                }
+
+                                if(!trocouVoo){
+                                    std::cout << "Falha ao encontrar voo para a reserva... " << std::endl;
+                                    return;
+                                }
+
+                                break;
+                            } else if(comando.compare("2") == 0){
+                                
+                                //seleção de novo assento
+                                std::string numeroAssentoReserva = (*it)->getVoo()->escolherAssentoReserva();
+                                if(numeroAssentoReserva.compare("SAIR") == 0){
+                                    std::cout << "NÃO vai alterar assento da reserva!" << std::endl;
+                                    return;
+                                } else {
+                                    std::cout << std::endl << "Alterando assento da reserva de ["<<(*it)->getNumeroDoAssento()<<"] para ["<<numeroAssentoReserva<<"]!" << std::endl;
+                                    (*it)->setNumeroDoAssento(numeroAssentoReserva);
+                                }
+
+                                break;
+                            }  else if(comando.compare("3") == 0){
+                                break;
+                            }
+                        }
+
+                        if(comando.compare("SAIR") != 0){
+                            return;
+                        }
+                        
+
+                        std::cout  << std::endl << "Reserva editada com sucesso!" << std::endl;
+                        break;
+                    } else {
+                        std::cout << "NÃO vai editar reserva..." << std::endl;
+                    }
+            }
+        }
+
+        if(!encontrouReserva){
+            std::cout << "Falha ao encontrar reserva para editar!" << std::endl;
+        }
+    } catch (std::exception &e){
+        std::cout << "Falha ao editar reserva! " << e.what() << std::endl;
+    }
 }
 
 void Console::gerenciarReservas(std::list<AgenteViagem*>& agentes, std::list<Passageiro*>& passageiros, std::list<Reserva*>& reservas, std::list<Voo*> voos){
@@ -565,19 +738,19 @@ void Console::gerenciarReservas(std::list<AgenteViagem*>& agentes, std::list<Pas
             } catch(std::exception &e){
                 std::cout << "Falha ao cadastrar passageiro: " << e.what() << std::endl;
             }
-        } /*else if(comando.compare("3") == 0){
+        } else if(comando.compare("3") == 0){
             try {
-                editarPassageiro(passageiros);
+                editarReserva(reservas, voos);
             } catch(std::exception &e){
-                std::cout << "Falha ao excluir passageiro: " << e.what() << std::endl;
+                std::cout << "Falha ao editar reserva: " << e.what() << std::endl;
             }
         } else if(comando.compare("4") == 0){
             try {
-                excluirPassageiro(passageiros);
+                excluirReserva(reservas);
             } catch(std::exception &e){
-                std::cout << "Falha ao excluir passageiro: " << e.what() << std::endl;
+                std::cout << "Falha ao excluir reserva: " << e.what() << std::endl;
             }
-        } */else if(comando.compare("5") == 0){
+        } else if(comando.compare("5") == 0){
             break;
         }
 

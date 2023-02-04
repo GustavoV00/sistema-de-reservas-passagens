@@ -64,14 +64,18 @@ void Utils::imprimirListaPassageiros(std::list<Passageiro*>& passageiros){
 }
 
 void Utils::imprimirListaReservas(std::list<Reserva*> reservas){
-    std::cout  << std::endl << "Reservas: " << std::endl;
-    std::list<Reserva*>::iterator it;
-    for (it = reservas.begin(); it != reservas.end(); it++){
-        std::cout << "=====================================================================================" << std::endl;
+    if(reservas.empty()){
+        std::cout << std::endl << "Nehuma reserva encontrada! " << std::endl;
+        return;
+    }
+
+    std::cout << std::endl << "Reservas: " << std::endl;
+    std::list<Reserva*>::iterator it{reservas.begin()};
+    for ( ; it != reservas.end(); it++){
+        //std::cout << "=====================================================================================" << std::endl;
         (*it)->imprimirDadosReserva();
     }
-    std::cout << "=====================================================================================" << std::endl;
-
+    //std::cout << "=====================================================================================" << std::endl;
 }
 
 void Utils::imprimirListaVoos(std::list<Voo*>& voos){

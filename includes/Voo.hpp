@@ -46,7 +46,6 @@ class Voo {
         std::list<Reserva *> getReservas() const;
         void setReservas(std::list<Reserva *> reservas);
 
-        // setters
         
         
         
@@ -57,6 +56,9 @@ class Voo {
         void imprimirMapaDeAssentos();
 
         void adicionarReserva(Reserva *reserva);
+        void removerReserva(Reserva *reserva);
+
+        std::string escolherAssentoReserva();
 
     private:
         std::string numeroDoVoo;

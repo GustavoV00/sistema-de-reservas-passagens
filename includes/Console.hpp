@@ -42,10 +42,12 @@ class Console {
 
         void imprimirOpcoesGerenciamentoReservas();
         void cadastrarReserva(std::list<AgenteViagem*>& agentes, std::list<Passageiro*>& passageiros, std::list<Reserva*>& reservas, std::list<Voo*> voos);
+        void excluirReserva(std::list<Reserva*>& reserva);
         void gerenciarReservas(std::list<AgenteViagem*>& agentes, std::list<Passageiro*>& passageiros, std::list<Reserva*>& reservas, std::list<Voo*> voos);
         
         void imprimirOpcoesGerenciamentoVoos();
         void cadastrarVoo(std::list<Voo*>& voos);
+        void editarReserva(std::list<Reserva*>& reservas, std::list<Voo*>& voos);
         void gerenciarVoos(std::list<Voo*>& voos);
 
         void imprimeStatusLogin();

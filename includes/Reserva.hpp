@@ -15,7 +15,7 @@
 class Reserva {
     public:
         // Construtores
-        Reserva(const std::string& localizador, const Passageiro& passageiro, const Voo& voo, const std::string numeroDoAssento);
+        Reserva(const std::string& localizador, const Passageiro& passageiro, Voo *voo, const std::string numeroDoAssento);
 
         // getters and setters
         std::string getLocalizador() const;
@@ -24,8 +24,8 @@ class Reserva {
         Passageiro getPassageiro() const;
         void setPassageiro(const Passageiro& passageiro);
 
-        Voo getVoo() const;
-        void setVoo(const Voo& voo);
+        Voo* getVoo() const;
+        void setVoo(Voo *const voo);
 
         std::string getNumeroDoAssento() const;
         void setNumeroDoAssento(const std::string& numeroDoAssento);
@@ -36,7 +36,7 @@ class Reserva {
     private:
         std::string localizador; 
         Passageiro passageiro;
-        Voo voo;
+        Voo *voo;
         std::string numeroDoAssento;
 };
 
