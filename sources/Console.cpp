@@ -232,21 +232,25 @@ void Console::excluirPassageiro(std::list<Passageiro*>& passageiros){
     try {
         std::list<Passageiro*>::iterator it;
         for (it = passageiros.begin(); it != passageiros.end(); it++){
-            if((*it)->getNome() == termoBusca || (*it)->getEmail().compare(termoBusca) == 0 || std::to_string((*it)->getCpf().getNumero()).compare(termoBusca) == 0 || std::to_string((*it)->getRg().getNumero()).compare(termoBusca) == 0){
-                std::cout << std::endl << "Encontrou passageiro para excluir: " << std::endl;
-                (*it)->imprimirDadosFormatados();
+            if((*it)->getNome() == termoBusca || 
+                (*it)->getEmail().compare(termoBusca) == 0 || 
+                std::to_string((*it)->getCpf().getNumero()).compare(termoBusca) == 0 || 
+                std::to_string((*it)->getRg().getNumero()).compare(termoBusca) == 0){
 
-                if(mensagemConfirmacao("Tem certeza que deseja excluir o passageiro acima?")){
-                    std::cout << "Excluindo passageiro..." << std::endl;
+                    std::cout << std::endl << "Encontrou passageiro para excluir: " << std::endl;
+                    (*it)->imprimirDadosFormatados();
 
-                    passageiros.erase(it);
-                    delete *it;
+                    if(mensagemConfirmacao("Tem certeza que deseja excluir o passageiro acima?")){
+                        std::cout << "Excluindo passageiro..." << std::endl;
 
-                    std::cout  << std::endl << "Passageiro excluído com sucesso!" << std::endl;
-                    break;
-                } else {
-                    std::cout << "NÃO vai excluir passageiro..." << std::endl;
-                }
+                        passageiros.erase(it);
+                        delete *it;
+
+                        std::cout  << std::endl << "Passageiro excluído com sucesso!" << std::endl;
+                        break;
+                    } else {
+                        std::cout << "NÃO vai excluir passageiro..." << std::endl;
+                    }
             }
         }
     } catch (std::exception &e){
