@@ -1,13 +1,10 @@
 
 #include "../../includes/controles/VooControle.hpp"
 
-VooControle::VooControle(const VooServico vooServico)
-    : vooServico{vooServico}
+VooControle::VooControle()
 {
-}
-
-VooControle::~VooControle()
-{
+    VooServico vooServico{};
+    this->setVooServico(vooServico);
 }
 
 VooServico VooControle::getVooServico()

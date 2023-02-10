@@ -1,14 +1,12 @@
 #include "../../includes/modelos/Usuario.hpp"
+#include "../../includes/consoles/ConsoleSistema.hpp"
 // #include "../../includes/modelos/Pessoa.hpp"
 
 Usuario::Usuario()
 {
+    ConsoleSistema consoleSistema;
+    this->setConsoleSistema(consoleSistema);
     this->gerarSessionId();
-}
-
-Usuario::Usuario(ConsoleSistema *consoleSistema)
-    : consoleSistema{consoleSistema}
-{
 }
 
 Usuario::Usuario(const std::string &nome, const CPF &cpf, const RG &rg,
@@ -18,14 +16,16 @@ Usuario::Usuario(const std::string &nome, const CPF &cpf, const RG &rg,
     this->gerarSessionId();
 }
 
-// Usuario::~Usuario()
-// {
-// }
+ConsoleSistema Usuario::getConsoleSistema()
+{
+    return this->consoleSistema;
+}
 
-// void Usuario::setSessionID(const std::string &sessionID)
-// {
-//     this->sessionID();
-// }
+void Usuario::setConsoleSistema(ConsoleSistema consoleSistema)
+{
+    this->consoleSistema = consoleSistema;
+}
+
 std::string Usuario::getSessionID() const
 {
     return this->sessionID;

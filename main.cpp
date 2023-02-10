@@ -4,70 +4,89 @@
 // #include "./includes/AgenteViagem.hpp"
 #include "includes/utils/Utils.hpp"
 // #include "./includes/Reserva.hpp"
-// #include "./includes/Voo.hpp"
+#include "includes/controles/VooControle.hpp"
 // #include "./includes/Console.hpp"
 #include "includes/consoles/ConsoleSistema.hpp"
-#include "includes/consoles/ConsoleConvidado.hpp"
 #include "includes/modelos/UsuarioConvidado.hpp"
 #include "includes/modelos/Usuario.hpp"
+#include "includes/modelos/GerarDados.hpp"
 
 int main()
 {
-    ConsoleSistema *consoleSistema{};
-    UsuarioConvidado usuario{consoleSistema};
-    // usuario->setConsoleSistema(new ConsoleSistema{...});
+    GerarDados gerarDados{};
+    VooControle vooControle{};
+    PassageiroControle passageiroControle{};
+    gerarDados.gerarDadosVoos(&vooControle);
+    gerarDados.gerarDadosPassageiros(&passageiroControle);
+    // VooControle vooControle{};
+    // UsuarioConvidado *usuarioConvidado{};
+    // ConsoleSistema console = usuarioConvidado->getConsoleSistema();
 
-    // ConsoleSistema *console = usuario->getConsoleSistema();
+    // Pode ser logado como passageiro ou como agente
+    // bool logado{false};
 
-    std::string comando{""};
+    // std::string comando{""};
 
     // cria o usuário como convidado
     // UserConvidado uc = cs.gerarInstanciaDeUserConvidado();
 
-    // cs.imprimirMensagemInicioExecucao();
-    // cv.imprimirMensagemInicioExecucaoConvidado();
+    // console.imprimirMensagemInicioExecucao();
+    // console.imprimirMensagemInicioExecucaoConvidado();
 
     // se for 10 encerra a execução
-    while (comando.compare("10") != 0)
-    {
-        // imprime opções do convidado (ou agente/passageiro)
-        // cs.imprimirComandosTelaPrincipal();
-        comando = Utils::leComando(comando);
+    // while (comando.compare("10") != 0)
+    // {
+    //     // imprime opções do convidado (ou agente/passageiro)
+    //     if (!logado)
+    //     {
+    //         console.imprimirComandosTelaPrincipal();
+    //     }
+    //     comando = Utils::lerStringTratada(comando);
 
-        // unsigned long comandoSucesso{0};
+    //     if (comando.compare("3") == 0)
+    //     {
+    //         usuarioConvidado->rodarGerenciamentoDeVoo(&console);
+    //     }
+    //     else if (comando.compare("4") == 0)
+    //     {
+    //         usuarioConvidado->rodarGerenciamentoDeReservas(&console);
+    //     }
 
-        // Condição de saída do convidado
-        // while (cv.deslogarDeConvidado(cmdConvidado))
-        // {
-        //     cv.imprimirComandosTelaDeConvidado();
-        //     cmdConvidado = Utils::leComando(cmdConvidado);
-        //     uc.rodarComando(cmdConvidado);
-        // }
+    //     // unsigned long comandoSucesso{0};
 
-        // std::cout << comando;
+    //     // Condição de saída do convidado
+    //     // while (cv.deslogarDeConvidado(cmdConvidado))
+    //     // {
+    //     //     cv.imprimirComandosTelaDeConvidado();
+    //     //     cmdConvidado = Utils::leComando(cmdConvidado);
+    //     //     uc.rodarComando(cmdConvidado);
+    //     // }
 
-        // Significa que é um usuário convidado
-        // Cadastrar / logar como passageiro
-        // else if (comando.compare("2") != 0)
-        // {
-        //     std::string cmdComum{""};
-        //     unsigned long comandoSucesso{0};
-        //     UserComum userComum = cs->gerarInstanciaDeUserComum();
-        //     ConsoleConvidado cv = userConvidado.getConsoleConvidado();
-        //     // Condição de saída do convidado
-        //     while (cv->deslogarDeConvidado(cmdConvidado))
-        //     {
-        //         cv->imprimirComandosTelaDeConvidado();
-        //         cmdConvidado = Utils::LeComando();
-        //         cv->gerenciamendoComandosConvidado(cmdConvidado, UserConvidado);
-        //     }
-        // }
-        // else if (comando.compare("3") != 0)
-        // {
-        //     // Gerar um usuário admin
-        // }
-    }
+    //     // std::cout << comando;
 
-    delete consoleSistema;
+    //     // Significa que é um usuário convidado
+    //     // Cadastrar / logar como passageiro
+    //     // else if (comando.compare("2") != 0)
+    //     // {
+    //     //     std::string cmdComum{""};
+    //     //     unsigned long comandoSucesso{0};
+    //     //     UserComum userComum = cs->gerarInstanciaDeUserComum();
+    //     //     ConsoleConvidado cv = userConvidado.getConsoleConvidado();
+    //     //     // Condição de saída do convidado
+    //     //     while (cv->deslogarDeConvidado(cmdConvidado))
+    //     //     {
+    //     //         cv->imprimirComandosTelaDeConvidado();
+    //     //         cmdConvidado = Utils::LeComando();
+    //     //         cv->gerenciamendoComandosConvidado(cmdConvidado, UserConvidado);
+    //     //     }
+    //     // }
+    //     // else if (comando.compare("3") != 0)
+    //     // {
+    //     //     // Gerar um usuário admin
+    //     // }
+    // }
+    // console.finalizarSistema();
+
+    // delete usuarioConvidado;
     return 0;
 }

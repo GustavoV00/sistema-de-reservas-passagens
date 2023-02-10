@@ -1,12 +1,12 @@
 
 #include "../../includes/controles/PassageiroControle.hpp"
 
-PassageiroControle::PassageiroControle(const PassageiroServico passageiroServico)
-    : passageiroServico{passageiroServico}
+PassageiroControle::PassageiroControle()
 {
 }
 
-PassageiroControle::~PassageiroControle()
+PassageiroControle::PassageiroControle(const PassageiroServico passageiroServico)
+    : passageiroServico{passageiroServico}
 {
 }
 

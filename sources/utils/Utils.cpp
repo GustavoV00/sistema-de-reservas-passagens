@@ -254,9 +254,9 @@ unsigned long Utils::lerTelefoneTratado(std::string mensagem)
 }
 
 // gera um número aleatório entre 1000 e 1999
-int Utils::geradorNumeroAleatorio()
+unsigned int Utils::geradorNumeroAleatorio()
 {
-    srand((unsigned)time(NULL));
+    // srand((unsigned)time(NULL));
     return rand() % 9000 + 1000;
 }
 
@@ -362,10 +362,4 @@ std::string Utils::lerHorarioTratado(std::string mensagem)
 
     throw FormatoInvalidoException{"Data inválida!"};
     // return retorno;
-}
-
-std::string Utils::leComando(std::string comando)
-{
-    std::getline(std::cin, comando);
-    return comando;
 }

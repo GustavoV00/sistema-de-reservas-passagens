@@ -14,7 +14,7 @@
 #include "../../includes/exceptions/CapacidadeIncorretaException.hpp"
 #include "../../includes/exceptions/FormatoInvalidoException.hpp"
 
-Voo::Voo(unsigned long id, std::string numeroDoVoo, std::string partida, std::string destino, int capacidade, std::string data, std::string horarioPartida, std::string horarioChegada)
+Voo::Voo(unsigned int id, unsigned int numeroDoVoo, std::string partida, std::string destino, unsigned int capacidade, std::string data, std::string horarioPartida, std::string horarioChegada)
     : numeroDoVoo(numeroDoVoo), partida(partida), destino(destino)
 {
     this->setCapacidade(capacidade);
@@ -24,12 +24,17 @@ Voo::Voo(unsigned long id, std::string numeroDoVoo, std::string partida, std::st
     this->setData(data);
 }
 
-std::string Voo::getNumeroDoVoo() const
+unsigned int Voo::getId()
+{
+    return this->id;
+}
+
+unsigned int Voo::getNumeroDoVoo() const
 {
     return this->numeroDoVoo;
 }
 
-void Voo::setNumeroDoVoo(const std::string &numeroDoVoo)
+void Voo::setNumeroDoVoo(const unsigned int numeroDoVoo)
 {
     this->numeroDoVoo = numeroDoVoo;
 }
@@ -99,12 +104,12 @@ int Voo::getCapacidade() const
     return this->capacidade;
 }
 
-void Voo::setCapacidade(const int &capacidade)
+void Voo::setCapacidade(const unsigned int capacidade)
 {
-    if (capacidade > 20 && (capacidade % 4) != 0 && capacidade < 400)
-    {
-        throw CapacidadeIncorretaException{"Capacidade inválida!", capacidade};
-    }
+    // if (capacidade > 20 && (capacidade % 4) != 0 && capacidade < 400)
+    // {
+    //     throw CapacidadeIncorretaException{"Capacidade inválida!", capacidade};
+    // }
     this->capacidade = capacidade;
 }
 

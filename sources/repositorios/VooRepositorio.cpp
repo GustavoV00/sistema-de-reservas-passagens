@@ -1,5 +1,9 @@
 #include "../../includes/repositorios/VooRepositorio.hpp"
 
+VooRepositorio::VooRepositorio()
+{
+}
+
 VooRepositorio::VooRepositorio(const std::list<Voo *> &voo)
     : voos{voo}
 {

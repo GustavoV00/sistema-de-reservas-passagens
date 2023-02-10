@@ -17,13 +17,13 @@ class Voo
 {
 public:
     // constructor
-    Voo(unsigned long id, std::string numeroDoVoo, std::string partida, std::string destino, int capacidade, std::string data, std::string horarioPartida, std::string horarioChegada);
+    Voo(unsigned int id, unsigned int numeroDoVoo, std::string partida, std::string chegada, unsigned int capacidade, std::string data, std::string horarioPartida, std::string horarioChegada);
 
     // getters and setters
-    unsigned long getId();
+    unsigned int getId();
 
-    std::string getNumeroDoVoo() const;
-    void setNumeroDoVoo(const std::string &numeroDoVoo);
+    unsigned int getNumeroDoVoo() const;
+    void setNumeroDoVoo(const unsigned int numeroDoVoo);
 
     std::string getPartida() const;
     void setPartida(const std::string &partida);
@@ -41,7 +41,7 @@ public:
     void setData(const std::string &data);
 
     int getCapacidade() const;
-    void setCapacidade(const int &capacidade);
+    void setCapacidade(const unsigned int capacidade);
 
     int getAssentosDisponiveis() const;
     void setAssentosDisponiveis(const int &assentosDisponiveis);
@@ -56,8 +56,8 @@ public:
     void adicionarReserva(Reserva *reserva);
 
 private:
-    unsigned long id;
-    std::string numeroDoVoo;
+    unsigned int id;
+    unsigned int numeroDoVoo;
     std::string partida;
     std::string destino;
     std::string data;

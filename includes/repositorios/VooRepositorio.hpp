@@ -7,6 +7,7 @@
 class VooRepositorio
 {
 public:
+    VooRepositorio();
     VooRepositorio(const std::list<Voo *> &voo);
     ~VooRepositorio();
 

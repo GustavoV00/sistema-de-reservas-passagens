@@ -1,18 +1,15 @@
 
 #include "../../includes/servicos/VooServico.hpp"
-#include "../../includes/repositorios/VooRepositorio.hpp"
 
 #include <string>
 #include <iostream>
 #include <list>
 
-VooServico::VooServico(const VooRepositorio vooRepositorio)
-    : vooRepositorio{vooRepositorio}
+VooServico::VooServico()
 {
-}
-
-VooServico::~VooServico()
-{
+    std::list<Voo *> voos;
+    VooRepositorio vooRepositorio{voos};
+    this->setVooRepositorio(vooRepositorio);
 }
 
 VooRepositorio VooServico::getVooRepositorio()
@@ -49,8 +46,8 @@ bool VooServico::atualizarVooPorId(unsigned long id, Voo vooNovo)
 {
     try
     {
-        Voo *voo = this->obterVooPorId(id);
-        voo = &vooNovo;
+        // Voo *voo = this->obterVooPorId(id);
+        // voo = &vooNovo;
         return true;
     }
     catch (std::exception &e)
@@ -62,10 +59,9 @@ bool VooServico::atualizarVooPorId(unsigned long id, Voo vooNovo)
 
 bool VooServico::cadastrarVoo(Voo *voo)
 {
-    std::list<Voo *> voos = this->getVooRepositorio().getVoos();
     try
     {
-        voos.push_back(voo);
+        this->getVooRepositorio().getVoos().push_back(voo);
         std::cout << "Sucesso ao cadastrar voo!" << std::endl;
     }
     catch (std::exception &e)

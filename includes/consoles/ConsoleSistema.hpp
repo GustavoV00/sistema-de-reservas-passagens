@@ -1,9 +1,6 @@
 #ifndef CONSOLESISTEMA_H
 #define CONSOLESISTEMA_H
 
-#include "ConsoleConvidado.hpp"
-// #include "../modelos/users/UserConvidado.hpp"
-
 class ConsoleSistema
 {
 public:
@@ -12,6 +9,10 @@ public:
 
     void imprimirMensagemInicioExecucao();
     void imprimirComandosTelaPrincipal();
+    void imprimirMensagemInicioExecucaoConvidado();
+    void imprimirOpcoesGerenciamentoVoos();
+    void finalizarSistema();
+    void imprimirOpcoesGerenciamentoDeReservas();
 
 private:
 };

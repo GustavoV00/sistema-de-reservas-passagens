@@ -1,12 +1,12 @@
 
 #include "../../includes/controles/ReservaControle.hpp"
 
-ReservaControle::ReservaControle(const ReservaServico reservaServico)
-    : reservaServico{reservaServico}
+ReservaControle::ReservaControle()
 {
 }
 
-ReservaControle::~ReservaControle()
+ReservaControle::ReservaControle(const ReservaServico reservaServico)
+    : reservaServico{reservaServico}
 {
 }
 

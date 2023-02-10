@@ -18,6 +18,12 @@ Pessoa::Pessoa(const std::string &nome, const CPF &cpf, const RG &rg,
 {
 }
 
+Pessoa::Pessoa(unsigned int id, const std::string &nome, const CPF &cpf, const RG &rg,
+               const std::string &dataDeNascimento, const unsigned long &contato, const std::string &email)
+    : id{id}, nome{nome}, cpf{cpf}, rg{rg}, dataDeNascimento{dataDeNascimento}, contato{contato}, email{email}
+{
+}
+
 std::string Pessoa::getNome() const
 {
     return this->nome;

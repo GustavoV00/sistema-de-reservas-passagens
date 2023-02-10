@@ -7,12 +7,12 @@
 #include <iostream>
 #include <list>
 
-PassageiroServico::PassageiroServico(const PassageiroRepositorio passageiroRepositorio)
-    : passageiroRepositorio{passageiroRepositorio}
+PassageiroServico::PassageiroServico()
 {
 }
 
-PassageiroServico::~PassageiroServico()
+PassageiroServico::PassageiroServico(const PassageiroRepositorio passageiroRepositorio)
+    : passageiroRepositorio{passageiroRepositorio}
 {
 }
 
@@ -50,8 +50,8 @@ bool PassageiroServico::atualizarPassageiroPorId(unsigned long id, Passageiro pa
 {
     try
     {
-        Passageiro *passageiro = this->obterPassageiroPorId(id);
-        passageiro = &passageiroNovo;
+        // Passageiro *passageiro = this->obterPassageiroPorId(id);
+        // passageiro = &passageiroNovo;
         return true;
     }
     catch (std::exception &e)

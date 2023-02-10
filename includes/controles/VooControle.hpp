@@ -10,8 +10,8 @@ class VooControle
 {
 
 public:
-    VooControle(const VooServico vooServico);
-    virtual ~VooControle() = default;
+    VooControle();
+    ~VooControle() = default;
 
     VooServico getVooServico();
     void setVooServico(VooServico vooServico);
@@ -23,7 +23,6 @@ public:
     bool excluirVooPorId(const unsigned long id);
 
 private:
-    /* data */
     VooServico vooServico;
 };
 

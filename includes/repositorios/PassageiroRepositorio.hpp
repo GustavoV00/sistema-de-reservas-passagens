@@ -8,6 +8,7 @@
 class PassageiroRepositorio
 {
 public:
+    PassageiroRepositorio();
     PassageiroRepositorio(const std::list<Passageiro *> &passageiro);
     ~PassageiroRepositorio();
 

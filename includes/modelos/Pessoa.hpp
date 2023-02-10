@@ -20,6 +20,8 @@ public:
     Pessoa();
     Pessoa(const std::string &nome, const CPF &cpf, const RG &rg,
            const std::string &dataDeNascimento, const unsigned long &contato, const std::string &email);
+    Pessoa(unsigned int id, const std::string &nome, const CPF &cpf, const RG &rg,
+           const std::string &dataDeNascimento, const unsigned long &contato, const std::string &email);
 
     // destructor
     virtual ~Pessoa() = default;
@@ -46,6 +48,7 @@ public:
     void imprimirDadosFormatados();
 
 private:
+    unsigned int id;
     std::string nome;
     CPF cpf;
     RG rg;

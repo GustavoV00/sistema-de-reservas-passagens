@@ -7,8 +7,9 @@ class PassageiroServico
 {
 
 public:
+    PassageiroServico();
     PassageiroServico(const PassageiroRepositorio passageiroRepositorio);
-    virtual ~PassageiroServico() = default;
+    ~PassageiroServico() = default;
 
     PassageiroRepositorio getPassageiroRepositorio();
     void setPassageiroRepositorio(const PassageiroRepositorio PassageiroRepositorio);

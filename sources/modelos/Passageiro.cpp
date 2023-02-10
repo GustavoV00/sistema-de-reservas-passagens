@@ -9,18 +9,18 @@
 #include "../../includes/modelos/Passageiro.hpp"
 #include "../../includes/modelos/Voo.hpp"
 
-Passageiro::Passageiro(const std::string &nome, const CPF &cpf, const RG &rg,
+Passageiro::Passageiro(unsigned int id, const std::string &nome, const CPF &cpf, const RG &rg,
                        const std::string &dataDeNascimento, const unsigned long &contato, const std::string &email)
-    : Pessoa(nome, cpf, rg, dataDeNascimento, contato, email)
+    : Pessoa(id, nome, cpf, rg, dataDeNascimento, contato, email)
 {
 }
 
-unsigned long Passageiro::getId()
+unsigned int Passageiro::getId()
 {
     return this->id;
 }
 
-void Passageiro::setId(unsigned long id)
+void Passageiro::setId(unsigned int id)
 {
     this->id = id;
 }

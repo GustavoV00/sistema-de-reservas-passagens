@@ -7,6 +7,7 @@
 class ReservaRepositorio
 {
 public:
+    ReservaRepositorio();
     ReservaRepositorio(const std::list<Reserva *> &reserva);
     ~ReservaRepositorio();
 

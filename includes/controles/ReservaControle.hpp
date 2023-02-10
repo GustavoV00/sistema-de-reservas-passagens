@@ -10,8 +10,9 @@ class ReservaControle
 {
 
 public:
+    ReservaControle();
     ReservaControle(const ReservaServico reservaServico);
-    virtual ~ReservaControle() = default;
+    ~ReservaControle() = default;
 
     ReservaServico getReservaServico();
     void setReservaServico(ReservaServico reservaServico);

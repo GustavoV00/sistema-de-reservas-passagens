@@ -7,8 +7,8 @@ class VooServico
 {
 
 public:
-    VooServico(const VooRepositorio vooRepositorio);
-    virtual ~VooServico() = default;
+    VooServico();
+    ~VooServico() = default;
 
     VooRepositorio getVooRepositorio();
     void setVooRepositorio(const VooRepositorio VooRepositorio);

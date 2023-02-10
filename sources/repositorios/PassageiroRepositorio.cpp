@@ -1,5 +1,9 @@
 #include "../../includes/repositorios/PassageiroRepositorio.hpp"
 
+PassageiroRepositorio::PassageiroRepositorio()
+{
+}
+
 PassageiroRepositorio::PassageiroRepositorio(const std::list<Passageiro *> &passageiro)
     : passageiros{passageiro}
 {

@@ -7,8 +7,9 @@ class ReservaServico
 {
 
 public:
+    ReservaServico();
     ReservaServico(const ReservaRepositorio reservaRepositorio);
-    virtual ~ReservaServico() = default;
+    ~ReservaServico() = default;
 
     ReservaRepositorio getReservaRepositorio();
     void setReservaRepositorio(const ReservaRepositorio reservaRepositorio);

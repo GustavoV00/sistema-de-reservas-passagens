@@ -10,8 +10,8 @@
 #include "../../includes/modelos/Passageiro.hpp"
 #include "../../includes/modelos/Voo.hpp"
 
-Reserva::Reserva(const std::string &localizador, const Passageiro &passageiro, const Voo &voo, const std::string numeroDoAssento)
-    : localizador{localizador}, passageiro{passageiro}, voo{voo}, numeroDoAssento{numeroDoAssento}
+Reserva::Reserva(unsigned int id, const std::string &localizador, const Passageiro &passageiro, const Voo &voo, const std::string numeroDoAssento)
+    : id{id}, localizador{localizador}, passageiro{passageiro}, voo{voo}, numeroDoAssento{numeroDoAssento}
 {
 }
 

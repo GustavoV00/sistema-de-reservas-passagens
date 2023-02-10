@@ -16,7 +16,7 @@ class Reserva
 {
 public:
     // Construtores
-    Reserva(const std::string &localizador, const Passageiro &passageiro, const Voo &voo, const std::string numeroDoAssento);
+    Reserva(unsigned int id, const std::string &localizador, const Passageiro &passageiro, const Voo &voo, const std::string numeroDoAssento);
 
     // getters and setters
     unsigned long getId();

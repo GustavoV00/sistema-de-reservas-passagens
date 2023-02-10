@@ -1,6 +1,10 @@
 
 #include "../../includes/repositorios/ReservaRepositorio.hpp"
 
+ReservaRepositorio::ReservaRepositorio()
+{
+}
+
 ReservaRepositorio::ReservaRepositorio(const std::list<Reserva *> &reserva)
     : reservas{reserva}
 {

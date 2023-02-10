@@ -10,8 +10,9 @@ class PassageiroControle
 {
 
 public:
+    PassageiroControle();
     PassageiroControle(const PassageiroServico passageiroServico);
-    virtual ~PassageiroControle() = default;
+    ~PassageiroControle() = default;
 
     PassageiroServico getPassageiroServico();
     void setPassageiroServico(PassageiroServico passageiroServico);

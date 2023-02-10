@@ -12,19 +12,21 @@ class Usuario : public Pessoa
 public:
     // construtor padrão
     Usuario();
-    Usuario(ConsoleSistema *consoleSistema);
     Usuario(const std::string &nome, const CPF &cpf, const RG &rg,
             const std::string &dataDeNascimento, const unsigned long &contato, const std::string &email);
 
     // destrutor
     virtual ~Usuario() = default;
 
+    ConsoleSistema getConsoleSistema();
+    void setConsoleSistema(ConsoleSistema consoleSistema);
+
     // void setSessionID(const std::string &sessionID);
     std::string getSessionID() const;
 
 private:
     std::string sessionID;
-    ConsoleSistema *consoleSistema;
+    ConsoleSistema consoleSistema;
 
     void gerarSessionId();
 };

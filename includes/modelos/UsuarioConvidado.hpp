@@ -7,12 +7,13 @@ class UsuarioConvidado : public Usuario
 {
 public:
     UsuarioConvidado();
-    UsuarioConvidado(ConsoleSistema *consoleSistema);
     // UsuarioConvidado(const std::string &nome, const CPF &cpf, const RG &rg,
     //                  const std::string &dataDeNascimento, const unsigned long &contato, const std::string &email);
 
     // Destructor default
     ~UsuarioConvidado();
+    void rodarGerenciamentoDeVoo(ConsoleSistema *console);
+    void rodarGerenciamentoDeReservas(ConsoleSistema *console);
 
 private:
 };

@@ -9,6 +9,7 @@
 #define UTILS_HPP
 
 #include <list>
+#include <iostream>
 #include <string>
 
 #include "../modelos/Pessoa.hpp"
@@ -39,13 +40,11 @@ public:
     static std::string lerDataTratada(std::string mensagem);
     static std::string lerHorarioTratado(std::string mensagem);
     static unsigned long lerTelefoneTratado(std::string mensagem);
-    static int geradorNumeroAleatorio();
+    static unsigned int geradorNumeroAleatorio();
     static bool assentoOcupado(const std::string &assento, std::list<std::string> assentosOcupados);
 
     static bool formatoData(const std::string &data);
     static bool formatoHoraHHMM(const std::string &horario);
-
-    static std::string leComando(std::string comando);
 
 private:
 };

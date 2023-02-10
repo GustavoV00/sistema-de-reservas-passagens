@@ -7,12 +7,12 @@
 #include "../../includes/servicos/ReservaServico.hpp"
 #include "../../includes/repositorios/ReservaRepositorio.hpp"
 
-ReservaServico::ReservaServico(const ReservaRepositorio reservaRepositorio)
-    : reservaRepositorio{reservaRepositorio}
+ReservaServico::ReservaServico()
 {
 }
 
-ReservaServico::~ReservaServico()
+ReservaServico::ReservaServico(const ReservaRepositorio reservaRepositorio)
+    : reservaRepositorio{reservaRepositorio}
 {
 }
 
@@ -50,8 +50,8 @@ bool ReservaServico::atualizarReservaPorId(unsigned long id, Reserva reservaNova
 {
     try
     {
-        Reserva *reserva = this->obterReservaPorId(id);
-        reserva = &reservaNova;
+        // Reserva *reserva = this->obterReservaPorId(id);
+        // reserva = &reservaNova;
         return true;
     }
     catch (std::exception &e)

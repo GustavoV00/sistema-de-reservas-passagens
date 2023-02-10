@@ -17,18 +17,17 @@ class Passageiro : public Pessoa
 {
 public:
     // constructor
-    Passageiro(const std::string &nome, const CPF &cpf, const RG &rg,
+    Passageiro(unsigned int id, const std::string &nome, const CPF &cpf, const RG &rg,
                const std::string &dataDeNascimento, const unsigned long &contato, const std::string &email);
 
     // destructor
-    virtual ~Passageiro() = default;
+    ~Passageiro() = default;
 
-    unsigned long getId();
-    void setId(unsigned long id);
+    unsigned int getId();
+    void setId(unsigned int id);
 
 private:
-    unsigned long id;
-    // std::list<Reserva *> reservas;
+    unsigned int id;
 };
 
 #endif
