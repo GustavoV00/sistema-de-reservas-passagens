@@ -1,5 +1,10 @@
-#ifndef CONSOLESISTEMA_H
-#define CONSOLESISTEMA_H
+#ifndef CONSOLE_SISTEMA_HPP
+#define CONSOLE_SISTEMA_HPP
+
+// #include "../modelos/AgenteViagem.hpp"
+#include <list>
+
+class AgenteViagem;
 
 class ConsoleSistema
 {
@@ -8,11 +13,13 @@ public:
     ~ConsoleSistema() = default;
 
     void imprimirMensagemInicioExecucao();
-    void imprimirComandosTelaPrincipal();
-    void imprimirMensagemInicioExecucaoConvidado();
+    virtual void imprimirComandosTelaPrincipal();
+    // void imprimirMensagemInicioExecucao();
     void imprimirOpcoesGerenciamentoVoos();
     void finalizarSistema();
     void imprimirOpcoesGerenciamentoDeReservas();
+
+    AgenteViagem *loginAgente(std::list<AgenteViagem *> &agentes);
 
 private:
 };

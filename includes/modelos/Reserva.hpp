@@ -16,7 +16,7 @@ class Reserva
 {
 public:
     // Construtores
-    Reserva(unsigned int id, const std::string &localizador, const Passageiro &passageiro, const Voo &voo, const std::string numeroDoAssento);
+    Reserva(unsigned int id, std::string &localizador, Passageiro &passageiro, Voo &voo, std::string numeroDoAssento);
 
     // getters and setters
     unsigned long getId();
@@ -36,6 +36,8 @@ public:
 
     void imprimirDadosReserva();
     static Reserva *buscaReservaLocalizador(const std::string &localizador, std::list<Reserva *> reservas);
+
+    static Reserva *verificaSeAssentoExiste(const std::string &numAssento, std::list<Reserva *> reservas);
 
 private:
     unsigned long id;

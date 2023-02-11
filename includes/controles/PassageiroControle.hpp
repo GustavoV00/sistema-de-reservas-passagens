@@ -18,10 +18,10 @@ public:
     void setPassageiroServico(PassageiroServico passageiroServico);
 
     std::list<Passageiro *> obterTodosOsPassageiros();
-    Passageiro *obterPassageiroPorId(const unsigned long id);
+    Passageiro *obterPassageiroPorId(const unsigned int id);
     bool atualizarPassageiroPorId(unsigned long id, Passageiro passageiroNovo);
     bool cadastrarPassageiro(Passageiro *passageiro);
-    bool excluirPassageiroPorId(const unsigned long id);
+    bool excluirPassageiroPorId(const unsigned int id);
 
 private:
     /* data */

@@ -11,7 +11,7 @@ public:
     //                  const std::string &dataDeNascimento, const unsigned long &contato, const std::string &email);
 
     // Destructor default
-    ~UsuarioConvidado();
+    ~UsuarioConvidado() = default;
     void rodarGerenciamentoDeVoo(ConsoleSistema *console);
     void rodarGerenciamentoDeReservas(ConsoleSistema *console);
 

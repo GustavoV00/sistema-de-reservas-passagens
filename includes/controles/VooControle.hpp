@@ -17,10 +17,10 @@ public:
     void setVooServico(VooServico vooServico);
 
     std::list<Voo *> obterTodosOsVoos();
-    Voo *obterVooPorId(const unsigned long id);
-    bool atualizarVooPorId(unsigned long id, Voo vooNovo);
+    Voo *obterVooPorId(const unsigned int id);
+    bool atualizarVooPorId(unsigned int id, Voo vooNovo);
     bool cadastrarVoo(Voo *voo);
-    bool excluirVooPorId(const unsigned long id);
+    bool excluirVooPorId(const unsigned int id);
 
 private:
     VooServico vooServico;

@@ -1,8 +1,9 @@
 #include "../../includes/modelos/AgenteViagem.hpp"
 
 AgenteViagem::AgenteViagem(const std::string &nome, const CPF &cpf, const RG &rg,
-                           const std::string &dataDeNascimento, const unsigned long &contato, const std::string &email, const std::string &codigo)
-    : Pessoa(nome, cpf, rg, dataDeNascimento, contato, email), codigo{codigo}
+                           const std::string &dataDeNascimento, const unsigned long &contato,
+                           const std::string &email, const std::string &codigo)
+    : Usuario(nome, cpf, rg, dataDeNascimento, contato, email), codigo{codigo}
 {
 }
 

@@ -4,8 +4,6 @@
 
 Usuario::Usuario()
 {
-    ConsoleSistema consoleSistema;
-    this->setConsoleSistema(consoleSistema);
     this->gerarSessionId();
 }
 
@@ -14,16 +12,6 @@ Usuario::Usuario(const std::string &nome, const CPF &cpf, const RG &rg,
     : Pessoa{nome, cpf, rg, dataDeNascimento, contato, email}
 {
     this->gerarSessionId();
-}
-
-ConsoleSistema Usuario::getConsoleSistema()
-{
-    return this->consoleSistema;
-}
-
-void Usuario::setConsoleSistema(ConsoleSistema consoleSistema)
-{
-    this->consoleSistema = consoleSistema;
 }
 
 std::string Usuario::getSessionID() const

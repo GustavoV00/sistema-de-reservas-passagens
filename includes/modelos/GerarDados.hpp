@@ -13,7 +13,9 @@ public:
 
     void gerarDadosVoos(VooControle *vooControle);
     void gerarDadosPassageiros(PassageiroControle *passageiroControle);
-    void gerarDadosReservas(ReservaControle *reservaControle);
+    void gerarDadosReservas(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle);
+    std::string gerarNovoNumeroDoAssento(ReservaControle *reservaControle, unsigned int capacidade);
+    std::string gerarLocalizador(ReservaControle *reservaControle);
     std::string gerarNovaData();
     std::string gerarNovoHorario();
     unsigned int gerarCapacidade();

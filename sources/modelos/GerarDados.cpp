@@ -1,3 +1,4 @@
+#include <vector>
 #include "../../includes/modelos/GerarDados.hpp"
 #include "../../includes/utils/Utils.hpp"
 #include "../../includes/modelos/Voo.hpp"
@@ -42,8 +43,8 @@ void GerarDados::gerarDadosPassageiros(PassageiroControle *passageiroControle)
     {
         unsigned int id{i};
         std::string nome = "Passageiro" + std::to_string(i);
-        CPF cpf{11111111111};
-        RG rg{111111111};
+        CPF cpf{11111111111}; // Criar um gerador de CPF
+        RG rg{111111111};     // Criar um gerador de RG
         std::string dataDeNascimento = this->gerarNovaData();
         unsigned long contato = 4199799999;
         std::string email = "email" + std::to_string(i) + "@email" + std::to_string(i) + ".com";
@@ -58,30 +59,72 @@ void GerarDados::gerarDadosPassageiros(PassageiroControle *passageiroControle)
     }
 }
 
-// void GerarDados::gerarDadosReservas(ReservaControle *reservaControle)
-// {
-//     // Passageiro(const std::string &nome, const CPF &cpf, const RG &rg,
-//     //            const std::string &dataDeNascimento, const unsigned long &contato, const std::string &email);
-//     srand((unsigned)time(NULL));
-//     for (unsigned int i = 0; i < 30; i++)
-//     {
-//         unsigned int id{i};
-//         std::string nome = "Passageiro" + std::to_string(i);
-//         // CPF cpf{11111111111};
-//         // RG rg{111111111};
-//         // std::string dataDeNascimento = this->gerarNovaData();
-//         // unsigned long contato = 4199799999;
-//         // std::string email = "email" + std::to_string(i) + "@email" + std::to_string(i) + ".com";
+void GerarDados::gerarDadosReservas(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle)
+{
+    // Passageiro(const std::string &nome, const CPF &cpf, const RG &rg,
+    //            const std::string &dataDeNascimento, const unsigned long &contato, const std::string &email);
+    srand((unsigned)time(NULL));
+    for (unsigned int i = 0; i < 30; i++)
+    {
+        unsigned int id{i};
+        unsigned int passageiroAleatorio = (rand() % 30) + 1;
+        unsigned int vooAleatorio = (rand() % 30) + 1;
+        std::string localizador = this->gerarLocalizador(reservaControle);
 
-//         // std::cout << id << " " << nome << " " << cpf.getNumero() << " " << rg.getNumero() << " " << dataDeNascimento << " " << contato << " " << email << std::endl;
+        // Verificar se não existe alguma coisa errado com os dados
+        // No sentido de um passageiro pertece a mais de uma reserva ou algo assim
+        Passageiro *passageiro = passageiroControle->obterPassageiroPorId(passageiroAleatorio);
+        Voo *voo = vooControle->obterVooPorId(vooAleatorio);
+        unsigned int capacidade = voo->getCapacidade();
 
-//         // Passageiro passageiro{id, nome, cpf, rg, dataDeNascimento, contato, email};
-//         // passageiroControle->cadastrarPassageiro(&passageiro);
+        // std::string numeroDoAssento = this->gerarNovoNumeroDoAssento(reservaControle, capacidade);
 
-//         // Voo voo{id, numeroDoVoo, partida, chegada, capacidade, data, horarioPartida, horarioChegada};
-//         // vooControle->cadastrarVoo(&voo);
-//     }
-// }
+        // Reserva reserva{id, localizador, passageiro, voo, numeroDoAssento};
+        // vooControle->cadastrarVoo(&voo);
+    }
+}
+
+std::string GerarDados::gerarNovoNumeroDoAssento(ReservaControle *reservaControle, unsigned int capacidade)
+{
+    std::string letrasAssentos{"ABCD"};
+    unsigned int letraAleatoria;
+    unsigned int numero;
+
+    std::string numAssento;
+    std::list<Reserva *> reservas = reservaControle->obterTodosAsReservas();
+    do
+    {
+        letraAleatoria = rand() % 4;
+        // numero = (rand() % capacidade) + 1;
+        numero = (rand() % 20) + 1;
+        if (numero < 10)
+            numAssento = "0" + std::to_string(numero) + letrasAssentos.at(letraAleatoria);
+        else
+            numAssento = std::to_string(numero) + letrasAssentos.at(letraAleatoria);
+    } while (Reserva::buscaReservaLocalizador(numAssento, reservas) != nullptr);
+
+    std::cout << numAssento << std::endl;
+
+    return numAssento;
+
+    // std::cout << gerarNumero << " " << charAleatorio[0];
+}
+
+std::string GerarDados::gerarLocalizador(ReservaControle *reservaControle)
+{
+    std::string localizador = "LR" + std::to_string(Utils::geradorNumeroAleatorio());
+    int cont = 0;
+
+    std::list<Reserva *> reservas = reservaControle->getReservaServico().obterTodosAsReservas();
+    while (Reserva::buscaReservaLocalizador(localizador, reservas) != nullptr && cont < 100)
+    {
+        localizador = "LR" + std::to_string(Utils::geradorNumeroAleatorio());
+        cont++;
+    }
+
+    std::cout << "Criou reserva com localizador: " << localizador << std::endl;
+    return localizador;
+}
 
 std::string GerarDados::gerarNovaData()
 {
@@ -118,6 +161,10 @@ std::string GerarDados::gerarNovoHorario()
 
 unsigned int GerarDados::gerarCapacidade()
 {
-    unsigned int capacidade = (rand() % 200) + 50;
+    unsigned int capacidade;
+    do
+    {
+        capacidade = (rand() % 200) + 50;
+    } while (capacidade % 4 != 0);
     return capacidade;
 }

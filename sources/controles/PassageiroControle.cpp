@@ -25,7 +25,7 @@ std::list<Passageiro *> PassageiroControle::obterTodosOsPassageiros()
     return this->getPassageiroServico().obterTodosOsPassageiros();
 }
 
-Passageiro *PassageiroControle::obterPassageiroPorId(const unsigned long id)
+Passageiro *PassageiroControle::obterPassageiroPorId(const unsigned int id)
 {
     return this->getPassageiroServico().obterPassageiroPorId(id);
 }
@@ -40,7 +40,7 @@ bool PassageiroControle::cadastrarPassageiro(Passageiro *passageiro)
     return this->getPassageiroServico().cadastrarPassageiro(passageiro);
 }
 
-bool PassageiroControle::excluirPassageiroPorId(const unsigned long id)
+bool PassageiroControle::excluirPassageiroPorId(const unsigned int id)
 {
     return this->getPassageiroServico().excluirPassageiroPorId(id);
 }

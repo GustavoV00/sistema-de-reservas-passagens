@@ -3,24 +3,16 @@
 #include "../../includes/modelos/UsuarioConvidado.hpp"
 #include "../../includes/modelos/Usuario.hpp"
 #include "../../includes/utils/Utils.hpp"
-
-// #include "../../../includes/consoles/ConsoleConvidado.hpp"
-// #include "../../../includes/utils/Utils.hpp"
-
-// UsuarioConvidado::UsuarioConvidado(const std::string &nome, const CPF &cpf, const RG &rg,
-//                                    const std::string &dataDeNascimento, const unsigned long &contato, const std::string &email)
-//     : Usuario{nome, cpf, rg, dataDeNascimento, contato, email}
-// {
-// }
+#include "../../includes/consoles/ConsoleSistema.hpp"
 
 UsuarioConvidado::UsuarioConvidado()
     : Usuario()
 {
 }
 
-UsuarioConvidado::~UsuarioConvidado()
-{
-}
+// UsuarioConvidado::~UsuarioConvidado()
+// {
+// }
 
 void UsuarioConvidado::rodarGerenciamentoDeVoo(ConsoleSistema *console)
 {

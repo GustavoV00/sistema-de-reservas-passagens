@@ -10,9 +10,9 @@
 
 #include "string"
 
-#include "../../includes/modelos/Pessoa.hpp"
+#include "Usuario.hpp"
 
-class AgenteViagem : public Pessoa
+class AgenteViagem : public Usuario
 {
 public:
     // constructor

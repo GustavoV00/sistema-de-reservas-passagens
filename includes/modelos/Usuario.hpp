@@ -18,15 +18,11 @@ public:
     // destrutor
     virtual ~Usuario() = default;
 
-    ConsoleSistema getConsoleSistema();
-    void setConsoleSistema(ConsoleSistema consoleSistema);
-
     // void setSessionID(const std::string &sessionID);
     std::string getSessionID() const;
 
 private:
     std::string sessionID;
-    ConsoleSistema consoleSistema;
 
     void gerarSessionId();
 };

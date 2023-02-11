@@ -11,9 +11,9 @@
 #include "string"
 
 // #include "../../includes/Reserva.hpp"
-#include "Pessoa.hpp"
+#include "Usuario.hpp"
 
-class Passageiro : public Pessoa
+class Passageiro : public Usuario
 {
 public:
     // constructor

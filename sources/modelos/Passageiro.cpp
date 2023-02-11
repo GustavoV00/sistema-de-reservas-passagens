@@ -11,7 +11,7 @@
 
 Passageiro::Passageiro(unsigned int id, const std::string &nome, const CPF &cpf, const RG &rg,
                        const std::string &dataDeNascimento, const unsigned long &contato, const std::string &email)
-    : Pessoa(id, nome, cpf, rg, dataDeNascimento, contato, email)
+    : Usuario(nome, cpf, rg, dataDeNascimento, contato, email), id{id}
 {
 }
 
