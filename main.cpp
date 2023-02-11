@@ -17,6 +17,7 @@
 
 #include "includes/consoles/ConsoleSistema.hpp"
 #include "includes/consoles/ConsoleAgente.hpp"
+#include "includes/consoles/ConsolePassageiro.hpp"
 
 int main()
 {
@@ -69,7 +70,7 @@ int main()
                 delete usuario;
                 usuario = passageiroLogado;
                 delete console;
-                // console = new ConsolePassageiro{};
+                console = new ConsolePassageiro{};
                 std::cout << "Mudou console!" << std::endl;
             }
         }
@@ -87,7 +88,7 @@ int main()
                 usuario = novoUsuarioAgente;
                 delete console;                // exclui o console atual
                 console = new ConsoleAgente{}; // cria um console para agentes
-                //std::cout << "Mudou console!" << std::endl;
+                // std::cout << "Mudou console!" << std::endl;
             }
             else
             {

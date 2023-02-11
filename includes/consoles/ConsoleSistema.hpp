@@ -5,6 +5,7 @@
 #include <list>
 
 #include "../controles/VooControle.hpp"
+#include "../controles/ReservaControle.hpp"
 #include "../controles/PassageiroControle.hpp"
 
 class AgenteViagem;
