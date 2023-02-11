@@ -1,5 +1,5 @@
-#ifndef PASSAGEIROCONTROLE_H
-#define PASSAGEIROCONTROLE_H
+#ifndef PASSAGEIRO_CONTROLE_H
+#define PASSAGEIRO_CONTROLE_H
 
 #include "../modelos/Passageiro.hpp"
 #include "../repositorios/PassageiroRepositorio.hpp"

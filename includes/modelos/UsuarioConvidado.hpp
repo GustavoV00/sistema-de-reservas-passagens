@@ -12,8 +12,6 @@ public:
 
     // Destructor default
     ~UsuarioConvidado() = default;
-    void rodarGerenciamentoDeVoo(ConsoleSistema *console);
-    void rodarGerenciamentoDeReservas(ConsoleSistema *console);
 
 private:
 };

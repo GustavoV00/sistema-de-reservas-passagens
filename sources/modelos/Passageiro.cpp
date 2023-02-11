@@ -5,8 +5,8 @@
  * PROF. PAULO ALMEIDA
  *
  */
-#include "../../includes/modelos/Reserva.hpp"
 #include "../../includes/modelos/Passageiro.hpp"
+#include "../../includes/modelos/Reserva.hpp"
 #include "../../includes/modelos/Voo.hpp"
 
 Passageiro::Passageiro(unsigned int id, const std::string &nome, const CPF &cpf, const RG &rg,

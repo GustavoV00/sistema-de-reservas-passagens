@@ -15,7 +15,7 @@ void GerarDados::gerarDadosVoos(VooControle *vooControle)
     for (unsigned int i = 0; i < 30; i++)
     {
         unsigned int id{i};
-        unsigned int numeroDoVoo = Utils::geradorNumeroAleatorio();
+        int numeroDoVoo = Utils::geradorNumeroAleatorio();
         std::string partida = "Partida" + std::to_string(i);
         std::string chegada = "Chegada" + std::to_string(i);
         std::string data = this->gerarNovaData();
@@ -25,7 +25,7 @@ void GerarDados::gerarDadosVoos(VooControle *vooControle)
 
         std::string horarioPartida = this->gerarNovoHorario();
         std::string horarioChegada = this->gerarNovoHorario();
-        unsigned int capacidade = this->gerarCapacidade();
+        int capacidade = this->gerarCapacidade();
 
         std::cout << id << " " << numeroDoVoo << " " << partida << " " << chegada << " " << data << " " << horarioPartida << " " << horarioChegada << " " << capacidade << " " << std::endl;
 
@@ -162,12 +162,12 @@ std::string GerarDados::gerarNovoHorario()
     return horario;
 }
 
-unsigned int GerarDados::gerarCapacidade()
+int GerarDados::gerarCapacidade()
 {
-    unsigned int capacidade;
+    int capacidade;
     do
     {
         capacidade = (rand() % 200) + 50;
-    } while (capacidade % 4 != 0);
+    } while ((capacidade % 4 != 0) || (capacidade <= 0) || (capacidade > 200));
     return capacidade;
 }

@@ -1,7 +1,7 @@
-#ifndef RESERVACONTROLE_H
-#define RESERVACONTROLE_H
+#ifndef RESERVA_CONTROLE_H
+#define RESERVA_CONTROLE_H
 
-#include "../servicos/ReservaServico.hpp"
+#include "../repositorios/ReservaRepositorio.hpp"
 #include "../modelos/Reserva.hpp"
 
 #include <string>

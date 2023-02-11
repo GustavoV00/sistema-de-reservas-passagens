@@ -14,9 +14,9 @@ class CapacidadeIncorretaException : public std::runtime_error
 {
 public:
     const std::string mensagem;
-    const unsigned int capacidade;
+    const int capacidade;
 
-    CapacidadeIncorretaException(const std::string mensagem, unsigned int capacidade);
+    CapacidadeIncorretaException(const std::string mensagem, int capacidade);
     virtual ~CapacidadeIncorretaException() = default;
 };
 #endif

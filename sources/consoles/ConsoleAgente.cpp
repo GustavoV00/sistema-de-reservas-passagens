@@ -1,6 +1,8 @@
 #include <iostream>
+#include <string>
 #include "../../includes/consoles/ConsoleAgente.hpp"
 #include "../../includes/utils/Utils.hpp"
+#include "../../includes/modelos/Voo.hpp"
 
 ConsoleAgente::ConsoleAgente()
 {
@@ -34,8 +36,115 @@ void ConsoleAgente::imprimirOpcoesGerenciamentoVoos()
     std::cout << std::endl;
 }
 
-void ConsoleAgente::cadastrarVooInterface()
+void ConsoleAgente::cadastrarVooInterface(VooControle *vooControle)
 {
+    std::list<Voo *> voos = vooControle->obterTodosOsVoos();
+    std::string numeroDoVoo = Utils::lerStringTratada("Digite o número do voo ou 'SAIR'");
+    int numeroDoVooParsed{0};
+
+    while (numeroDoVoo.compare("SAIR") != 0)
+    {
+        if (numeroDoVoo.compare("SAIR") == 0)
+        {
+            return;
+        }
+        try
+        {
+            numeroDoVooParsed = stoi(numeroDoVoo);
+            if (numeroDoVooParsed <= 0)
+            {
+                std::cout << "Número do voo deve ser > 0" << std::endl;
+            }
+            else
+            {
+                // verifica se já existe voo com esse número
+                if (!Utils::existeVooNumero(voos, numeroDoVooParsed))
+                {
+                    break;
+                }
+                std::cout << "Já existe voo com esse número!" << std::endl;
+            }
+        }
+        catch (std::exception &e)
+        {
+            std::cout << "Digite apenas números!" << std::endl;
+        }
+
+        numeroDoVoo = Utils::lerStringTratada("Digite o número do voo ou 'SAIR'");
+    }
+
+    if (numeroDoVoo.compare("SAIR") == 0)
+    {
+        return;
+    }
+    if (numeroDoVooParsed <= 0)
+    {
+        std::cout << "Número do voo não pode ser <= 0" << std::endl;
+        return;
+    }
+
+    std::string partida = Utils::lerStringTratada("Digite o local de partida do voo ou 'SAIR'");
+    if (partida.compare("SAIR") == 0)
+    {
+        return;
+    }
+    std::string chegada = Utils::lerStringTratada("Digite o local de chegada do voo ou 'SAIR'");
+    if (chegada.compare("SAIR") == 0)
+    {
+        return;
+    }
+    std::string data = Utils::lerDataTratada("Digite a data de partida do voo ou 'SAIR'");
+    if (data.compare("SAIR") == 0)
+    {
+        return;
+    }
+    std::string horarioPartida = Utils::lerHorarioTratado("Digite o horário de partida do voo ou 'SAIR'");
+    if (horarioPartida.compare("SAIR") == 0)
+    {
+        return;
+    }
+    std::string horarioChegada = Utils::lerHorarioTratado("Digite o horário de chegada do voo ou 'SAIR'");
+    if (horarioChegada.compare("SAIR") == 0)
+    {
+        return;
+    }
+
+    int capacidade{0};
+    try
+    {
+        std::string stringCapacidade = Utils::lerStringTratada("Digite a capacidade do voo (múltiplo de 4 entre 20 e 200) ou 'SAIR'");
+        if (stringCapacidade.compare("SAIR") == 0)
+        {
+            return;
+        }
+
+        capacidade = stoi(stringCapacidade);
+    }
+    catch (std::exception &e)
+    {
+        std::cout << "Capacidade deve ser inteiro (múltiplo de 4 entre 20 e 200)!" << std::endl;
+        return;
+    }
+
+    Voo *voo{nullptr};
+    try
+    {
+        unsigned int novoID = voos.size() + 1;
+        voo = new Voo{novoID, numeroDoVooParsed, partida, chegada, capacidade, data, horarioPartida, horarioChegada};
+    }
+    catch (std::exception &e)
+    {
+        std::cout << "Falha ao cadastrar voo: " << e.what() << std::endl;
+        return;
+    }
+
+    // voos.push_back(voo);
+    if (!vooControle->cadastrarVoo(voo))
+    {
+        return;
+    }
+
+    std::cout << "Sucesso ao cadastrar voo!" << std::endl;
 }
 
 // usuário agente tem todas as permissões para gerenciar os voos
@@ -53,7 +162,7 @@ void ConsoleAgente::rodarGerenciamentoDeVoo(VooControle *vooControle)
         else if (comando.compare("2") == 0)
         {
             std::cout << "Aqui chama a função de cadastrar voo" << std::endl;
-            cadastrarVooInterface();
+            cadastrarVooInterface(vooControle);
         }
         else if (comando.compare("3") == 0)
         {

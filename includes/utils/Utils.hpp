@@ -14,7 +14,7 @@
 
 #include "../modelos/Pessoa.hpp"
 #include "../modelos/AgenteViagem.hpp"
-#include "../modelos/Passageiro.hpp"
+// #include "../modelos/Passageiro.hpp"
 #include "../modelos/Reserva.hpp"
 #include "../modelos/CPF.hpp"
 #include "../modelos/RG.hpp"
@@ -40,11 +40,13 @@ public:
     static std::string lerDataTratada(std::string mensagem);
     static std::string lerHorarioTratado(std::string mensagem);
     static unsigned long lerTelefoneTratado(std::string mensagem);
-    static unsigned int geradorNumeroAleatorio();
+    static int geradorNumeroAleatorio();
     static bool assentoOcupado(const std::string &assento, std::list<std::string> assentosOcupados);
 
     static bool formatoData(const std::string &data);
     static bool formatoHoraHHMM(const std::string &horario);
+
+    static bool existeVooNumero(std::list<Voo *> &voos, int numeroDoVoo);
 
 private:
 };

@@ -1,10 +1,6 @@
 #ifndef USUARIO_HPP
 #define USUARIO_HPP
 
-// #include "../controles/PassageiroControle.hpp"
-// #include "../controles/VooControle.hpp"
-// #include "../controles/ReservaControle.hpp"
-#include "../consoles/ConsoleSistema.hpp"
 #include "Pessoa.hpp"
 
 class Usuario : public Pessoa

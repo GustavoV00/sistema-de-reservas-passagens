@@ -10,7 +10,6 @@
 
 #include "string"
 
-// #include "../../includes/Reserva.hpp"
 #include "Usuario.hpp"
 
 class Passageiro : public Usuario

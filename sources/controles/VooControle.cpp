@@ -70,8 +70,6 @@ bool VooControle::excluirVooPorId(const unsigned int id)
     std::list<Voo *>::iterator it;
     for (it = voos.begin(); it != voos.end(); ++it)
     {
-        // Testar isso aqui mais tarde!!!
-        // isso aqui funciona ? Muito suspeito. Preciso testar com cuidado mais tarde
         std::cout << *it << std::endl;
         if ((*it)->getId() == id)
         {

@@ -7,7 +7,7 @@
  */
 #include "../../includes/exceptions/CapacidadeIncorretaException.hpp"
 
-CapacidadeIncorretaException::CapacidadeIncorretaException(const std::string mensagem, unsigned int capacidade)
+CapacidadeIncorretaException::CapacidadeIncorretaException(const std::string mensagem, int capacidade)
     : std::runtime_error{mensagem}, capacidade{capacidade}
 {
 }

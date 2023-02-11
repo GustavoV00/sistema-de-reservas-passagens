@@ -5,8 +5,11 @@
 #include <list>
 
 #include "../controles/VooControle.hpp"
+#include "../controles/PassageiroControle.hpp"
 
 class AgenteViagem;
+// class Passageiro;
+// class Usuario;
 
 class ConsoleSistema
 {
@@ -28,6 +31,7 @@ public:
     void imprimirOpcoesGerenciamentoDeReservas();
 
     AgenteViagem *loginAgente(std::list<AgenteViagem *> &agentes);
+    Passageiro *loginPassageiro(std::list<Passageiro *> &passageiros);
 
 private:
 };

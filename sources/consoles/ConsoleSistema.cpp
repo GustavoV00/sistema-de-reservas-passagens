@@ -3,6 +3,7 @@
 #include "../../includes/utils/Utils.hpp"
 
 #include "../../includes/modelos/AgenteViagem.hpp" //forward declaration
+#include "../../includes/modelos/Passageiro.hpp"   //forward declaration
 
 ConsoleSistema::ConsoleSistema()
 {
@@ -93,6 +94,56 @@ void ConsoleSistema::finalizarSistema()
 //     }
 //     return true;
 // }
+
+Passageiro *ConsoleSistema::loginPassageiro(std::list<Passageiro *> &passageiros)
+{
+    std::cout << "----------------------LOGIN----------------------" << std::endl;
+    std::string resposta;
+    std::cout << "Deseja listar novamente os passageiros? (S/n): ";
+    std::getline(std::cin, resposta);
+    while (resposta.compare("S") != 0 && resposta.compare("n") != 0)
+    {
+        std::cout << "Deseja listar novamente os passageiros? (S/n): ";
+        std::getline(std::cin, resposta);
+    }
+
+    if (resposta.compare("S") == 0)
+    {
+        Utils::imprimirListaPassageiros(passageiros);
+    }
+
+    std::cout << std::endl;
+
+    std::string login{""}, senha{""};
+    bool logado = false;
+    // arrumou, q tu fez ? arrumou nada tinha um getCodigo pra passageiro
+    // hum
+    std::cout << "Digite o login (CPF ou Email) do agente para logar: ";
+    std::getline(std::cin, login);
+    while (!logado && login.compare("SAIR") != 0)
+    {
+        // pesquisa na lista de agentes
+        std::list<Passageiro *>::iterator it;
+        for (it = passageiros.begin(); it != passageiros.end(); it++)
+        {
+            if (std::to_string((*it)->getCpf().getNumero()).compare(login) == 0 || (*it)->getEmail().compare(login) == 0)
+            {
+                std::cout << std::endl
+                          << "Encontrou passageiro! Logando..." << std::endl;
+                return *it;
+            }
+            else
+            {
+                std::cout << "Não encontrou passageiro com esse login!" << std::endl;
+            }
+        }
+
+        std::cout << "Digite o login (CPF, Email ou Código): ";
+        std::getline(std::cin, login);
+    }
+
+    return nullptr;
+}
 
 AgenteViagem *ConsoleSistema::loginAgente(std::list<AgenteViagem *> &agentes)
 {

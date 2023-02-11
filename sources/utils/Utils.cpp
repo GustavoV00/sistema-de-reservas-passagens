@@ -217,6 +217,11 @@ std::string Utils::lerDataTratada(std::string mensagem)
         std::getline(std::cin, retorno);
     }
 
+    if (retorno.compare("SAIR") == 0)
+    {
+        return "SAIR";
+    }
+
     throw FormatoInvalidoException{"Data inválida!"};
     // return retorno;
 }
@@ -252,7 +257,7 @@ unsigned long Utils::lerTelefoneTratado(std::string mensagem)
 }
 
 // gera um número aleatório entre 1000 e 1999
-unsigned int Utils::geradorNumeroAleatorio()
+int Utils::geradorNumeroAleatorio()
 {
     // srand((unsigned)time(NULL));
     return rand() % 9000 + 1000;
@@ -358,6 +363,24 @@ std::string Utils::lerHorarioTratado(std::string mensagem)
         std::getline(std::cin, retorno);
     }
 
+    if (retorno.compare("SAIR") == 0)
+    {
+        return "SAIR";
+    }
+
     throw FormatoInvalidoException{"Data inválida!"};
     // return retorno;
+}
+
+bool Utils::existeVooNumero(std::list<Voo *> &voos, int numeroDoVoo)
+{
+    std::list<Voo *>::iterator it;
+    for (it = voos.begin(); it != voos.end(); it++)
+    {
+        if ((*it)->getNumeroDoVoo() == numeroDoVoo)
+        {
+            return true;
+        }
+    }
+    return false;
 }

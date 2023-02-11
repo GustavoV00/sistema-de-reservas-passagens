@@ -770,7 +770,7 @@ void Console::cadastrarVoo(std::list<Voo *> &voos)
     std::string data = Utils::lerDataTratada("Digite a data de partida do voo");
     std::string horarioPartida = Utils::lerHorarioTratado("Digite o horário de partida do voo");
     std::string horarioChegada = Utils::lerHorarioTratado("Digite o horário de chegada do voo");
-    int capacidade = stoi(Utils::lerStringTratada("Digite a capacidade do voo (múltiplo de 4 entre 20 e 400)"));
+    int capacidade = stoi(Utils::lerStringTratada("Digite a capacidade do voo (múltiplo de 4 entre 20 e 200)"));
 
     Voo *voo{nullptr};
     try

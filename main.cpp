@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <list>
-// #include "./includes/Passageiro.hpp"
+//
 #include "includes/utils/Utils.hpp"
 // #include "./includes/Reserva.hpp"
 #include "includes/controles/VooControle.hpp"
@@ -11,6 +11,8 @@
 #include "includes/modelos/UsuarioConvidado.hpp"
 #include "includes/modelos/Usuario.hpp"
 #include "includes/modelos/GerarDados.hpp"
+
+#include "includes/modelos/Passageiro.hpp"
 #include "includes/modelos/AgenteViagem.hpp"
 
 #include "includes/consoles/ConsoleSistema.hpp"
@@ -18,6 +20,13 @@
 
 int main()
 {
+    std::cout << "      _                                     \n";
+    std::cout << "  ___(_)_ __ ___  _ __  ___  ___  _ __  ___ \n";
+    std::cout << " / __| | '_ ` _ \\| '_ \\/ __|/ _ \\| '_ \\/ __|\n";
+    std::cout << " \\__ \\ | | | | | | |_) \\__ \\ (_) | | | \\__ \\\n";
+    std::cout << " |___/_|_| |_| |_| .__/|___/\\___/|_| |_|___/\n";
+    std::cout << "                 |_|                        \n";
+
     // classes de controle dos dados de voos, passageiros e reservas
     VooControle *vooControle = new VooControle{};
     PassageiroControle *passageiroControle = new PassageiroControle{};
@@ -25,7 +34,6 @@ int main()
 
     GerarDados gerarDados{};
     gerarDados.gerarDadosVoos(vooControle);
-
     gerarDados.gerarDadosPassageiros(passageiroControle);
     gerarDados.gerarDadosReservas(reservaControle, passageiroControle, vooControle);
 
@@ -53,6 +61,17 @@ int main()
 
         if (comando.compare("1") == 0) // login como passageiro
         {
+            // comando = Utils::lerStringTratada("Digite o número da opção escolhida");
+            std::list<Passageiro *> passageiros = passageiroControle->obterTodosOsPassageiros();
+            Usuario *passageiroLogado = console->loginPassageiro(passageiros);
+            if (passageiroLogado != nullptr)
+            {
+                delete usuario;
+                usuario = passageiroLogado;
+                delete console;
+                // console = new ConsolePassageiro{};
+                std::cout << "Mudou console!" << std::endl;
+            }
         }
         else if (comando.compare("2") == 0) // login como agente
         {
@@ -69,6 +88,10 @@ int main()
                 delete console;                // exclui o console atual
                 console = new ConsoleAgente{}; // cria um console para agentes
                 std::cout << "Mudou console!" << std::endl;
+            }
+            else
+            {
+                std::cout << "Falha ao logar como agente!" << std::endl;
             }
         }
         else if (comando.compare("3") == 0)

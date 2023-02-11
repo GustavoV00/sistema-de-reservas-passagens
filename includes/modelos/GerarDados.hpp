@@ -18,7 +18,7 @@ public:
     std::string gerarLocalizador(ReservaControle *reservaControle);
     std::string gerarNovaData();
     std::string gerarNovoHorario();
-    unsigned int gerarCapacidade();
+    int gerarCapacidade();
 
 private:
     VooControle vooControle;
