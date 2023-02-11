@@ -1,26 +1,26 @@
-#ifndef VOOSERVICO_H
-#define VOOSERVICO_H
+// #ifndef VOOSERVICO_H
+// #define VOOSERVICO_H
 
-#include "../repositorios/VooRepositorio.hpp"
+// #include "../repositorios/VooRepositorio.hpp"
 
-class VooServico
-{
+// class VooServico
+// {
 
-public:
-    VooServico();
-    ~VooServico() = default;
+// public:
+//     VooServico();
+//     ~VooServico() = default;
 
-    VooRepositorio getVooRepositorio();
-    void setVooRepositorio(const VooRepositorio VooRepositorio);
+//     VooRepositorio *getVooRepositorio();
+//     void setVooRepositorio(VooRepositorio *VooRepositorio);
 
-    std::list<Voo *> obterTodosOsVoos();
-    Voo *obterVooPorId(const unsigned long id);
-    bool atualizarVooPorId(unsigned long id, Voo vooNovo);
-    bool cadastrarVoo(Voo *voo);
-    bool excluirVooPorId(const unsigned long id);
+//     std::list<Voo *> &obterTodosOsVoos();
+//     Voo *obterVooPorId(const unsigned long id);
+//     bool atualizarVooPorId(unsigned long id, Voo vooNovo);
+//     bool cadastrarVoo(Voo *voo);
+//     bool excluirVooPorId(const unsigned long id);
 
-private:
-    VooRepositorio vooRepositorio;
-};
+// private:
+//     VooRepositorio *vooRepositorio;
+// };
 
-#endif
+// #endif

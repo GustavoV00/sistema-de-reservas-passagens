@@ -51,10 +51,10 @@ void ConsoleSistema::imprimirOpcoesGerenciamentoVoos()
     std::cout << "-------------------------GERENCIAMENTO DE VOOS------------------------" << std::endl;
     std::cout << "--------------------------------OPÇÕES--------------------------------" << std::endl;
     std::cout << "1) LISTAR VOOS" << std::endl;
-    std::cout << "2) CRIAR VOO" << std::endl;
-    std::cout << "3) EDITAR VOO" << std::endl;
-    std::cout << "4) EXCLUIR VOO" << std::endl;
-    std::cout << "5) VOLTAR" << std::endl;
+    // std::cout << "2) CRIAR VOO" << std::endl;
+    // std::cout << "3) EDITAR VOO" << std::endl;
+    // std::cout << "4) EXCLUIR VOO" << std::endl;
+    std::cout << "2) VOLTAR" << std::endl;
     std::cout << "----------------------------------------------------------------------------" << std::endl;
     std::cout << std::endl;
 }
@@ -64,11 +64,11 @@ void ConsoleSistema::imprimirOpcoesGerenciamentoDeReservas()
     std::cout << std::endl;
     std::cout << "-------------------------GERENCIAMENTO DE VOOS------------------------" << std::endl;
     std::cout << "--------------------------------OPÇÕES--------------------------------" << std::endl;
-    std::cout << "1) LISTAR RESERVAS" << std::endl;
-    std::cout << "2) CRIAR  RESERVAS" << std::endl;
-    std::cout << "3) EDITAR RESERVAS" << std::endl;
-    std::cout << "4) EXCLUIR  RESERVAS" << std::endl;
-    std::cout << "5) VOLTAR" << std::endl;
+    // std::cout << "1) LISTAR RESERVAS" << std::endl;
+    std::cout << "1) CRIAR  RESERVAS" << std::endl;
+    // std::cout << "3) EDITAR RESERVAS" << std::endl;
+    // std::cout << "4) EXCLUIR  RESERVAS" << std::endl;
+    std::cout << "2) VOLTAR" << std::endl;
     std::cout << "----------------------------------------------------------------------------" << std::endl;
     std::cout << std::endl;
 }
@@ -125,7 +125,8 @@ AgenteViagem *ConsoleSistema::loginAgente(std::list<AgenteViagem *> &agentes)
         {
             if (std::to_string((*it)->getCpf().getNumero()).compare(login) == 0 || (*it)->getEmail().compare(login) == 0 || (*it)->getCodigo().compare(login) == 0)
             {
-                std::cout << "Encontrou agente! Logando..." << std::endl;
+                std::cout << std::endl
+                          << "Encontrou agente! Logando..." << std::endl;
                 return *it;
             }
             else
@@ -139,4 +140,37 @@ AgenteViagem *ConsoleSistema::loginAgente(std::list<AgenteViagem *> &agentes)
     }
 
     return nullptr;
+}
+
+// usuário convidado só tem permissão para listar voos
+void ConsoleSistema::rodarGerenciamentoDeVoo(VooControle *vooControle)
+{
+    std::string comando{""};
+    while (comando.compare("2") != 0)
+    {
+        imprimirOpcoesGerenciamentoVoos();
+        comando = Utils::lerStringTratada("Digite o número da opção escolhida");
+        if (comando.compare("1") == 0)
+        {
+            Utils::imprimirListaVoos(vooControle->obterTodosOsVoos());
+        }
+        std::cout << std::endl;
+    }
+}
+
+void ConsoleSistema::rodarGerenciamentoDeReservas()
+{
+    std::string comando{""};
+    while (comando.compare("2") != 0)
+    {
+        this->imprimirOpcoesGerenciamentoDeReservas();
+        comando = Utils::lerStringTratada("Digite o número da opção escolhida");
+        // Listar
+        if (comando.compare("1") == 0)
+        {
+            std::cout << "Aqui chama a função de criar reservas, mas deve ser lançado uma exceção!" << std::endl;
+        }
+
+        std::cout << std::endl;
+    }
 }

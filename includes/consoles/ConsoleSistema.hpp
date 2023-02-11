@@ -4,18 +4,26 @@
 // #include "../modelos/AgenteViagem.hpp"
 #include <list>
 
+#include "../controles/VooControle.hpp"
+
 class AgenteViagem;
 
 class ConsoleSistema
 {
 public:
     ConsoleSistema();
-    ~ConsoleSistema() = default;
+    virtual ~ConsoleSistema() = default;
 
     void imprimirMensagemInicioExecucao();
     virtual void imprimirComandosTelaPrincipal();
+
+    virtual void rodarGerenciamentoDeVoo(VooControle *vooControle);
+    virtual void imprimirOpcoesGerenciamentoVoos();
+
+    virtual void rodarGerenciamentoDeReservas();
+
     // void imprimirMensagemInicioExecucao();
-    void imprimirOpcoesGerenciamentoVoos();
+
     void finalizarSistema();
     void imprimirOpcoesGerenciamentoDeReservas();
 

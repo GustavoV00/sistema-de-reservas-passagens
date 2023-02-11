@@ -16,7 +16,7 @@ class Reserva
 {
 public:
     // Construtores
-    Reserva(unsigned int id, std::string &localizador, Passageiro &passageiro, Voo &voo, std::string numeroDoAssento);
+    Reserva(unsigned int id, std::string &localizador, Passageiro *passageiro, Voo *voo, std::string numeroDoAssento);
 
     // getters and setters
     unsigned long getId();
@@ -25,11 +25,11 @@ public:
     std::string getLocalizador() const;
     void setLocalizador(const std::string &localizador);
 
-    Passageiro getPassageiro() const;
-    void setPassageiro(const Passageiro &passageiro);
+    Passageiro *getPassageiro() const;
+    void setPassageiro(Passageiro *passageiro);
 
-    Voo getVoo() const;
-    void setVoo(const Voo &voo);
+    Voo *getVoo() const;
+    void setVoo(Voo *voo);
 
     std::string getNumeroDoAssento() const;
     void setNumeroDoAssento(const std::string &numeroDoAssento);
@@ -42,8 +42,8 @@ public:
 private:
     unsigned long id;
     std::string localizador;
-    Passageiro passageiro;
-    Voo voo;
+    Passageiro *passageiro;
+    Voo *voo;
     std::string numeroDoAssento;
 };
 

@@ -11,8 +11,9 @@
 
 Passageiro::Passageiro(unsigned int id, const std::string &nome, const CPF &cpf, const RG &rg,
                        const std::string &dataDeNascimento, const unsigned long &contato, const std::string &email)
-    : Usuario(nome, cpf, rg, dataDeNascimento, contato, email), id{id}
+    : Usuario(nome, cpf, rg, dataDeNascimento, contato, email)
 {
+    this->id = id;
 }
 
 unsigned int Passageiro::getId()

@@ -9,11 +9,11 @@ class PassageiroRepositorio
 {
 public:
     PassageiroRepositorio();
-    PassageiroRepositorio(const std::list<Passageiro *> &passageiro);
+    // PassageiroRepositorio(const std::list<Passageiro *> &passageiro);
     ~PassageiroRepositorio();
 
-    std::list<Passageiro *> getPassageiros();
-    void setPassageiros(std::list<Passageiro *>);
+    std::list<Passageiro *> &getPassageiros();
+    // void setPassageiros(std::list<Passageiro *> &passageiros);
 
 private:
     std::list<Passageiro *> passageiros;

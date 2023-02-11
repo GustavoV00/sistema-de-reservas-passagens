@@ -8,11 +8,11 @@ class VooRepositorio
 {
 public:
     VooRepositorio();
-    VooRepositorio(const std::list<Voo *> &voo);
+    // VooRepositorio(std::list<Voo *> *voos);
     ~VooRepositorio();
 
-    std::list<Voo *> getVoos();
-    void setVoos(std::list<Voo *>);
+    std::list<Voo *> &getVoos();
+    void setVoos(std::list<Voo *> &voos);
 
 private:
     std::list<Voo *> voos;

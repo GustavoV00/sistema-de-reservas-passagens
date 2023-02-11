@@ -9,36 +9,36 @@
 
 PassageiroServico::PassageiroServico()
 {
+    PassageiroRepositorio *passageiroRepositorio = new PassageiroRepositorio{};
+    this->passageiroRepositorio = passageiroRepositorio;
 }
 
-PassageiroServico::PassageiroServico(const PassageiroRepositorio passageiroRepositorio)
-    : passageiroRepositorio{passageiroRepositorio}
-{
-}
+// PassageiroServico::PassageiroServico(const PassageiroRepositorio passageiroRepositorio)
+//     : passageiroRepositorio{passageiroRepositorio}
+// {
+// }
 
-PassageiroRepositorio PassageiroServico::getPassageiroRepositorio()
+PassageiroRepositorio *PassageiroServico::getPassageiroRepositorio()
 {
     return this->passageiroRepositorio;
 }
 
-void PassageiroServico::setPassageiroRepositorio(const PassageiroRepositorio passageiroRepositorio)
+void PassageiroServico::setPassageiroRepositorio(PassageiroRepositorio *passageiroRepositorio)
 {
     this->passageiroRepositorio = passageiroRepositorio;
 }
 
-std::list<Passageiro *> PassageiroServico::obterTodosOsPassageiros()
+std::list<Passageiro *> &PassageiroServico::obterTodosOsPassageiros()
 {
-    return this->getPassageiroRepositorio().getPassageiros();
+    return this->getPassageiroRepositorio()->getPassageiros();
 }
 
 Passageiro *PassageiroServico::obterPassageiroPorId(const unsigned long id)
 {
-    std::list<Passageiro *> passageiros = this->getPassageiroRepositorio().getPassageiros();
+    std::list<Passageiro *> passageiros = this->passageiroRepositorio->getPassageiros();
     std::list<Passageiro *>::iterator it;
     for (it = passageiros.begin(); it != passageiros.end(); ++it)
     {
-        // Testar isso aqui mais tarde!!!
-        std::cout << *it << std::endl;
         if ((*it)->getId() == id)
             return *it;
     }
@@ -63,23 +63,22 @@ bool PassageiroServico::atualizarPassageiroPorId(unsigned long id, Passageiro pa
 
 bool PassageiroServico::cadastrarPassageiro(Passageiro *passageiro)
 {
-    std::list<Passageiro *> passageiros = this->getPassageiroRepositorio().getPassageiros();
     try
     {
-        passageiros.push_back(passageiro);
+        this->passageiroRepositorio->getPassageiros().push_back(passageiro);
         std::cout << "Sucesso ao cadastrar passageiro!" << std::endl;
+        return true;
     }
     catch (std::exception &e)
     {
         std::cout << "Falha ao adicionar passageiro no bd: " << e.what() << std::endl;
         return false;
     }
-    return true;
 }
 
 bool PassageiroServico::excluirPassageiroPorId(const unsigned long id)
 {
-    std::list<Passageiro *> passageiros = this->getPassageiroRepositorio().getPassageiros();
+    std::list<Passageiro *> passageiros = this->getPassageiroRepositorio()->getPassageiros();
     std::list<Passageiro *>::iterator it;
     for (it = passageiros.begin(); it != passageiros.end(); ++it)
     {

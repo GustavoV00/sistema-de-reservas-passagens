@@ -40,7 +40,7 @@ public:
     std::string getData() const;
     void setData(const std::string &data);
 
-    int getCapacidade() const;
+    int getCapacidade();
     void setCapacidade(const unsigned int capacidade);
 
     int getAssentosDisponiveis() const;

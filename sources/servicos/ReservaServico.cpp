@@ -9,31 +9,33 @@
 
 ReservaServico::ReservaServico()
 {
+    ReservaRepositorio *reservaRepositorio = new ReservaRepositorio{};
+    this->reservaRepositorio = reservaRepositorio;
 }
 
-ReservaServico::ReservaServico(const ReservaRepositorio reservaRepositorio)
-    : reservaRepositorio{reservaRepositorio}
-{
-}
+// ReservaServico::ReservaServico(const ReservaRepositorio reservaRepositorio)
+//     : reservaRepositorio{reservaRepositorio}
+// {
+// }
 
-ReservaRepositorio ReservaServico::getReservaRepositorio()
+ReservaRepositorio *ReservaServico::getReservaRepositorio()
 {
     return this->reservaRepositorio;
 }
 
-void ReservaServico::setReservaRepositorio(const ReservaRepositorio reservaRepositorio)
-{
-    this->reservaRepositorio = reservaRepositorio;
-}
+// void ReservaServico::setReservaRepositorio(const ReservaRepositorio reservaRepositorio)
+// {
+//     this->reservaRepositorio = reservaRepositorio;
+// }
 
-std::list<Reserva *> ReservaServico::obterTodosAsReservas()
+std::list<Reserva *> &ReservaServico::obterTodosAsReservas()
 {
-    return this->getReservaRepositorio().getReservas();
+    return this->getReservaRepositorio()->getReservas();
 }
 
 Reserva *ReservaServico::obterReservaPorId(const unsigned long id)
 {
-    std::list<Reserva *> reservas = this->getReservaRepositorio().getReservas();
+    std::list<Reserva *> reservas = this->getReservaRepositorio()->getReservas();
     std::list<Reserva *>::iterator it;
     for (it = reservas.begin(); it != reservas.end(); ++it)
     {
@@ -63,23 +65,22 @@ bool ReservaServico::atualizarReservaPorId(unsigned long id, Reserva reservaNova
 
 bool ReservaServico::cadastrarReserva(Reserva *reserva)
 {
-    std::list<Reserva *> reservas = this->getReservaRepositorio().getReservas();
     try
     {
-        reservas.push_back(reserva);
+        this->getReservaRepositorio()->getReservas().push_back(reserva);
         std::cout << "Sucesso ao cadastrar reserva!" << std::endl;
+        return true;
     }
     catch (std::exception &e)
     {
         std::cout << "Falha ao adicionar reserva no bd: " << e.what() << std::endl;
         return false;
     }
-    return true;
 }
 
 bool ReservaServico::excluirReservaPorId(const unsigned long id)
 {
-    std::list<Reserva *> reservas = this->getReservaRepositorio().getReservas();
+    std::list<Reserva *> reservas = this->getReservaRepositorio()->getReservas();
     std::list<Reserva *>::iterator it;
     for (it = reservas.begin(); it != reservas.end(); ++it)
     {

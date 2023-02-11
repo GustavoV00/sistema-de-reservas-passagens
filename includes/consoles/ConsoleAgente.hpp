@@ -7,9 +7,16 @@ class ConsoleAgente : public ConsoleSistema
 {
 public:
     ConsoleAgente();
-    ~ConsoleAgente() = default;
+    virtual ~ConsoleAgente() = default;
 
     virtual void imprimirComandosTelaPrincipal();
+    virtual void rodarGerenciamentoDeVoo(VooControle *vooControle);
+    virtual void imprimirOpcoesGerenciamentoVoos();
+
+    virtual void imprimirOpcoesGerenciamentoDeReservas();
+    virtual void rodarGerenciamentoDeReservas();
+
+    void cadastrarVooInterface();
 
 private:
 };

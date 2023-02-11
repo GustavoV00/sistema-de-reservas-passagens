@@ -1,8 +1,8 @@
 #ifndef PASSAGEIROCONTROLE_H
 #define PASSAGEIROCONTROLE_H
 
-#include "../servicos/PassageiroServico.hpp"
 #include "../modelos/Passageiro.hpp"
+#include "../repositorios/PassageiroRepositorio.hpp"
 
 #include <string>
 
@@ -11,13 +11,13 @@ class PassageiroControle
 
 public:
     PassageiroControle();
-    PassageiroControle(const PassageiroServico passageiroServico);
+    // PassageiroControle(const PassageiroRepositorio passageiroRepositorio);
     ~PassageiroControle() = default;
 
-    PassageiroServico getPassageiroServico();
-    void setPassageiroServico(PassageiroServico passageiroServico);
+    PassageiroRepositorio *getPassageiroRepositorio();
+    void setPassageiroRepositorio(PassageiroRepositorio *passageiroRepositorio);
 
-    std::list<Passageiro *> obterTodosOsPassageiros();
+    std::list<Passageiro *> &obterTodosOsPassageiros();
     Passageiro *obterPassageiroPorId(const unsigned int id);
     bool atualizarPassageiroPorId(unsigned long id, Passageiro passageiroNovo);
     bool cadastrarPassageiro(Passageiro *passageiro);
@@ -25,7 +25,7 @@ public:
 
 private:
     /* data */
-    PassageiroServico passageiroServico;
+    PassageiroRepositorio *passageiroRepositorio;
 };
 
 #endif

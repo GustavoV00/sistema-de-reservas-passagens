@@ -10,7 +10,7 @@
 #include "../../includes/modelos/Passageiro.hpp"
 #include "../../includes/modelos/Voo.hpp"
 
-Reserva::Reserva(unsigned int id, std::string &localizador, Passageiro &passageiro, Voo &voo, std::string numeroDoAssento)
+Reserva::Reserva(unsigned int id, std::string &localizador, Passageiro *passageiro, Voo *voo, std::string numeroDoAssento)
     : id{id}, localizador{localizador}, passageiro{passageiro}, voo{voo}, numeroDoAssento{numeroDoAssento}
 {
 }
@@ -35,20 +35,20 @@ void Reserva::setLocalizador(const std::string &localizador)
     this->localizador = localizador;
 }
 
-Passageiro Reserva::getPassageiro() const
+Passageiro *Reserva::getPassageiro() const
 {
     return this->passageiro;
 }
-void Reserva::setPassageiro(const Passageiro &passageiro)
+void Reserva::setPassageiro(Passageiro *passageiro)
 {
     this->passageiro = passageiro;
 }
 
-Voo Reserva::getVoo() const
+Voo *Reserva::getVoo() const
 {
     return this->voo;
 }
-void Reserva::setVoo(const Voo &voo)
+void Reserva::setVoo(Voo *voo)
 {
     this->voo = voo;
 }
@@ -66,9 +66,9 @@ void Reserva::imprimirDadosReserva()
 {
     std::cout << "=============================================================================================================================" << std::endl;
     std::cout << "Código: " << this->getLocalizador() << std::endl;
-    std::cout << "Passageiro: " << this->getPassageiro().getNome() << " - Email: " << this->getPassageiro().getEmail()
-              << " - CPF: " << this->getPassageiro().getCpf().getNumero() << std::endl;
-    std::cout << "Voo: " << this->getVoo().getNumeroDoVoo() << " - Partida: " << this->getVoo().getPartida() << " - Destino: " << this->getVoo().getDestino() << " - Data: " << this->getVoo().getData() << " - Horário Partida: " << this->getVoo().getHorarioPartida() << " - Horário Chegada: " << this->getVoo().getHorarioChegada() << std::endl;
+    std::cout << "Passageiro: " << this->getPassageiro()->getNome() << " - Email: " << this->getPassageiro()->getEmail()
+              << " - CPF: " << this->getPassageiro()->getCpf().getNumero() << std::endl;
+    std::cout << "Voo: " << this->getVoo()->getNumeroDoVoo() << " - Partida: " << this->getVoo()->getPartida() << " - Destino: " << this->getVoo()->getDestino() << " - Data: " << this->getVoo()->getData() << " - Horário Partida: " << this->getVoo()->getHorarioPartida() << " - Horário Chegada: " << this->getVoo()->getHorarioChegada() << std::endl;
     std::cout << "Assento: " << this->getNumeroDoAssento() << std::endl;
     // std::cout << "=================================================================================" << std::endl;
 }

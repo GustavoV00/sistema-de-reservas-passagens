@@ -15,7 +15,7 @@
 #include "../../includes/exceptions/FormatoInvalidoException.hpp"
 
 Voo::Voo(unsigned int id, unsigned int numeroDoVoo, std::string partida, std::string destino, unsigned int capacidade, std::string data, std::string horarioPartida, std::string horarioChegada)
-    : numeroDoVoo(numeroDoVoo), partida(partida), destino(destino)
+    : id{id}, numeroDoVoo(numeroDoVoo), partida(partida), destino(destino)
 {
     this->setCapacidade(capacidade);
     this->setAssentosDisponiveis(capacidade);
@@ -99,7 +99,7 @@ void Voo::setData(const std::string &data)
     this->data = data;
 }
 
-int Voo::getCapacidade() const
+int Voo::getCapacidade()
 {
     return this->capacidade;
 }
@@ -141,6 +141,7 @@ void Voo::imprimirDadosVoo()
     std::cout << "Destino: " << this->getDestino() << std::endl;
     std::cout << "Capacidade: " << this->getCapacidade() << std::endl;
     std::cout << "Assentos Disponíveis: " << this->getAssentosDisponiveis() << std::endl;
+    std::cout << "=================================================================================" << std::endl;
 }
 
 void Voo::imprimirMapaDeAssentos()

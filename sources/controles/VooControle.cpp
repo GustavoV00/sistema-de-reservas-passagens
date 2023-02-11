@@ -1,43 +1,84 @@
 
+#include <iostream>
 #include "../../includes/controles/VooControle.hpp"
 
 VooControle::VooControle()
 {
-    VooServico vooServico{};
-    this->setVooServico(vooServico);
+    VooRepositorio *vooRepositorio = new VooRepositorio{};
+    this->vooRepositorio = vooRepositorio;
 }
 
-VooServico VooControle::getVooServico()
+VooRepositorio *VooControle::getVooRepositorio()
 {
-    return this->vooServico;
+    return this->vooRepositorio;
 }
 
-void VooControle::setVooServico(VooServico VooServico)
+std::list<Voo *> &VooControle::obterTodosOsVoos()
 {
-    this->vooServico = vooServico;
-}
-
-std::list<Voo *> VooControle::obterTodosOsVoos()
-{
-    return this->getVooServico().obterTodosOsVoos();
+    return this->vooRepositorio->getVoos();
 }
 
 Voo *VooControle::obterVooPorId(const unsigned int id)
 {
-    return this->getVooServico().obterVooPorId(id);
+    std::list<Voo *> voos = this->vooRepositorio->getVoos();
+    std::list<Voo *>::iterator it;
+    for (it = voos.begin(); it != voos.end(); ++it)
+    {
+        if ((*it)->getId() == id)
+        {
+            std::cout << "retornando o de n " << (*it)->getNumeroDoVoo() << std::endl;
+            return (*it);
+        }
+    }
+
+    return nullptr;
 }
 
-bool VooControle::atualizarVooPorId(unsigned int id, Voo novoVoo)
+bool VooControle::atualizarVooPorId(unsigned int id, Voo vooNovo)
 {
-    return this->getVooServico().atualizarVooPorId(id, novoVoo);
+    try
+    {
+        // Voo *voo = this->obterVooPorId(id);
+        // voo = &vooNovo;
+        return true;
+    }
+    catch (std::exception &e)
+    {
+        std::cout << "Voo não existe ou o id está errado: " << e.what() << std::endl;
+    }
+    return false;
 }
 
 bool VooControle::cadastrarVoo(Voo *voo)
 {
-    return this->getVooServico().cadastrarVoo(voo);
+    try
+    {
+        this->vooRepositorio->getVoos().push_back(voo);
+        std::cout << "Sucesso ao cadastrar voo!" << std::endl;
+    }
+    catch (std::exception &e)
+    {
+        std::cout << "Falha ao adicionar voo no bd: " << e.what() << std::endl;
+        return false;
+    }
+    return true;
 }
 
 bool VooControle::excluirVooPorId(const unsigned int id)
 {
-    return this->getVooServico().excluirVooPorId(id);
+    std::list<Voo *> voos = this->vooRepositorio->getVoos();
+    std::list<Voo *>::iterator it;
+    for (it = voos.begin(); it != voos.end(); ++it)
+    {
+        // Testar isso aqui mais tarde!!!
+        // isso aqui funciona ? Muito suspeito. Preciso testar com cuidado mais tarde
+        std::cout << *it << std::endl;
+        if ((*it)->getId() == id)
+        {
+            voos.erase(it);
+            delete *it;
+            return true;
+        }
+    }
+    return false;
 }

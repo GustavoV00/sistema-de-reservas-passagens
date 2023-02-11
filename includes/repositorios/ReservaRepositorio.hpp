@@ -8,11 +8,10 @@ class ReservaRepositorio
 {
 public:
     ReservaRepositorio();
-    ReservaRepositorio(const std::list<Reserva *> &reserva);
+    // ReservaRepositorio(const std::list<Reserva *> &reserva);
     ~ReservaRepositorio();
 
-    std::list<Reserva *> getReservas();
-    void setReservas(std::list<Reserva *> reservas);
+    std::list<Reserva *> &getReservas();
 
 private:
     std::list<Reserva *> reservas;

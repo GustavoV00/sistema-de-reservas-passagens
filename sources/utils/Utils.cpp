@@ -96,10 +96,8 @@ void Utils::imprimirListaVoos(std::list<Voo *> &voos)
     std::list<Voo *>::iterator it;
     for (it = voos.begin(); it != voos.end(); it++)
     {
-        std::cout << "=====================================================================================" << std::endl;
         (*it)->imprimirDadosVoo();
     }
-    std::cout << "=====================================================================================" << std::endl;
 }
 
 std::string Utils::lerStringTratada(std::string mensagem)
