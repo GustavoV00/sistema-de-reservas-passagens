@@ -20,12 +20,12 @@
 
 int main()
 {
-    std::cout << "      _                                     \n";
-    std::cout << "  ___(_)_ __ ___  _ __  ___  ___  _ __  ___ \n";
-    std::cout << " / __| | '_ ` _ \\| '_ \\/ __|/ _ \\| '_ \\/ __|\n";
-    std::cout << " \\__ \\ | | | | | | |_) \\__ \\ (_) | | | \\__ \\\n";
-    std::cout << " |___/_|_| |_| |_| .__/|___/\\___/|_| |_|___/\n";
-    std::cout << "                 |_|                        \n";
+    // std::cout << "      _                                     \n";
+    // std::cout << "  ___(_)_ __ ___  _ __  ___  ___  _ __  ___ \n";
+    // std::cout << " / __| | '_ ` _ \\| '_ \\/ __|/ _ \\| '_ \\/ __|\n";
+    // std::cout << " \\__ \\ | | | | | | |_) \\__ \\ (_) | | | \\__ \\\n";
+    // std::cout << " |___/_|_| |_| |_| .__/|___/\\___/|_| |_|___/\n";
+    // std::cout << "                 |_|                        \n";
 
     // classes de controle dos dados de voos, passageiros e reservas
     VooControle *vooControle = new VooControle{};
@@ -87,7 +87,7 @@ int main()
                 usuario = novoUsuarioAgente;
                 delete console;                // exclui o console atual
                 console = new ConsoleAgente{}; // cria um console para agentes
-                std::cout << "Mudou console!" << std::endl;
+                //std::cout << "Mudou console!" << std::endl;
             }
             else
             {

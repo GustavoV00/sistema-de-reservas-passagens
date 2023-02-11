@@ -26,7 +26,6 @@ Voo *VooControle::obterVooPorId(const unsigned int id)
     {
         if ((*it)->getId() == id)
         {
-            std::cout << "retornando o de n " << (*it)->getNumeroDoVoo() << std::endl;
             return (*it);
         }
     }

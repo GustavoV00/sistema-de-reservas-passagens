@@ -36,6 +36,40 @@ void ConsoleAgente::imprimirOpcoesGerenciamentoVoos()
     std::cout << std::endl;
 }
 
+void ConsoleAgente::atualizarVooInterface(VooControle *vooControle)
+{
+
+}
+
+void ConsoleAgente::excluirVooInterface(VooControle *vooControle)
+{
+    std::list<Voo *> voos = vooControle->obterTodosOsVoos();
+
+    std::string termoBusca = Utils::lerStringTratada("Digite o número do voo a ser excluído");
+    int numeroVooParsed{0};
+    while(termoBusca.compare("SAIR") != 0){
+        numeroVooParsed = 0;
+        try {
+            numeroVooParsed = stoi(termoBusca);
+        } catch(std::exception &e) {
+            std::cout << "Digite apenas números!" << std::endl;
+        }
+
+        if(numeroVooParsed > 0){
+            std::list<Voo *>::iterator it;
+            for (it = voos.begin(); it != voos.end(); it++){
+                if((*it)->getNumeroDoVoo() == numeroVooParsed){
+                    std::cout << "Encontrou voo para excluir!" << std::endl;
+                    (*it)->imprimirDadosVoo();
+                }
+            }
+        } else {
+            std::cout << "Digite um número > 0!" << std::endl;
+        }
+        
+    }
+}
+
 void ConsoleAgente::cadastrarVooInterface(VooControle *vooControle)
 {
     std::list<Voo *> voos = vooControle->obterTodosOsVoos();
@@ -144,7 +178,7 @@ void ConsoleAgente::cadastrarVooInterface(VooControle *vooControle)
         return;
     }
 
-    std::cout << "Sucesso ao cadastrar voo!" << std::endl;
+    //std::cout << "Sucesso ao cadastrar voo!" << std::endl;
 }
 
 // usuário agente tem todas as permissões para gerenciar os voos
@@ -161,12 +195,11 @@ void ConsoleAgente::rodarGerenciamentoDeVoo(VooControle *vooControle)
         }
         else if (comando.compare("2") == 0)
         {
-            std::cout << "Aqui chama a função de cadastrar voo" << std::endl;
             cadastrarVooInterface(vooControle);
         }
         else if (comando.compare("3") == 0)
         {
-            std::cout << "Aqui chama a função de atualizar voo" << std::endl;
+            atualizarVooInterface(vooControle);
         }
         else if (comando.compare("4") == 0)
         {

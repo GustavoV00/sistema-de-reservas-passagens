@@ -18,6 +18,8 @@ public:
     virtual void rodarGerenciamentoDeReservas();
 
     void cadastrarVooInterface(VooControle *vooControle);
+    void atualizarVooInterface(VooControle *vooControle);
+    void excluirVooInterface(VooControle *vooControle);
 
 private:
 };
