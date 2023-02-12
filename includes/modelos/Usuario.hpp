@@ -14,7 +14,6 @@ public:
     // destrutor
     virtual ~Usuario() = default;
 
-    // void setSessionID(const std::string &sessionID);
     std::string getSessionID() const;
 
 private:

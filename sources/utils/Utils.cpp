@@ -52,7 +52,7 @@ void Utils::imprimirListaAgentes(std::list<AgenteViagem *> &agentes)
     std::cout << std::endl
               << "Agentes: " << std::endl;
     std::list<AgenteViagem *>::iterator it;
-    for (it = agentes.begin(); it != agentes.end(); it++)
+    for (it = agentes.begin(); it != agentes.end(); ++it)
     {
         std::cout << "=====================================================================================" << std::endl;
         std::cout << "Nome: " << (*it)->getNome() << " - CPF: " << (*it)->getCpf().getNumero() << " - RG: " << (*it)->getRg().getNumero() << std::endl;
@@ -60,6 +60,7 @@ void Utils::imprimirListaAgentes(std::list<AgenteViagem *> &agentes)
         std::cout << "Código: " << (*it)->getCodigo() << std::endl;
     }
     std::cout << "=====================================================================================" << std::endl;
+    std::cout << "Quantidade de agentes: " << agentes.size() << std::endl;
 }
 
 void Utils::imprimirListaPassageiros(std::list<Passageiro *> &passageiros)
@@ -67,26 +68,32 @@ void Utils::imprimirListaPassageiros(std::list<Passageiro *> &passageiros)
     std::cout << std::endl
               << "Passageiros: " << std::endl;
     std::list<Passageiro *>::iterator it;
-    for (it = passageiros.begin(); it != passageiros.end(); it++)
+    for (it = passageiros.begin(); it != passageiros.end(); ++it)
     {
-        std::cout << "=====================================================================================" << std::endl;
-        std::cout << "Nome: " << (*it)->getNome() << " - CPF: " << (*it)->getCpf().getNumero() << " - RG: " << (*it)->getRg().getNumero() << std::endl;
-        std::cout << "Email: " << (*it)->getEmail() << " - Telefone: " << (*it)->getContato() << " - Data de Nascimento: " << (*it)->getDataDeNascimento() << std::endl;
+        (*it)->imprimirDadosPassageiro();
     }
-    std::cout << "=====================================================================================" << std::endl;
+    std::cout << "Quantidade de passageiros: " << passageiros.size() << std::endl;
 }
 
 void Utils::imprimirListaReservas(std::list<Reserva *> reservas)
 {
-    std::cout << std::endl
-              << "Reservas: " << std::endl;
-    std::list<Reserva *>::iterator it;
-    for (it = reservas.begin(); it != reservas.end(); it++)
+    if (reservas.size() != 0)
     {
+        std::cout << std::endl
+                  << "Reservas: " << std::endl;
+        std::list<Reserva *>::iterator it;
+        for (it = reservas.begin(); it != reservas.end(); ++it)
+        {
+            std::cout << "=====================================================================================" << std::endl;
+            (*it)->imprimirDadosReserva();
+        }
         std::cout << "=====================================================================================" << std::endl;
-        (*it)->imprimirDadosReserva();
+        std::cout << "Quantidade de reservas: " << reservas.size() << std::endl;
     }
-    std::cout << "=====================================================================================" << std::endl;
+    else
+    {
+        std::cout << "Lista de reservas está vazia! Cadastre alguma reserva!" << std::endl;
+    }
 }
 
 void Utils::imprimirListaVoos(std::list<Voo *> &voos)
@@ -99,6 +106,7 @@ void Utils::imprimirListaVoos(std::list<Voo *> &voos)
     {
         (*it)->imprimirDadosVoo();
     }
+    std::cout << "Quantidade de voos: " << voos.size() << std::endl;
 }
 
 std::string Utils::lerStringTratada(std::string mensagem)
@@ -267,7 +275,7 @@ int Utils::geradorNumeroAleatorio()
 bool Utils::assentoOcupado(const std::string &assento, std::list<std::string> assentosOcupados)
 {
     std::list<std::string>::iterator it;
-    for (it = assentosOcupados.begin(); it != assentosOcupados.end(); it++)
+    for (it = assentosOcupados.begin(); it != assentosOcupados.end(); ++it)
     {
         if ((*it).compare(assento) == 0)
         {
@@ -376,7 +384,7 @@ std::string Utils::lerHorarioTratado(std::string mensagem)
 bool Utils::existeVooNumero(std::list<Voo *> &voos, int numeroDoVoo)
 {
     std::list<Voo *>::iterator it;
-    for (it = voos.begin(); it != voos.end(); it++)
+    for (it = voos.begin(); it != voos.end(); ++it)
     {
         if ((*it)->getNumeroDoVoo() == numeroDoVoo)
         {

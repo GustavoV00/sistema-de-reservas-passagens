@@ -11,20 +11,21 @@ class ReservaControle
 
 public:
     ReservaControle();
-    // ReservaControle(const ReservaServico reservaServico);
     ~ReservaControle() = default;
-    // void setReservaServico(ReservaServico *reservaServico);
 
-    ReservaRepositorio *getReservaRepositorio();
+    ReservaRepositorio getReservaRepositorio();
 
     std::list<Reserva *> &obterTodosAsReservas();
-    Reserva *obterReservaPorId(const unsigned long id);
+    Reserva *obterReservaPorId(int id);
+    Reserva *obterReservaPorLocalizador(std::string &localizador);
     bool atualizarReservaPorId(unsigned long id, Reserva reservaNovo);
     bool cadastrarReserva(Reserva *Reserva);
-    bool excluirReservaPorId(const unsigned int id);
+    bool excluirReservaPorLocalizador(std::string &localizador);
+    std::list<Reserva *> obterReservasDoPassageiro(Usuario *usuario);
+    Passageiro *obterPassageiroDasReservas(std::list<Reserva *> &reservas);
 
 private:
-    ReservaRepositorio *reservaRepositorio;
+    ReservaRepositorio reservaRepositorio;
 };
 
 #endif

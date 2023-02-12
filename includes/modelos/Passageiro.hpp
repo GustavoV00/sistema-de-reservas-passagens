@@ -25,6 +25,8 @@ public:
     unsigned int getId();
     void setId(unsigned int id);
 
+    void imprimirDadosPassageiro();
+
 private:
     unsigned int id;
 };

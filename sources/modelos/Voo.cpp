@@ -15,8 +15,8 @@
 #include "../../includes/exceptions/FormatoInvalidoException.hpp"
 #include "../../includes/exceptions/VooCheioException.hpp"
 
-Voo::Voo(unsigned int id, int numeroDoVoo, std::string partida, std::string destino, int capacidade, std::string data, std::string horarioPartida, std::string horarioChegada)
-    : id{id}, numeroDoVoo(numeroDoVoo), partida(partida), destino(destino)
+Voo::Voo(int numeroDoVoo, std::string partida, std::string destino, int capacidade, std::string data, std::string horarioPartida, std::string horarioChegada)
+    : numeroDoVoo(numeroDoVoo), partida(partida), destino(destino)
 {
     this->setCapacidade(capacidade);
     this->setAssentosDisponiveis(capacidade);
@@ -25,9 +25,14 @@ Voo::Voo(unsigned int id, int numeroDoVoo, std::string partida, std::string dest
     this->setData(data);
 }
 
-unsigned int Voo::getId()
+unsigned int Voo::getId() const
 {
     return this->id;
+}
+
+void Voo::setId(const unsigned int id)
+{
+    this->id = id;
 }
 
 int Voo::getNumeroDoVoo() const
@@ -153,7 +158,7 @@ void Voo::imprimirMapaDeAssentos()
 
     std::list<std::string> assentosOcupados;
     std::list<Reserva *>::iterator it;
-    for (it = (this->reservas.begin()); it != (this->reservas.end()); it++)
+    for (it = (this->reservas.begin()); it != (this->reservas.end()); ++it)
     {
         std::cout << "ADICIONANDO " << (*it)->getNumeroDoAssento() << " NA LISTA DE ASSENTOS OCUPADOS..." << std::endl;
         ;

@@ -17,10 +17,12 @@ class Voo
 {
 public:
     // constructor
-    Voo(unsigned int id, int numeroDoVoo, std::string partida, std::string chegada, int capacidade, std::string data, std::string horarioPartida, std::string horarioChegada);
+    Voo(int numeroDoVoo, std::string partida, std::string chegada, int capacidade, std::string data, std::string horarioPartida, std::string horarioChegada);
+    ~Voo() = default;
 
     // getters and setters
-    unsigned int getId();
+    void setId(const unsigned int id);
+    unsigned int getId() const;
 
     int getNumeroDoVoo() const;
     void setNumeroDoVoo(const int numeroDoVoo);

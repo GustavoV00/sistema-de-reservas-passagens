@@ -13,7 +13,7 @@ void GerarDados::gerarDadosVoos(VooControle *vooControle)
     srand((unsigned)time(NULL));
     for (unsigned int i = 0; i < 30; i++)
     {
-        unsigned int id{i};
+        // unsigned int id{i};
         int numeroDoVoo = Utils::geradorNumeroAleatorio();
         std::string partida = "Partida" + std::to_string(i);
         std::string chegada = "Chegada" + std::to_string(i);
@@ -25,31 +25,69 @@ void GerarDados::gerarDadosVoos(VooControle *vooControle)
 
         // std::cout << id << " " << numeroDoVoo << " " << partida << " " << chegada << " " << data << " " << horarioPartida << " " << horarioChegada << " " << capacidade << " " << std::endl;
 
-        Voo *voo = new Voo{id, numeroDoVoo, partida, chegada, capacidade, data, horarioPartida, horarioChegada};
-        if (!vooControle->cadastrarVoo(voo))
+        Voo *voo{nullptr};
+        try
         {
-            std::cout << "FALHA AO CADASTRAR VOO!" << std::endl;
+            voo = new Voo{numeroDoVoo, partida, chegada, capacidade, data, horarioPartida, horarioChegada};
+            vooControle->cadastrarVoo(voo);
+        }
+        catch (std::exception &e)
+        {
+            std::cout << "Erro ao criar voo!" << std::endl;
         }
     }
 }
 
 void GerarDados::gerarDadosPassageiros(PassageiroControle *passageiroControle)
 {
+    // array com cpfs válidos aleatórios
+    unsigned long arrayCpfsValidos[10] = {
+        44778767853,
+        27819295309,
+        54888646791,
+        65716284493,
+        60941972089,
+        56135928376,
+        26113812758,
+        43433414106,
+        71590307704,
+        73615056191};
+    // array com rgs válidos aleatórios
+    unsigned long arrayRgsValidos[10] = {
+        322196462,
+        385805147,
+        216413606,
+        476192821,
+        214117364,
+        245323594,
+        322186547,
+        335512434,
+        470124623,
+        319921414};
+
     srand((unsigned)time(NULL));
-    for (unsigned int i = 0; i < 50; i++)
+    for (int i = 0; i < 10; i++)
     {
         unsigned int id{i};
         std::string nome = "Passageiro" + std::to_string(i);
-        CPF cpf{11111111111}; // Criar um gerador de CPF
-        RG rg{111111111};     // Criar um gerador de RG
+        CPF cpf{arrayCpfsValidos[i]};
+        RG rg{arrayRgsValidos[i]};
         std::string dataDeNascimento = this->gerarNovaData();
         unsigned long contato = 4199799999;
         std::string email = "email" + std::to_string(i) + "@email" + std::to_string(i) + ".com";
 
         // std::cout << id << " " << nome << " " << cpf.getNumero() << " " << rg.getNumero() << " " << dataDeNascimento << " " << contato << " " << email << std::endl;
 
-        Passageiro *passageiro = new Passageiro{id, nome, cpf, rg, dataDeNascimento, contato, email};
-        passageiroControle->cadastrarPassageiro(passageiro);
+        Passageiro *passageiro{nullptr};
+        try
+        {
+            passageiro = new Passageiro{id, nome, cpf, rg, dataDeNascimento, contato, email};
+            passageiroControle->cadastrarPassageiro(passageiro);
+        }
+        catch (std::exception &e)
+        {
+            std::cout << "Falha ao cadastrar passageiro!" << std::endl;
+        }
     }
 }
 
@@ -58,9 +96,8 @@ void GerarDados::gerarDadosReservas(ReservaControle *reservaControle, Passageiro
     srand((unsigned)time(NULL));
 
     // Quantidade de voos existentes
-    for (unsigned int i = 0; i < 50; i++)
+    for (unsigned int i = 0; i < 10; i++)
     {
-        unsigned int id{i};
         std::string localizador = this->gerarLocalizador(reservaControle);
 
         unsigned int vooAleat = (rand() % 29);
@@ -72,31 +109,34 @@ void GerarDados::gerarDadosReservas(ReservaControle *reservaControle, Passageiro
         // std::cout << "Passageiro: " << passageiro->getId() << std::endl;
 
         unsigned int capacidade = voo->getCapacidade();
-        std::string numeroDoAssento = this->gerarNovoNumeroDoAssento(reservaControle, capacidade);
+        std::string numeroDoAssento = this->gerarNovoNumeroDoAssento(reservaControle);
 
-        Reserva *reserva = new Reserva{id, localizador, passageiro, voo, numeroDoAssento};
-        if (!reservaControle->cadastrarReserva(reserva))
+        try
         {
-            std::cout << "Falha ao cadastrar reserva!" << std::endl;
+            Reserva *reserva = new Reserva{localizador, passageiro, voo, numeroDoAssento};
+            if (reservaControle->cadastrarReserva(reserva))
+            {
+                // adiciona reserva na lista de reservas do voo
+                try
+                {
+                    voo->adicionarReserva(reserva);
+                }
+                catch (std::exception &e)
+                {
+                    std::cout << "Falha ao adicionar reserva no voo: " << e.what() << "! Reserva não vai ser adicionada!" << std::endl;
+                    reservaControle->excluirReservaPorLocalizador(localizador);
+                }
+            }
         }
-        else
+        catch (std::exception &e)
         {
-            // adiciona reserva na lista de reservas do voo
-            try
-            {
-                voo->adicionarReserva(reserva);
-            }
-            catch (std::exception &e)
-            {
-                std::cout << "Falha ao adicionar reserva no voo: " << e.what() << "! Reserva não vai ser adicionada!" << std::endl;
-                reservaControle->excluirReservaPorId(id);
-            }
+            std::cout << "Erro ao criar reserva!" << std::endl;
         }
     }
     // Tenho que verificar depois, a existência de assentos repetidos/passageiros repetidos ou alguma coisa assim!!!!
 }
 
-std::string GerarDados::gerarNovoNumeroDoAssento(ReservaControle *reservaControle, unsigned int capacidade)
+std::string GerarDados::gerarNovoNumeroDoAssento(ReservaControle *reservaControle)
 {
     std::string letrasAssentos{"ABCD"};
     unsigned int letraAleatoria;

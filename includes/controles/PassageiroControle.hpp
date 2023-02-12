@@ -11,21 +11,19 @@ class PassageiroControle
 
 public:
     PassageiroControle();
-    // PassageiroControle(const PassageiroRepositorio passageiroRepositorio);
     ~PassageiroControle() = default;
 
-    PassageiroRepositorio *getPassageiroRepositorio();
-    void setPassageiroRepositorio(PassageiroRepositorio *passageiroRepositorio);
+    PassageiroRepositorio getPassageiroRepositorio();
 
     std::list<Passageiro *> &obterTodosOsPassageiros();
     Passageiro *obterPassageiroPorId(const unsigned int id);
+    Passageiro *obterPassageiroPorEmail(std::string &email);
     bool atualizarPassageiroPorId(unsigned long id, Passageiro passageiroNovo);
     bool cadastrarPassageiro(Passageiro *passageiro);
     bool excluirPassageiroPorId(const unsigned int id);
 
 private:
-    /* data */
-    PassageiroRepositorio *passageiroRepositorio;
+    PassageiroRepositorio passageiroRepositorio;
 };
 
 #endif

@@ -5,11 +5,6 @@ ReservaRepositorio::ReservaRepositorio()
 {
 }
 
-// ReservaRepositorio::ReservaRepositorio(const std::list<Reserva *> &reserva)
-//     : reservas{reserva}
-// {
-// }
-
 ReservaRepositorio::~ReservaRepositorio()
 {
 }
@@ -17,4 +12,11 @@ ReservaRepositorio::~ReservaRepositorio()
 std::list<Reserva *> &ReservaRepositorio::getReservas()
 {
     return this->reservas;
+}
+
+unsigned int ReservaRepositorio::getNewId()
+{
+
+    this->lastId += 1;
+    return this->lastId;
 }

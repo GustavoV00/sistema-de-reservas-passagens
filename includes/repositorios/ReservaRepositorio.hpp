@@ -8,12 +8,13 @@ class ReservaRepositorio
 {
 public:
     ReservaRepositorio();
-    // ReservaRepositorio(const std::list<Reserva *> &reserva);
     ~ReservaRepositorio();
 
     std::list<Reserva *> &getReservas();
+    unsigned int getNewId();
 
 private:
     std::list<Reserva *> reservas;
+    unsigned int lastId;
 };
 #endif

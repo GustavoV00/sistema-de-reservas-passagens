@@ -13,16 +13,17 @@ public:
     VooControle();
     ~VooControle() = default;
 
-    VooRepositorio *getVooRepositorio();
+    VooRepositorio getVooRepositorio();
 
     std::list<Voo *> &obterTodosOsVoos();
     Voo *obterVooPorId(const unsigned int id);
+    Voo *obterVooPorNumeroDoVoo(int numeroDoVoo);
     bool atualizarVooPorId(unsigned int id, Voo vooNovo);
     bool cadastrarVoo(Voo *voo);
     bool excluirVooPorId(const unsigned int id);
 
 private:
-    VooRepositorio *vooRepositorio;
+    VooRepositorio vooRepositorio;
 };
 
 #endif

@@ -34,41 +34,25 @@ void ConsoleSistema::imprimirComandosTelaPrincipal()
     std::cout << std::endl;
 }
 
-// mensagens de boa vinda quando o usuário convidado entra no sistema
-/*
-void ConsoleSistema::imprimirMensagemInicioExecucao()
-{
-    std::cout << "----------------------------------------------------------------------------" << std::endl;
-    std::cout << "Você acessou o sistema como Convidado!" << std::endl;
-    std::cout << "----------------------------------------------------------------------------" << std::endl;
-    std::cout << std::endl
-              << std::endl;
-}
-*/
-
+// usuário convidado só pode listar os voos
 void ConsoleSistema::imprimirOpcoesGerenciamentoVoos()
 {
     std::cout << std::endl;
     std::cout << "-------------------------GERENCIAMENTO DE VOOS------------------------" << std::endl;
     std::cout << "--------------------------------OPÇÕES--------------------------------" << std::endl;
     std::cout << "1) LISTAR VOOS" << std::endl;
-    // std::cout << "2) CRIAR VOO" << std::endl;
-    // std::cout << "3) EDITAR VOO" << std::endl;
-    // std::cout << "4) EXCLUIR VOO" << std::endl;
     std::cout << "2) VOLTAR" << std::endl;
     std::cout << "----------------------------------------------------------------------------" << std::endl;
     std::cout << std::endl;
 }
 
+// usuario convidado só pode criar reservas
 void ConsoleSistema::imprimirOpcoesGerenciamentoDeReservas()
 {
     std::cout << std::endl;
     std::cout << "-------------------------GERENCIAMENTO DE VOOS------------------------" << std::endl;
     std::cout << "--------------------------------OPÇÕES--------------------------------" << std::endl;
-    // std::cout << "1) LISTAR RESERVAS" << std::endl;
-    std::cout << "1) CRIAR  RESERVAS" << std::endl;
-    // std::cout << "3) EDITAR RESERVAS" << std::endl;
-    // std::cout << "4) EXCLUIR  RESERVAS" << std::endl;
+    std::cout << "1) CRIAR RESERVAS" << std::endl;
     std::cout << "2) VOLTAR" << std::endl;
     std::cout << "----------------------------------------------------------------------------" << std::endl;
     std::cout << std::endl;
@@ -84,16 +68,6 @@ void ConsoleSistema::finalizarSistema()
     std::cout << std::endl
               << std::endl;
 }
-
-// bool ConsoleSistema::deslogarDeConvidado(std::string comando)
-// {
-//     if (comando.compare("10") == 0)
-//     {
-//         this->deslogadoComSucesso();
-//         return false;
-//     }
-//     return true;
-// }
 
 Passageiro *ConsoleSistema::loginPassageiro(std::list<Passageiro *> &passageiros)
 {
@@ -114,28 +88,26 @@ Passageiro *ConsoleSistema::loginPassageiro(std::list<Passageiro *> &passageiros
 
     std::cout << std::endl;
 
-    std::string login{""}, senha{""};
-    bool logado = false;
+    std::string login{""};
+    bool logado{false};
 
     std::cout << "Digite o login (CPF ou Email) do passageiro para logar ou 'SAIR': ";
     std::getline(std::cin, login);
     while (!logado && login.compare("SAIR") != 0)
     {
-        // pesquisa na lista de agentes
+        // pesquisa na lista de passageiros
         std::list<Passageiro *>::iterator it;
-        for (it = passageiros.begin(); it != passageiros.end(); it++)
+        for (it = passageiros.begin(); it != passageiros.end(); ++it)
         {
             if (std::to_string((*it)->getCpf().getNumero()).compare(login) == 0 || (*it)->getEmail().compare(login) == 0)
             {
-                std::cout << std::endl
-                          << "Encontrou passageiro! Logando..." << std::endl;
+                std::cout << std::endl;
+                std::cout << "Encontrou passageiro! Logando..." << std::endl;
                 return *it;
             }
-            else
-            {
-                std::cout << "Não encontrou passageiro com esse login!" << std::endl;
-            }
         }
+
+        std::cout << "Não encontrou passageiro com esse login!" << std::endl;
 
         std::cout << "Digite o login (CPF ou Email) ou 'SAIR': ";
         std::getline(std::cin, login);
@@ -163,27 +135,25 @@ AgenteViagem *ConsoleSistema::loginAgente(std::list<AgenteViagem *> &agentes)
 
     std::cout << std::endl;
 
-    std::string login{""}, senha{""};
-    bool logado = false;
+    std::string login{""};
+    bool logado{false};
     std::cout << "Digite o login (CPF, Email ou Código) do agente para logar ou 'SAIR': ";
     std::getline(std::cin, login);
     while (!logado && login.compare("SAIR") != 0)
     {
         // pesquisa na lista de agentes
         std::list<AgenteViagem *>::iterator it;
-        for (it = agentes.begin(); it != agentes.end(); it++)
+        for (it = agentes.begin(); it != agentes.end(); ++it)
         {
             if (std::to_string((*it)->getCpf().getNumero()).compare(login) == 0 || (*it)->getEmail().compare(login) == 0 || (*it)->getCodigo().compare(login) == 0)
             {
-                std::cout << std::endl
-                          << "Encontrou agente! Logando..." << std::endl;
+                std::cout << std::endl;
+                std::cout << "Encontrou agente! Logando..." << std::endl;
                 return *it;
             }
-            else
-            {
-                std::cout << "Não encontrou agente com esse login!" << std::endl;
-            }
         }
+
+        std::cout << "Não encontrou agente com esse login!" << std::endl;
 
         std::cout << "Digite o login (CPF, Email ou Código) ou 'SAIR': ";
         std::getline(std::cin, login);
@@ -208,7 +178,7 @@ void ConsoleSistema::rodarGerenciamentoDeVoo(VooControle *vooControle)
     }
 }
 
-void ConsoleSistema::rodarGerenciamentoDeReservas(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle)
+void ConsoleSistema::rodarGerenciamentoDeReservas(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle, Usuario *usuario)
 {
     std::string comando{""};
     while (comando.compare("2") != 0)
@@ -223,4 +193,9 @@ void ConsoleSistema::rodarGerenciamentoDeReservas(ReservaControle *reservaContro
 
         std::cout << std::endl;
     }
+}
+
+void ConsoleSistema::rodarGerenciamentoDePassageiros(PassageiroControle *passageiroControle, Usuario *usuario, ReservaControle *reservaControle)
+{
+    std::cout << "Função permitida apenas como agente logado!" << std::endl;
 }

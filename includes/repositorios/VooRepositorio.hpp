@@ -8,13 +8,14 @@ class VooRepositorio
 {
 public:
     VooRepositorio();
-    // VooRepositorio(std::list<Voo *> *voos);
-    ~VooRepositorio();
+    ~VooRepositorio() = default;
 
     std::list<Voo *> &getVoos();
-    void setVoos(std::list<Voo *> &voos);
+
+    unsigned int getNewId();
 
 private:
     std::list<Voo *> voos;
+    unsigned int lastId;
 };
 #endif

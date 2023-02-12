@@ -10,12 +10,12 @@
 #include "../../includes/modelos/Passageiro.hpp"
 #include "../../includes/modelos/Voo.hpp"
 
-Reserva::Reserva(unsigned int id, std::string &localizador, Passageiro *passageiro, Voo *voo, std::string numeroDoAssento)
-    : id{id}, localizador{localizador}, passageiro{passageiro}, voo{voo}, numeroDoAssento{numeroDoAssento}
+Reserva::Reserva(std::string &localizador, Passageiro *passageiro, Voo *voo, std::string numeroDoAssento)
+    : localizador{localizador}, passageiro{passageiro}, voo{voo}, numeroDoAssento{numeroDoAssento}
 {
 }
 
-unsigned long Reserva::getId()
+unsigned long Reserva::getId() const
 {
     return this->id;
 }
@@ -76,7 +76,7 @@ void Reserva::imprimirDadosReserva()
 Reserva *Reserva::verificaSeAssentoExiste(const std::string &numAssento, std::list<Reserva *> reservas)
 {
     std::list<Reserva *>::iterator it{reservas.begin()};
-    for (; it != reservas.end(); it++)
+    for (; it != reservas.end(); ++it)
     {
         if ((*it)->getLocalizador().compare(numAssento) == 0)
         {
@@ -89,7 +89,7 @@ Reserva *Reserva::verificaSeAssentoExiste(const std::string &numAssento, std::li
 Reserva *Reserva::buscaReservaLocalizador(const std::string &localizador, std::list<Reserva *> reservas)
 {
     std::list<Reserva *>::iterator it{reservas.begin()};
-    for (; it != reservas.end(); it++)
+    for (; it != reservas.end(); ++it)
     {
         if ((*it)->getLocalizador().compare(localizador) == 0)
         {

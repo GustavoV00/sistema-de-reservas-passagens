@@ -10,170 +10,14 @@ ConsolePassageiro::ConsolePassageiro()
 
 void ConsolePassageiro::imprimirComandosTelaPrincipal()
 {
-    // imprimeStatusLogin();
     std::cout << "--------------------------------OPÇÕES--------------------------------" << std::endl;
-    std::cout << " 1) FAZER LOGIN COMO PASSAGEIRO" << std::endl;
+    std::cout << " 1) FAZER LOGIN COMO OUTRO PASSAGEIRO" << std::endl;
     std::cout << " 2) FAZER LOGIN COMO AGENTE" << std::endl;
     std::cout << " 3) MOSTRAR OPÇÕES DE VOOS" << std::endl;
     std::cout << " 4) MOSTRAR OPÇÕES DE RESERVAS" << std::endl;
     std::cout << "10) SAIR" << std::endl;
     std::cout << "----------------------------------------------------------------------------" << std::endl;
     std::cout << std::endl;
-    // std::cout << "testeeeereee" << std::endl;
-}
-
-void ConsolePassageiro::imprimirOpcoesGerenciamentoVoos()
-{
-    std::cout << std::endl;
-    std::cout << "-------------------------GERENCIAMENTO DE VOOS------------------------" << std::endl;
-    std::cout << "--------------------------------OPÇÕES--------------------------------" << std::endl;
-    std::cout << "1) LISTAR VOOS" << std::endl;
-    std::cout << "2) CRIAR VOO" << std::endl;
-    std::cout << "3) EDITAR VOO" << std::endl;
-    std::cout << "4) EXCLUIR VOO" << std::endl;
-    std::cout << "5) VOLTAR" << std::endl;
-    std::cout << "----------------------------------------------------------------------------" << std::endl;
-    std::cout << std::endl;
-}
-
-void ConsolePassageiro::cadastrarVooInterface(VooControle *vooControle)
-{
-    std::list<Voo *> voos = vooControle->obterTodosOsVoos();
-    std::string numeroDoVoo = Utils::lerStringTratada("Digite o número do voo ou 'SAIR'");
-    int numeroDoVooParsed{0};
-
-    while (numeroDoVoo.compare("SAIR") != 0)
-    {
-        if (numeroDoVoo.compare("SAIR") == 0)
-        {
-            return;
-        }
-        try
-        {
-            numeroDoVooParsed = stoi(numeroDoVoo);
-            if (numeroDoVooParsed <= 0)
-            {
-                std::cout << "Número do voo deve ser > 0" << std::endl;
-            }
-            else
-            {
-                // verifica se já existe voo com esse número
-                if (!Utils::existeVooNumero(voos, numeroDoVooParsed))
-                {
-                    break;
-                }
-                std::cout << "Já existe voo com esse número!" << std::endl;
-            }
-        }
-        catch (std::exception &e)
-        {
-            std::cout << "Digite apenas números!" << std::endl;
-        }
-
-        numeroDoVoo = Utils::lerStringTratada("Digite o número do voo ou 'SAIR'");
-    }
-
-    if (numeroDoVoo.compare("SAIR") == 0)
-    {
-        return;
-    }
-    if (numeroDoVooParsed <= 0)
-    {
-        std::cout << "Número do voo não pode ser <= 0" << std::endl;
-        return;
-    }
-
-    std::string partida = Utils::lerStringTratada("Digite o local de partida do voo ou 'SAIR'");
-    if (partida.compare("SAIR") == 0)
-    {
-        return;
-    }
-    std::string chegada = Utils::lerStringTratada("Digite o local de chegada do voo ou 'SAIR'");
-    if (chegada.compare("SAIR") == 0)
-    {
-        return;
-    }
-    std::string data = Utils::lerDataTratada("Digite a data de partida do voo ou 'SAIR'");
-    if (data.compare("SAIR") == 0)
-    {
-        return;
-    }
-    std::string horarioPartida = Utils::lerHorarioTratado("Digite o horário de partida do voo ou 'SAIR'");
-    if (horarioPartida.compare("SAIR") == 0)
-    {
-        return;
-    }
-    std::string horarioChegada = Utils::lerHorarioTratado("Digite o horário de chegada do voo ou 'SAIR'");
-    if (horarioChegada.compare("SAIR") == 0)
-    {
-        return;
-    }
-
-    int capacidade{0};
-    try
-    {
-        std::string stringCapacidade = Utils::lerStringTratada("Digite a capacidade do voo (múltiplo de 4 entre 20 e 200) ou 'SAIR'");
-        if (stringCapacidade.compare("SAIR") == 0)
-        {
-            return;
-        }
-
-        capacidade = stoi(stringCapacidade);
-    }
-    catch (std::exception &e)
-    {
-        std::cout << "Capacidade deve ser inteiro (múltiplo de 4 entre 20 e 200)!" << std::endl;
-        return;
-    }
-
-    Voo *voo{nullptr};
-    try
-    {
-        unsigned int novoID = voos.size() + 1;
-        voo = new Voo{novoID, numeroDoVooParsed, partida, chegada, capacidade, data, horarioPartida, horarioChegada};
-    }
-    catch (std::exception &e)
-    {
-        std::cout << "Falha ao cadastrar voo: " << e.what() << std::endl;
-        return;
-    }
-
-    // voos.push_back(voo);
-    if (!vooControle->cadastrarVoo(voo))
-    {
-        return;
-    }
-
-    std::cout << "Sucesso ao cadastrar voo!" << std::endl;
-}
-
-// usuário agente tem todas as permissões para gerenciar os voos
-void ConsolePassageiro::rodarGerenciamentoDeVoo(VooControle *vooControle)
-{
-    std::string comando{""};
-    while (comando.compare("5") != 0)
-    {
-        imprimirOpcoesGerenciamentoVoos();
-        comando = Utils::lerStringTratada("Digite o número da opção escolhida");
-        if (comando.compare("1") == 0)
-        {
-            Utils::imprimirListaVoos(vooControle->obterTodosOsVoos());
-        }
-        else if (comando.compare("2") == 0)
-        {
-            std::cout << "Aqui chama a função de cadastrar voo" << std::endl;
-            cadastrarVooInterface(vooControle);
-        }
-        else if (comando.compare("3") == 0)
-        {
-            std::cout << "Aqui chama a função de atualizar voo" << std::endl;
-        }
-        else if (comando.compare("4") == 0)
-        {
-            std::cout << "Aqui chama a função de excluir voo" << std::endl;
-        }
-        std::cout << std::endl;
-    }
 }
 
 void ConsolePassageiro::imprimirOpcoesGerenciamentoDeReservas()
@@ -191,120 +35,194 @@ void ConsolePassageiro::imprimirOpcoesGerenciamentoDeReservas()
     std::cout << std::endl;
 }
 
-void ConsolePassageiro::rodarGerenciamentoDeReservas(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle)
+void ConsolePassageiro::rodarGerenciamentoDeReservas(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle, Usuario *usuario)
 {
     std::string comando{""};
-    while (comando.compare("5") != 0)
+    std::list<Reserva *> reservas = reservaControle->obterReservasDoPassageiro(usuario);
+    std::list<Reserva *>::iterator it;
+    for (it = reservas.begin(); it != reservas.end(); ++it)
+    {
+
+        std::cout << "Estou entrando aqui!" << std::endl;
+        std::cout << (*it)->getPassageiro()->getNome() << std::endl;
+        std::cout << (*it)->getLocalizador() << std::endl;
+    }
+
+    // isso aqui vai dar problema quando a lista for fazia
+    std::string email = usuario->getEmail();
+    Passageiro *passageiro = passageiroControle->obterPassageiroPorEmail(email);
+    while (comando.compare("6") != 0)
     {
         this->imprimirOpcoesGerenciamentoDeReservas();
         comando = Utils::lerStringTratada("Digite o número da opção escolhida");
-        // Listar
+
+        // // Listar
         if (comando.compare("1") == 0)
         {
-            std::list<Reserva *> reservas = reservaControle->obterTodosAsReservas();
             Utils::imprimirListaReservas(reservas);
         }
         // buscar apenas uma reserva
         else if (comando.compare("2") == 0)
         {
             std::string comando{""};
-            comando = Utils::lerStringTratada("Digite o id da reserva");
-            int id = stoi(comando);
-            Reserva *reserva = reservaControle->obterReservaPorId(id);
-            reserva->imprimirDadosReserva();
+            comando = Utils::lerStringTratada("Digite o localizador da reserva");
+            if (comando.size() == 6)
+            {
+                Reserva *reserva = reservaControle->obterReservaPorLocalizador(comando);
+                reserva->imprimirDadosReserva();
+            }
+            else
+            {
+                std::cout << "Número do localizador está incorreto! " << std::endl;
+            }
         }
         // Cadastrar reserva
         else if (comando.compare("3") == 0)
         {
-            this->cadastrarReservaInterface(reservaControle, passageiroControle, vooControle);
+            this->cadastrarReservaInterface(reservaControle, passageiroControle, vooControle, passageiro, reservas);
+            reservas = reservaControle->obterReservasDoPassageiro(usuario);
         }
         else if (comando.compare("4") == 0)
         {
-            // this->atualizarReservaInterface(reservaControle, passageiroControle, vooControle);
+            this->atualizarReservaInterface(reservaControle, passageiroControle, vooControle);
         }
         else if (comando.compare("5") == 0)
         {
-            std::cout << "Aqui chama a função de excluir reserva, mas deve ser lançado uma exceção!" << std::endl;
-            this->removerReservaInterface(reservaControle, passageiroControle, vooControle);
+            this->removerReservaInterface(reservaControle, passageiroControle, vooControle, passageiro);
+            reservas = reservaControle->obterReservasDoPassageiro(usuario);
         }
-        std::cout << std::endl;
+        else if (comando.compare("6") == 0)
+        {
+            comando = "6";
+        }
+        // std::cout << std::endl;
     }
 }
 
-void ConsolePassageiro::cadastrarReservaInterface(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle)
+// Verificar se um Passageiro já pertence ao voo e não deixar ele se cadastrar dnv
+void ConsolePassageiro::cadastrarReservaInterface(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle, Passageiro *passageiro, std::list<Reserva *> resevasDoPassageiro)
 {
-    Passageiro *passageiro{nullptr};
     // Passageiro *passageiro = passageiroControle->obterPassageiroPorId(1);
     // std::cout << passageiro->getNome();
     Voo *voo{nullptr};
-    std::list<Reserva *> reservas = reservaControle->obterTodosAsReservas();
+    std::list<Voo *> voos;
     std::string comando{""};
-    int id{0};
+    int numeroDoVoo{0};
 
-    std::cout << "ESSA RESERVA VAI PERTENCER A QUAL PASSAGEIRO ? " << std::endl;
-    while (passageiro == nullptr)
-    {
-        comando = Utils::lerStringTratada("DESEJA LISTAR TODOS OS PASSAGEIROS ? S/n");
-        if (comando.compare("S") == 0)
-        {
-            std::list<Passageiro *> passageiros = passageiroControle->obterTodosOsPassageiros();
-            Utils::imprimirListaPassageiros(passageiros);
-        }
-        comando = Utils::lerStringTratada("Digite um ID valido!");
-        id = stoi(comando);
-        passageiro = passageiroControle->obterPassageiroPorId(id);
-        if (passageiro == nullptr)
-            std::cout << "ID Inválido!" << std::endl;
-    }
-
-    std::cout << "ESSA RESERVA PERTENCE A QUAL VOO? " << std::endl;
+    // std::list<Voo *> voos = vooControle->obterTodosOsVoos();
     while (voo == nullptr)
     {
-        comando = Utils::lerStringTratada("DESEJA LISTAR TODOS OS VOOS? S/n");
-        if (comando.compare("S") == 0)
+        comando = Utils::lerStringTratada("Digite SAIR para sair, LISTAR para mostrar os VOOS ou o NUMERO DO VOO para criar a reserva");
+        if (comando.compare("LISTAR") == 0)
         {
-            std::list<Voo *> voos = vooControle->obterTodosOsVoos();
+            voos = vooControle->obterTodosOsVoos();
             Utils::imprimirListaVoos(voos);
         }
-        comando = Utils::lerStringTratada("Digite um ID valido do Voo!");
-        id = stoi(comando);
-        voo = vooControle->obterVooPorId(id);
-        if (voo == nullptr)
-            std::cout << "ID Inválido!" << std::endl;
+        else if (comando.compare("SAIR") == 0)
+        {
+            return;
+        }
+        else
+        {
+            numeroDoVoo = stoi(comando);
+            // if (isdigit(numeroDoVoo))
+            // {
+            voo = vooControle->obterVooPorNumeroDoVoo(numeroDoVoo);
+            if (voo == nullptr)
+                std::cout << "NUMERO do VOO inválido" << std::endl;
+
+            // std::list<Reserva *>::iterator it;
+            // for (it = reservas.begin(); it != reservas.end(); ++it)
+            // {
+            //     if ((*it)->getVoo() == voo)
+            //     {
+            //         std::cout << "Não pode fazer a reserva desse PASSAGEIRO nesse mesmo VOO" << std::endl;
+            //         voo = nullptr;
+            //     }
+            // }
+
+            // }
+        }
     }
 
-    unsigned int tamReserva = reservas.size() + 1;
-    unsigned int novoId{tamReserva};
+    std::list<Reserva *> reservas = reservaControle->obterTodosAsReservas();
     std::string localizador = GerarDados::gerarLocalizador(reservaControle);
-    unsigned int capacidade = voo->getCapacidade();
-    std::string numeroDoAssento = GerarDados::gerarNovoNumeroDoAssento(reservaControle, capacidade);
+    std::string numeroDoAssento = GerarDados::gerarNovoNumeroDoAssento(reservaControle);
 
-    Reserva *reserva = new Reserva{novoId, localizador, passageiro, voo, numeroDoAssento};
-    reservaControle->cadastrarReserva(reserva);
+    Reserva *reserva{nullptr};
+    try
+    {
+        reserva = new Reserva{localizador, passageiro, voo, numeroDoAssento};
+        if (reservaControle->cadastrarReserva(reserva))
+        {
+            // adiciona reserva na lista de reservas do voo
+            try
+            {
+                voo->adicionarReserva(reserva);
+            }
+            catch (std::exception &e)
+            {
+                std::cout << "Falha ao adicionar reserva no voo: " << e.what() << "! Reserva não vai ser adicionada!" << std::endl;
+                reservaControle->excluirReservaPorLocalizador(localizador);
+            }
+        }
+    }
+    catch (std::exception &e)
+    {
+        std::cout << "Falha ao criar reserva!" << std::endl;
+    }
 }
 
-void ConsolePassageiro::removerReservaInterface(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle)
+void ConsolePassageiro::removerReservaInterface(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle, Passageiro *passageiro)
 {
 
-    Passageiro *passageiro{nullptr};
-    Voo *voo{nullptr};
-    std::list<Reserva *> reservas = reservaControle->obterTodosAsReservas();
-    Utils::imprimirListaReservas(reservas);
     std::string comando{""};
-    int id{0};
 
+    comando = Utils::lerStringTratada("Digite o CÓDIGO da reserva para remover e SAIR para sair ");
+    if (comando.compare("SAIR") == 0)
+        return;
+
+    // Reserva *reserva = reservaControle->obterReservaPorLocalizador(comando);
+    // reserva->getPassageiro();
+    reservaControle->excluirReservaPorLocalizador(comando);
+}
+
+void ConsolePassageiro::atualizarReservaInterface(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle)
+{
+    std::string comando{""};
     while (comando.compare("SAIR") != 0)
     {
-        comando = Utils::lerStringTratada("Digite o ID para remover, LISTAR para ver as reservas e SAIR para sair ");
-        if (comando.compare("LISTAR") == 0)
-            Utils::imprimirListaReservas(reservas);
-        else if (comando.compare("SAIR"))
+        comando = Utils::lerStringTratada("Digite o CÓDIGO da reserva que deseja atualizar ou SAIR para sair");
+        if (comando.size() == 6)
         {
-            id = stoi(comando);
-            Reserva *reserva = reservaControle->obterReservaPorId(id);
-            passageiro = reserva->getPassageiro();
-            passageiro = nullptr;
-            reservaControle->excluirReservaPorId(id);
+            Reserva *reserva = reservaControle->obterReservaPorLocalizador(comando);
+            if (reserva != nullptr)
+            {
+                comando = Utils::lerStringTratada("Digite VOO para mudar o VOO e ASSENTO para mudar o ASSENTO do VOO atual");
+                if (comando.compare("VOO") == 0)
+                {
+                    std::list<Voo *> voos = vooControle->obterTodosOsVoos();
+                    Utils::imprimirListaVoos(voos);
+                    comando = Utils::lerStringTratada("Digite o NUMERO do novo VOO");
+                    int numVoo = stoi(comando);
+                    Voo *voo = vooControle->obterVooPorNumeroDoVoo(numVoo);
+                    reserva->setVoo(voo);
+                }
+                else if (comando.compare("ASSENTO") == 0)
+                {
+                    std::cout << "Foi gerado um novo assento com sucesso!" << std::endl;
+                    std::string novoAssento = GerarDados::gerarNovoNumeroDoAssento(reservaControle);
+                    reserva->setNumeroDoAssento(novoAssento);
+                }
+            }
+            else
+            {
+                std::cout << "Reserva não existe!" << std::endl;
+            }
+        }
+        else
+        {
+            std::cout << "Código incorreto!" << std::endl;
         }
     }
 }

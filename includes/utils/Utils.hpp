@@ -33,6 +33,7 @@ public:
     static void imprimirListaAgentes(std::list<AgenteViagem *> &agentes);
     static void imprimirListaPassageiros(std::list<Passageiro *> &passageiros);
     static void imprimirListaReservas(std::list<Reserva *> reservas);
+
     static void imprimirListaVoos(std::list<Voo *> &voos);
     static std::string lerStringTratada(std::string mensagem);
     static CPF *lerCPFTratado(std::string mensagem);
