@@ -79,21 +79,20 @@ bool ReservaControle::cadastrarReserva(Reserva *reserva)
     }
 }
 
-bool ReservaControle::excluirReservaPorId(const unsigned long id)
+bool ReservaControle::excluirReservaPorId(const unsigned int id)
 {
-    std::list<Reserva *> reservas = this->getReservaRepositorio()->getReservas();
-    std::list<Reserva *>::iterator it;
-    for (it = reservas.begin(); it != reservas.end(); ++it)
+    std::list<Reserva *>::iterator it{this->reservaRepositorio->getReservas().begin()};
+    while (it != this->reservaRepositorio->getReservas().end())
     {
-        // Testar isso aqui mais tarde!!!
-        // isso aqui funciona ? Muito suspeito. Preciso testar com cuidado mais tarde
-        std::cout << *it << std::endl;
+        // std::cout << (*it)->getNumeroDoVoo() << std::endl;
         if ((*it)->getId() == id)
         {
+            // voos.erase(it);
+            this->reservaRepositorio->getReservas().erase(it);
             delete *it;
-            reservas.erase(it);
             return true;
         }
+        it++;
     }
     return false;
 }

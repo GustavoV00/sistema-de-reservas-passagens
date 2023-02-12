@@ -8,8 +8,8 @@ all: $(nomePrograma)
 # $(nomePrograma): main.o Pessoa.o CPF.o RG.o DocumentoInvalidoException.o Utils.o Reserva.o Passageiro.o Voo.o AgenteViagem.o Console.o DadoIncorretoException.o CapacidadeIncorretaException.o FormatoInvalidoException.o
 # 	$(compilador) -o $(nomePrograma) main.o Pessoa.o CPF.o RG.o DocumentoInvalidoException.o Utils.o Reserva.o Passageiro.o Voo.o AgenteViagem.o Console.o DadoIncorretoException.o CapacidadeIncorretaException.o FormatoInvalidoException.o $(parametrosCompilacao)
 
-$(nomePrograma): main.o Pessoa.o CPF.o RG.o DocumentoInvalidoException.o Utils.o Reserva.o Passageiro.o Voo.o AgenteViagem.o UsuarioConvidado.o Usuario.o  ConsoleSistema.o ConsoleAgente.o GerarDados.o VooControle.o ReservaControle.o PassageiroControle.o VooRepositorio.o ReservaRepositorio.o PassageiroRepositorio.o DadoIncorretoException.o CapacidadeIncorretaException.o FormatoInvalidoException.o
-	$(compilador) -o $(nomePrograma) main.o Pessoa.o CPF.o RG.o DocumentoInvalidoException.o Utils.o Reserva.o Passageiro.o Voo.o AgenteViagem.o UsuarioConvidado.o Usuario.o ConsoleSistema.o ConsoleAgente.o GerarDados.o VooControle.o ReservaControle.o PassageiroControle.o VooRepositorio.o ReservaRepositorio.o PassageiroRepositorio.o DadoIncorretoException.o CapacidadeIncorretaException.o FormatoInvalidoException.o $(parametrosCompilacao)
+$(nomePrograma): main.o Pessoa.o CPF.o RG.o DocumentoInvalidoException.o Utils.o Reserva.o Passageiro.o Voo.o AgenteViagem.o UsuarioConvidado.o Usuario.o  ConsoleSistema.o ConsoleAgente.o ConsolePassageiro.o GerarDados.o VooControle.o ReservaControle.o PassageiroControle.o VooRepositorio.o ReservaRepositorio.o PassageiroRepositorio.o DadoIncorretoException.o CapacidadeIncorretaException.o FormatoInvalidoException.o VooCheioException.o
+	$(compilador) -o $(nomePrograma) main.o Pessoa.o CPF.o RG.o DocumentoInvalidoException.o Utils.o Reserva.o Passageiro.o Voo.o AgenteViagem.o UsuarioConvidado.o Usuario.o ConsoleSistema.o ConsoleAgente.o ConsolePassageiro.o GerarDados.o VooControle.o ReservaControle.o PassageiroControle.o VooRepositorio.o ReservaRepositorio.o PassageiroRepositorio.o DadoIncorretoException.o CapacidadeIncorretaException.o FormatoInvalidoException.o VooCheioException.o $(parametrosCompilacao)
 
 main.o: main.cpp
 	$(compilador) -c main.cpp $(parametrosCompilacao)
@@ -74,6 +74,9 @@ ConsoleSistema.o: includes/consoles/ConsoleSistema.hpp sources/consoles/ConsoleS
 ConsoleAgente.o: includes/consoles/ConsoleAgente.hpp sources/consoles/ConsoleAgente.cpp
 	$(compilador) -c sources/consoles/ConsoleAgente.cpp $(parametrosCompilacao)
 
+ConsolePassageiro.o: includes/consoles/ConsolePassageiro.hpp sources/consoles/ConsolePassageiro.cpp
+	$(compilador) -c sources/consoles/ConsolePassageiro.cpp $(parametrosCompilacao)
+
 DocumentoInvalidoException.o: includes/exceptions/DocumentoInvalidoException.hpp sources/exceptions/DocumentoInvalidoException.cpp
 	$(compilador) -c sources/exceptions/DocumentoInvalidoException.cpp $(parametrosCompilacao)
 
@@ -85,6 +88,9 @@ CapacidadeIncorretaException.o: includes/exceptions/CapacidadeIncorretaException
 
 FormatoInvalidoException.o: includes/exceptions/FormatoInvalidoException.hpp sources/exceptions/FormatoInvalidoException.cpp
 	$(compilador) -c sources/exceptions/FormatoInvalidoException.cpp $(parametrosCompilacao)
+
+VooCheioException.o: includes/exceptions/VooCheioException.hpp sources/exceptions/VooCheioException.cpp
+	$(compilador) -c sources/exceptions/VooCheioException.cpp $(parametrosCompilacao)
 
 clean:
 	rm -f *.o *.gch $(nomePrograma)

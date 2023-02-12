@@ -24,7 +24,7 @@ public:
     virtual void rodarGerenciamentoDeVoo(VooControle *vooControle);
     virtual void imprimirOpcoesGerenciamentoVoos();
 
-    virtual void rodarGerenciamentoDeReservas();
+    virtual void rodarGerenciamentoDeReservas(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle);
 
     // void imprimirMensagemInicioExecucao();
 

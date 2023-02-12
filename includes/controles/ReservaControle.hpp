@@ -21,7 +21,7 @@ public:
     Reserva *obterReservaPorId(const unsigned long id);
     bool atualizarReservaPorId(unsigned long id, Reserva reservaNovo);
     bool cadastrarReserva(Reserva *Reserva);
-    bool excluirReservaPorId(const unsigned long id);
+    bool excluirReservaPorId(const unsigned int id);
 
 private:
     ReservaRepositorio *reservaRepositorio;

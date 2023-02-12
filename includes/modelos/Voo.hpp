@@ -46,7 +46,7 @@ public:
     int getAssentosDisponiveis() const;
     void setAssentosDisponiveis(const int &assentosDisponiveis);
 
-    std::list<Reserva *> getReservas() const;
+    std::list<Reserva *> &getReservas();
     void setReservas(std::list<Reserva *> reservas);
 
     // setters

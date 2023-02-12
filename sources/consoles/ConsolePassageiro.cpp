@@ -179,18 +179,19 @@ void ConsolePassageiro::rodarGerenciamentoDeVoo(VooControle *vooControle)
 void ConsolePassageiro::imprimirOpcoesGerenciamentoDeReservas()
 {
     std::cout << std::endl;
-    std::cout << "-------------------------GERENCIAMENTO DE VOOS------------------------" << std::endl;
+    std::cout << "-------------------------GERENCIAMENTO DE RESERVAS------------------------" << std::endl;
     std::cout << "--------------------------------OPÇÕES--------------------------------" << std::endl;
     std::cout << "1) LISTAR RESERVAS" << std::endl;
-    std::cout << "2) CRIAR  RESERVAS" << std::endl;
-    std::cout << "3) EDITAR RESERVAS" << std::endl;
-    std::cout << "4) EXCLUIR  RESERVAS" << std::endl;
-    std::cout << "5) VOLTAR" << std::endl;
+    std::cout << "2) LISTAR RESERVA POR ID: Entre 1 e 30" << std::endl;
+    std::cout << "3) CRIAR  RESERVAS" << std::endl;
+    std::cout << "4) EDITAR RESERVAS" << std::endl;
+    std::cout << "5) EXCLUIR  RESERVAS" << std::endl;
+    std::cout << "6) VOLTAR" << std::endl;
     std::cout << "----------------------------------------------------------------------------" << std::endl;
     std::cout << std::endl;
 }
 
-void ConsolePassageiro::rodarGerenciamentoDeReservas(ReservaControle *reservaControle)
+void ConsolePassageiro::rodarGerenciamentoDeReservas(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle)
 {
     std::string comando{""};
     while (comando.compare("5") != 0)
@@ -203,23 +204,107 @@ void ConsolePassageiro::rodarGerenciamentoDeReservas(ReservaControle *reservaCon
             std::list<Reserva *> reservas = reservaControle->obterTodosAsReservas();
             Utils::imprimirListaReservas(reservas);
         }
-        // Cadastrar
+        // buscar apenas uma reserva
         else if (comando.compare("2") == 0)
         {
             std::string comando{""};
             comando = Utils::lerStringTratada("Digite o id da reserva");
             int id = stoi(comando);
             Reserva *reserva = reservaControle->obterReservaPorId(id);
-            // Utils::imprimirReserva(reserva);
+            reserva->imprimirDadosReserva();
         }
+        // Cadastrar reserva
         else if (comando.compare("3") == 0)
         {
-            std::cout << "Aqui chama a função de atualizar reserva, mas deve ser lançado uma exceção!" << std::endl;
+            this->cadastrarReservaInterface(reservaControle, passageiroControle, vooControle);
         }
         else if (comando.compare("4") == 0)
         {
+            // this->atualizarReservaInterface(reservaControle, passageiroControle, vooControle);
+        }
+        else if (comando.compare("5") == 0)
+        {
             std::cout << "Aqui chama a função de excluir reserva, mas deve ser lançado uma exceção!" << std::endl;
+            this->removerReservaInterface(reservaControle, passageiroControle, vooControle);
         }
         std::cout << std::endl;
+    }
+}
+
+void ConsolePassageiro::cadastrarReservaInterface(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle)
+{
+    Passageiro *passageiro{nullptr};
+    // Passageiro *passageiro = passageiroControle->obterPassageiroPorId(1);
+    // std::cout << passageiro->getNome();
+    Voo *voo{nullptr};
+    std::list<Reserva *> reservas = reservaControle->obterTodosAsReservas();
+    std::string comando{""};
+    int id{0};
+
+    std::cout << "ESSA RESERVA VAI PERTENCER A QUAL PASSAGEIRO ? " << std::endl;
+    while (passageiro == nullptr)
+    {
+        comando = Utils::lerStringTratada("DESEJA LISTAR TODOS OS PASSAGEIROS ? S/n");
+        if (comando.compare("S") == 0)
+        {
+            std::list<Passageiro *> passageiros = passageiroControle->obterTodosOsPassageiros();
+            Utils::imprimirListaPassageiros(passageiros);
+        }
+        comando = Utils::lerStringTratada("Digite um ID valido!");
+        id = stoi(comando);
+        passageiro = passageiroControle->obterPassageiroPorId(id);
+        if (passageiro == nullptr)
+            std::cout << "ID Inválido!" << std::endl;
+    }
+
+    std::cout << "ESSA RESERVA PERTENCE A QUAL VOO? " << std::endl;
+    while (voo == nullptr)
+    {
+        comando = Utils::lerStringTratada("DESEJA LISTAR TODOS OS VOOS? S/n");
+        if (comando.compare("S") == 0)
+        {
+            std::list<Voo *> voos = vooControle->obterTodosOsVoos();
+            Utils::imprimirListaVoos(voos);
+        }
+        comando = Utils::lerStringTratada("Digite um ID valido do Voo!");
+        id = stoi(comando);
+        voo = vooControle->obterVooPorId(id);
+        if (voo == nullptr)
+            std::cout << "ID Inválido!" << std::endl;
+    }
+
+    unsigned int tamReserva = reservas.size() + 1;
+    unsigned int novoId{tamReserva};
+    std::string localizador = GerarDados::gerarLocalizador(reservaControle);
+    unsigned int capacidade = voo->getCapacidade();
+    std::string numeroDoAssento = GerarDados::gerarNovoNumeroDoAssento(reservaControle, capacidade);
+
+    Reserva *reserva = new Reserva{novoId, localizador, passageiro, voo, numeroDoAssento};
+    reservaControle->cadastrarReserva(reserva);
+}
+
+void ConsolePassageiro::removerReservaInterface(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle)
+{
+
+    Passageiro *passageiro{nullptr};
+    Voo *voo{nullptr};
+    std::list<Reserva *> reservas = reservaControle->obterTodosAsReservas();
+    Utils::imprimirListaReservas(reservas);
+    std::string comando{""};
+    int id{0};
+
+    while (comando.compare("SAIR") != 0)
+    {
+        comando = Utils::lerStringTratada("Digite o ID para remover, LISTAR para ver as reservas e SAIR para sair ");
+        if (comando.compare("LISTAR") == 0)
+            Utils::imprimirListaReservas(reservas);
+        else if (comando.compare("SAIR"))
+        {
+            id = stoi(comando);
+            Reserva *reserva = reservaControle->obterReservaPorId(id);
+            passageiro = reserva->getPassageiro();
+            passageiro = nullptr;
+            reservaControle->excluirReservaPorId(id);
+        }
     }
 }

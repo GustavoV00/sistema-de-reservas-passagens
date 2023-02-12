@@ -91,10 +91,11 @@ void Utils::imprimirListaReservas(std::list<Reserva *> reservas)
 
 void Utils::imprimirListaVoos(std::list<Voo *> &voos)
 {
-    std::cout << std::endl
-              << "Voos: " << std::endl;
+    std::cout << std::endl;
+    std::cout << "Voos: " << std::endl;
+
     std::list<Voo *>::iterator it;
-    for (it = voos.begin(); it != voos.end(); it++)
+    for (it = voos.begin(); it != voos.end(); ++it)
     {
         (*it)->imprimirDadosVoo();
     }
@@ -382,5 +383,25 @@ bool Utils::existeVooNumero(std::list<Voo *> &voos, int numeroDoVoo)
             return true;
         }
     }
+    return false;
+}
+
+bool Utils::mensagemConfirmacao(std::string mensagem)
+{
+    std::string retorno{""};
+    std::cout << mensagem << "(S/n): ";
+    std::getline(std::cin, retorno);
+    while (retorno.compare("SAIR") != 0 && retorno.compare("S") != 0 && retorno.compare("n") != 0)
+    {
+
+        std::cout << mensagem << "(S/n): ";
+        std::getline(std::cin, retorno);
+    }
+
+    if (retorno.compare("S") == 0)
+    {
+        return true;
+    }
+
     return false;
 }

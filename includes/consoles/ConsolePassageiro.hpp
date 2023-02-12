@@ -4,6 +4,7 @@
 
 #include "ConsoleSistema.hpp"
 #include "../modelos/Voo.hpp"
+#include "../modelos/GerarDados.hpp"
 
 class ConsolePassageiro : public ConsoleSistema
 {
@@ -16,9 +17,11 @@ public:
     virtual void imprimirOpcoesGerenciamentoVoos();
 
     virtual void imprimirOpcoesGerenciamentoDeReservas();
-    virtual void rodarGerenciamentoDeReservas(ReservaControle *reservaControle);
+    virtual void rodarGerenciamentoDeReservas(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle);
 
     void cadastrarVooInterface(VooControle *vooControle);
+    void cadastrarReservaInterface(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle);
+    void removerReservaInterface(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle);
 
 private:
 };

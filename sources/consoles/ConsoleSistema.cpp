@@ -116,9 +116,8 @@ Passageiro *ConsoleSistema::loginPassageiro(std::list<Passageiro *> &passageiros
 
     std::string login{""}, senha{""};
     bool logado = false;
-    // arrumou, q tu fez ? arrumou nada tinha um getCodigo pra passageiro
-    // hum
-    std::cout << "Digite o login (CPF ou Email) do agente para logar: ";
+
+    std::cout << "Digite o login (CPF ou Email) do passageiro para logar ou 'SAIR': ";
     std::getline(std::cin, login);
     while (!logado && login.compare("SAIR") != 0)
     {
@@ -138,7 +137,7 @@ Passageiro *ConsoleSistema::loginPassageiro(std::list<Passageiro *> &passageiros
             }
         }
 
-        std::cout << "Digite o login (CPF, Email ou Código): ";
+        std::cout << "Digite o login (CPF ou Email) ou 'SAIR': ";
         std::getline(std::cin, login);
     }
 
@@ -166,7 +165,7 @@ AgenteViagem *ConsoleSistema::loginAgente(std::list<AgenteViagem *> &agentes)
 
     std::string login{""}, senha{""};
     bool logado = false;
-    std::cout << "Digite o login (CPF, Email ou Código) do agente para logar: ";
+    std::cout << "Digite o login (CPF, Email ou Código) do agente para logar ou 'SAIR': ";
     std::getline(std::cin, login);
     while (!logado && login.compare("SAIR") != 0)
     {
@@ -186,7 +185,7 @@ AgenteViagem *ConsoleSistema::loginAgente(std::list<AgenteViagem *> &agentes)
             }
         }
 
-        std::cout << "Digite o login (CPF, Email ou Código): ";
+        std::cout << "Digite o login (CPF, Email ou Código) ou 'SAIR': ";
         std::getline(std::cin, login);
     }
 
@@ -209,7 +208,7 @@ void ConsoleSistema::rodarGerenciamentoDeVoo(VooControle *vooControle)
     }
 }
 
-void ConsoleSistema::rodarGerenciamentoDeReservas()
+void ConsoleSistema::rodarGerenciamentoDeReservas(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle)
 {
     std::string comando{""};
     while (comando.compare("2") != 0)

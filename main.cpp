@@ -21,13 +21,6 @@
 
 int main()
 {
-    // std::cout << "      _                                     \n";
-    // std::cout << "  ___(_)_ __ ___  _ __  ___  ___  _ __  ___ \n";
-    // std::cout << " / __| | '_ ` _ \\| '_ \\/ __|/ _ \\| '_ \\/ __|\n";
-    // std::cout << " \\__ \\ | | | | | | |_) \\__ \\ (_) | | | \\__ \\\n";
-    // std::cout << " |___/_|_| |_| |_| .__/|___/\\___/|_| |_|___/\n";
-    // std::cout << "                 |_|                        \n";
-
     // classes de controle dos dados de voos, passageiros e reservas
     VooControle *vooControle = new VooControle{};
     PassageiroControle *passageiroControle = new PassageiroControle{};
@@ -101,7 +94,7 @@ int main()
         }
         else if (comando.compare("4") == 0)
         {
-            console->rodarGerenciamentoDeReservas();
+            console->rodarGerenciamentoDeReservas(reservaControle, passageiroControle, vooControle);
         }
     }
 

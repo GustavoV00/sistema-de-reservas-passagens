@@ -13,6 +13,7 @@
 #include "../../includes/modelos/Voo.hpp"
 #include "../../includes/exceptions/CapacidadeIncorretaException.hpp"
 #include "../../includes/exceptions/FormatoInvalidoException.hpp"
+#include "../../includes/exceptions/VooCheioException.hpp"
 
 Voo::Voo(unsigned int id, int numeroDoVoo, std::string partida, std::string destino, int capacidade, std::string data, std::string horarioPartida, std::string horarioChegada)
     : id{id}, numeroDoVoo(numeroDoVoo), partida(partida), destino(destino)
@@ -123,7 +124,7 @@ void Voo::setAssentosDisponiveis(const int &assentosDisponiveis)
     this->assentosDisponiveis = assentosDisponiveis;
 }
 
-std::list<Reserva *> Voo::getReservas() const
+std::list<Reserva *> &Voo::getReservas()
 {
     return this->reservas;
 }
@@ -139,6 +140,9 @@ void Voo::imprimirDadosVoo()
     std::cout << "Número: " << this->getNumeroDoVoo() << std::endl;
     std::cout << "Partida: " << this->getPartida() << std::endl;
     std::cout << "Destino: " << this->getDestino() << std::endl;
+    std::cout << "Data: " << this->getData() << std::endl;
+    std::cout << "Horário de Partida: " << this->getHorarioPartida() << std::endl;
+    std::cout << "Horário de Chegada: " << this->getHorarioChegada() << std::endl;
     std::cout << "Capacidade: " << this->getCapacidade() << std::endl;
     std::cout << "Assentos Disponíveis: " << this->getAssentosDisponiveis() << std::endl;
     std::cout << "=================================================================================" << std::endl;
@@ -258,5 +262,10 @@ void Voo::imprimirMapaDeAssentos()
 
 void Voo::adicionarReserva(Reserva *reserva)
 {
+    if (this->assentosDisponiveis <= 0)
+    {
+        throw VooCheioException("Voo já está cheio!");
+    }
     this->reservas.push_back(reserva);
+    this->assentosDisponiveis = (assentosDisponiveis - 1);
 }

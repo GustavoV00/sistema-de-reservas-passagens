@@ -20,6 +20,7 @@ public:
     void cadastrarVooInterface(VooControle *vooControle);
     void atualizarVooInterface(VooControle *vooControle);
     void excluirVooInterface(VooControle *vooControle);
+    void imprimirOpcoesDadosEditarVoo();
 
 private:
 };

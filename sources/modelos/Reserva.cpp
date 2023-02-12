@@ -44,7 +44,7 @@ void Reserva::setPassageiro(Passageiro *passageiro)
     this->passageiro = passageiro;
 }
 
-Voo *Reserva::getVoo() const
+Voo *Reserva::getVoo()
 {
     return this->voo;
 }

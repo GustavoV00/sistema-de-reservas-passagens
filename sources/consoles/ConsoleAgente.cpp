@@ -19,7 +19,6 @@ void ConsoleAgente::imprimirComandosTelaPrincipal()
     std::cout << "10) SAIR" << std::endl;
     std::cout << "----------------------------------------------------------------------------" << std::endl;
     std::cout << std::endl;
-    // std::cout << "testeeeereee" << std::endl;
 }
 
 void ConsoleAgente::imprimirOpcoesGerenciamentoVoos()
@@ -36,37 +35,255 @@ void ConsoleAgente::imprimirOpcoesGerenciamentoVoos()
     std::cout << std::endl;
 }
 
+void ConsoleAgente::imprimirOpcoesDadosEditarVoo()
+{
+    std::cout << std::endl;
+    std::cout << "----------------------------EDIÇÃO DE VOO------------------------" << std::endl;
+    std::cout << "--------------------------------OPÇÕES--------------------------------" << std::endl;
+    std::cout << "1) PARTIDA" << std::endl;
+    std::cout << "2) DESTINO" << std::endl;
+    std::cout << "3) DATA" << std::endl;
+    std::cout << "4) HORARIO DE PARTIDA" << std::endl;
+    std::cout << "5) HORARIO DE CHEGADA" << std::endl;
+    std::cout << "6) VOLTAR" << std::endl;
+    std::cout << "----------------------------------------------------------------------------" << std::endl;
+    std::cout << std::endl;
+}
+
 void ConsoleAgente::atualizarVooInterface(VooControle *vooControle)
 {
+    std::list<Voo *> voos = vooControle->obterTodosOsVoos();
 
+    std::string termoBusca = Utils::lerStringTratada("Digite o número do voo a ser editado ou 'SAIR'");
+    int numeroVooParsed{0};
+    bool alterouVoo{false};
+    while (termoBusca.compare("SAIR") != 0)
+    {
+        numeroVooParsed = 0;
+        try
+        {
+            numeroVooParsed = stoi(termoBusca);
+        }
+        catch (std::exception &e)
+        {
+            std::cout << "Digite apenas números!" << std::endl;
+        }
+
+        if (numeroVooParsed > 0)
+        {
+            std::list<Voo *>::iterator it;
+            for (it = voos.begin(); it != voos.end(); it++)
+            {
+                if ((*it)->getNumeroDoVoo() == numeroVooParsed)
+                {
+                    std::cout << "Encontrou voo para editar!" << std::endl;
+                    (*it)->imprimirDadosVoo();
+
+                    imprimirOpcoesDadosEditarVoo();
+                    std::string campoEditar = Utils::lerStringTratada("Digite o número do CAMPO a ser editado ou 'SAIR'");
+                    while (campoEditar.compare("SAIR") != 0)
+                    {
+                        if (campoEditar.compare("1") == 0)
+                        {
+                            std::string partida = Utils::lerStringTratada("Digite o novo local de partida do voo ou 'SAIR'");
+                            if (partida.compare("SAIR") == 0)
+                            {
+                                return;
+                            }
+                            if (Utils::mensagemConfirmacao("Tem certeza que deseja editar o voo acima?"))
+                            {
+                                (*it)->setPartida(partida);
+                                alterouVoo = true;
+                                std::cout << "Sucesso ao alterar partida!" << std::endl;
+                            }
+                            break;
+                        }
+                        else if (campoEditar.compare("2") == 0)
+                        {
+                            std::string destino = Utils::lerStringTratada("Digite o novo local de destino do voo ou 'SAIR'");
+                            if (destino.compare("SAIR") == 0)
+                            {
+                                return;
+                            }
+                            if (Utils::mensagemConfirmacao("Tem certeza que deseja editar o voo acima?"))
+                            {
+                                (*it)->setDestino(destino);
+                                alterouVoo = true;
+                                std::cout << "Sucesso ao alterar destino!" << std::endl;
+                            }
+                            break;
+                        }
+                        else if (campoEditar.compare("3") == 0)
+                        {
+                            std::string data = Utils::lerDataTratada("Digite a nova data do voo ou 'SAIR'");
+                            if (data.compare("SAIR") == 0)
+                            {
+                                return;
+                            }
+                            if (Utils::mensagemConfirmacao("Tem certeza que deseja editar o voo acima?"))
+                            {
+                                (*it)->setData(data);
+                                alterouVoo = true;
+                                std::cout << "Sucesso ao alterar data!" << std::endl;
+                            }
+                            break;
+                        }
+                        else if (campoEditar.compare("4") == 0)
+                        {
+                            std::string horarioPartida = Utils::lerHorarioTratado("Digite o novo horário de partida do voo ou 'SAIR'");
+                            if (horarioPartida.compare("SAIR") == 0)
+                            {
+                                return;
+                            }
+                            if (Utils::mensagemConfirmacao("Tem certeza que deseja editar o voo acima?"))
+                            {
+                                (*it)->setHorarioPartida(horarioPartida);
+                                alterouVoo = true;
+                                std::cout << "Sucesso ao alterar horário de partida!" << std::endl;
+                            }
+                            break;
+                        }
+                        else if (campoEditar.compare("5") == 0)
+                        {
+                            std::string horarioChegada = Utils::lerHorarioTratado("Digite o novo horário de chegada do voo ou 'SAIR'");
+                            if (horarioChegada.compare("SAIR") == 0)
+                            {
+                                return;
+                            }
+                            if (Utils::mensagemConfirmacao("Tem certeza que deseja editar o voo acima?"))
+                            {
+                                (*it)->setHorarioChegada(horarioChegada);
+                                alterouVoo = true;
+                                std::cout << "Sucesso ao alterar horário de chegada!" << std::endl;
+                            }
+                            break;
+                        }
+                        else if (campoEditar.compare("6") == 0)
+                        {
+                            return;
+                        }
+
+                        campoEditar = Utils::lerStringTratada("Digite o número do CAMPO a ser editado ou 'SAIR'");
+                    }
+
+                    if (campoEditar.compare("SAIR") == 0)
+                    {
+                        return;
+                    }
+                }
+            }
+
+            if (alterouVoo)
+            {
+                break;
+            }
+            else
+            {
+                std::cout << "Não editou voo!" << std::endl;
+            }
+        }
+        else
+        {
+            std::cout << "Digite um número > 0!" << std::endl;
+        }
+
+        termoBusca = Utils::lerStringTratada("Digite o número do voo a ser editado ou 'SAIR'");
+    }
 }
 
 void ConsoleAgente::excluirVooInterface(VooControle *vooControle)
 {
     std::list<Voo *> voos = vooControle->obterTodosOsVoos();
 
-    std::string termoBusca = Utils::lerStringTratada("Digite o número do voo a ser excluído");
+    std::string termoBusca = Utils::lerStringTratada("Digite o número do voo a ser excluído ou 'SAIR'");
     int numeroVooParsed{0};
-    while(termoBusca.compare("SAIR") != 0){
+    bool excluiuVoo{false};
+    while (termoBusca.compare("SAIR") != 0)
+    {
         numeroVooParsed = 0;
-        try {
+        try
+        {
             numeroVooParsed = stoi(termoBusca);
-        } catch(std::exception &e) {
+        }
+        catch (std::exception &e)
+        {
             std::cout << "Digite apenas números!" << std::endl;
         }
 
-        if(numeroVooParsed > 0){
-            std::list<Voo *>::iterator it;
-            for (it = voos.begin(); it != voos.end(); it++){
-                if((*it)->getNumeroDoVoo() == numeroVooParsed){
+        if (numeroVooParsed > 0)
+        {
+            std::list<Voo *>::iterator it{voos.begin()};
+            while (it != voos.end())
+            {
+                if ((*it)->getNumeroDoVoo() == numeroVooParsed)
+                {
                     std::cout << "Encontrou voo para excluir!" << std::endl;
                     (*it)->imprimirDadosVoo();
+
+                    // verifica se tem alguma reserva atrelada nele
+                    bool reservaAtrelada{false};
+                    std::list<Reserva *> reservasVoo = (*it)->getReservas();
+                    std::list<Reserva *>::iterator it2{reservasVoo.begin()};
+                    for (; it2 != reservasVoo.end(); ++it2)
+                    {
+                        if ((*it2)->getVoo()->getNumeroDoVoo() == (*it)->getNumeroDoVoo())
+                        {
+                            std::cout << "Voo está atrelado na reserva " << (*it2)->getLocalizador() << std::endl;
+                            reservaAtrelada = true;
+                        }
+                    }
+                    if (reservaAtrelada)
+                    {
+                        std::cout << "Não é possível excluir voo com reservas!" << std::endl;
+                        return;
+                    }
+
+                    if (Utils::mensagemConfirmacao("Tem certeza que deseja excluir o voo acima?"))
+                    {
+                        std::cout << "Excluindo voo..." << std::endl;
+
+                        if (!vooControle->excluirVooPorId((*it)->getId()))
+                        {
+                            std::cout << "Falha ao excluir voo!" << std::endl;
+                        }
+                        else
+                        {
+                            excluiuVoo = true;
+
+                            std::cout << std::endl;
+                            std::cout << "Voo excluído com sucesso!" << std::endl;
+
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        std::cout << "NÃO vai excluir o voo!" << std::endl;
+                        it++;
+                    }
+                }
+                else
+                {
+                    it++;
                 }
             }
-        } else {
+
+            if (excluiuVoo)
+            {
+                std::cout << "Excluiu voo" << std::endl;
+                break;
+            }
+            else
+            {
+                std::cout << "Não excluiu voo!" << std::endl;
+            }
+        }
+        else
+        {
             std::cout << "Digite um número > 0!" << std::endl;
         }
-        
+
+        termoBusca = Utils::lerStringTratada("Digite o número do voo a ser excluído ou 'SAIR'");
     }
 }
 
@@ -177,8 +394,6 @@ void ConsoleAgente::cadastrarVooInterface(VooControle *vooControle)
     {
         return;
     }
-
-    //std::cout << "Sucesso ao cadastrar voo!" << std::endl;
 }
 
 // usuário agente tem todas as permissões para gerenciar os voos
@@ -203,7 +418,7 @@ void ConsoleAgente::rodarGerenciamentoDeVoo(VooControle *vooControle)
         }
         else if (comando.compare("4") == 0)
         {
-            std::cout << "Aqui chama a função de excluir voo" << std::endl;
+            excluirVooInterface(vooControle);
         }
         std::cout << std::endl;
     }

@@ -28,7 +28,7 @@ public:
     Passageiro *getPassageiro() const;
     void setPassageiro(Passageiro *passageiro);
 
-    Voo *getVoo() const;
+    Voo *getVoo();
     void setVoo(Voo *voo);
 
     std::string getNumeroDoAssento() const;

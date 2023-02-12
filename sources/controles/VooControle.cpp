@@ -65,17 +65,17 @@ bool VooControle::cadastrarVoo(Voo *voo)
 
 bool VooControle::excluirVooPorId(const unsigned int id)
 {
-    std::list<Voo *> voos = this->vooRepositorio->getVoos();
-    std::list<Voo *>::iterator it;
-    for (it = voos.begin(); it != voos.end(); ++it)
+    std::list<Voo *>::iterator it{this->vooRepositorio->getVoos().begin()};
+    while (it != this->vooRepositorio->getVoos().end())
     {
-        std::cout << *it << std::endl;
         if ((*it)->getId() == id)
         {
-            voos.erase(it);
+            this->vooRepositorio->getVoos().erase(it);
             delete *it;
             return true;
         }
+        it++;
     }
+
     return false;
 }

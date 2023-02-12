@@ -48,6 +48,8 @@ public:
 
     static bool existeVooNumero(std::list<Voo *> &voos, int numeroDoVoo);
 
+    static bool mensagemConfirmacao(std::string mensagem);
+
 private:
 };
 
