@@ -47,7 +47,6 @@ int main()
     gerarDados.gerarDadosReservas(reservaControle, passageiroControle, vooControle);
 
     // Pode ser logado como passageiro ou como agente
-    bool usuarioLogado{false};
     std::string comando{""};
 
     console->imprimirMensagemInicioExecucao();
@@ -77,7 +76,6 @@ int main()
                     usuario = passageiroLogado;
                     delete console;
                     console = new ConsolePassageiro{};
-                    usuarioLogado = true;
                 }
                 catch (std::exception &e)
                 {
@@ -105,7 +103,6 @@ int main()
                     usuario = novoUsuarioAgente;
                     delete console;                // exclui o console atual
                     console = new ConsoleAgente{}; // cria um console para agentes
-                    usuarioLogado = true;
                 }
                 catch (std::exception &e)
                 {
@@ -127,22 +124,14 @@ int main()
         }
         else if (comando.compare("5") == 0)
         {
-            if (!usuarioLogado)
-            {
-                std::cout << "Precisa estar logado como Agente para realizar essa função!" << std::endl;
-            }
-            else
-            {
-                console->rodarGerenciamentoDePassageiros(passageiroControle, usuario, reservaControle);
-            }
+            console->rodarGerenciamentoDePassageiros(passageiroControle, usuario, reservaControle);
         }
     }
 
     // liberar memória
-
-    console->finalizarSistema();
-
     delete console;
     delete usuario;
+
+    console->finalizarSistema();
     return 0;
 }

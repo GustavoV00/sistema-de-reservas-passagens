@@ -50,6 +50,7 @@ public:
     static bool existeVooNumero(std::list<Voo *> &voos, int numeroDoVoo);
 
     static bool mensagemConfirmacao(std::string mensagem);
+    static bool eh_numero(const std::string &s);
 
 private:
 };

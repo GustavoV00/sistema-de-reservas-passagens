@@ -56,6 +56,7 @@ public:
     void imprimirMapaDeAssentos();
 
     void adicionarReserva(Reserva *reserva);
+    void removerReserva(Reserva *reserva);
 
 private:
     unsigned int id;

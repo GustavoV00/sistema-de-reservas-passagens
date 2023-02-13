@@ -11,7 +11,7 @@ GerarDados::GerarDados()
 void GerarDados::gerarDadosVoos(VooControle *vooControle)
 {
     srand((unsigned)time(NULL));
-    for (unsigned int i = 0; i < 30; i++)
+    for (unsigned int i = 0; i < 15; i++)
     {
         // unsigned int id{i};
         int numeroDoVoo = Utils::geradorNumeroAleatorio();
@@ -68,7 +68,6 @@ void GerarDados::gerarDadosPassageiros(PassageiroControle *passageiroControle)
     srand((unsigned)time(NULL));
     for (int i = 0; i < 10; i++)
     {
-        unsigned int id{i};
         std::string nome = "Passageiro" + std::to_string(i);
         CPF cpf{arrayCpfsValidos[i]};
         RG rg{arrayRgsValidos[i]};
@@ -81,7 +80,7 @@ void GerarDados::gerarDadosPassageiros(PassageiroControle *passageiroControle)
         Passageiro *passageiro{nullptr};
         try
         {
-            passageiro = new Passageiro{id, nome, cpf, rg, dataDeNascimento, contato, email};
+            passageiro = new Passageiro{nome, cpf, rg, dataDeNascimento, contato, email};
             passageiroControle->cadastrarPassageiro(passageiro);
         }
         catch (std::exception &e)
@@ -99,17 +98,19 @@ void GerarDados::gerarDadosReservas(ReservaControle *reservaControle, Passageiro
     for (unsigned int i = 0; i < 10; i++)
     {
         std::string localizador = this->gerarLocalizador(reservaControle);
+        // std::cout << "locali: " << localizador << std::endl;
 
-        unsigned int vooAleat = (rand() % 29);
+        unsigned int vooAleat = (rand() % 14);
+        // std::cout << "vooAleat: " << vooAleat << std::endl;
         Voo *voo = vooControle->obterVooPorId(vooAleat);
         // std::cout << "VOO: " << voo->getId() << std::endl;
 
-        unsigned int passageiroAleat = (rand() % 49);
+        unsigned int passageiroAleat = (rand() % 9);
         Passageiro *passageiro = passageiroControle->obterPassageiroPorId(passageiroAleat);
         // std::cout << "Passageiro: " << passageiro->getId() << std::endl;
 
-        unsigned int capacidade = voo->getCapacidade();
         std::string numeroDoAssento = this->gerarNovoNumeroDoAssento(reservaControle);
+        // std::cout << "numeroDoAssento: " << numeroDoAssento << std::endl;
 
         try
         {

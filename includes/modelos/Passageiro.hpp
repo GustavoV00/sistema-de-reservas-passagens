@@ -16,13 +16,13 @@ class Passageiro : public Usuario
 {
 public:
     // constructor
-    Passageiro(unsigned int id, const std::string &nome, const CPF &cpf, const RG &rg,
+    Passageiro(const std::string &nome, const CPF &cpf, const RG &rg,
                const std::string &dataDeNascimento, const unsigned long &contato, const std::string &email);
 
     // destructor
     ~Passageiro() = default;
 
-    unsigned int getId();
+    unsigned int getId() const;
     void setId(unsigned int id);
 
     void imprimirDadosPassageiro();

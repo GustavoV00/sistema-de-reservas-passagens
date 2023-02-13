@@ -17,7 +17,7 @@ public:
 
     std::list<Passageiro *> &obterTodosOsPassageiros();
     Passageiro *obterPassageiroPorId(const unsigned int id);
-    Passageiro *obterPassageiroPorEmail(std::string &email);
+    Passageiro *obterPassageiroPorCPF(CPF &cpf);
     bool atualizarPassageiroPorId(unsigned long id, Passageiro passageiroNovo);
     bool cadastrarPassageiro(Passageiro *passageiro);
     bool excluirPassageiroPorId(const unsigned int id);

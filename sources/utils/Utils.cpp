@@ -79,15 +79,15 @@ void Utils::imprimirListaReservas(std::list<Reserva *> reservas)
 {
     if (reservas.size() != 0)
     {
-        std::cout << std::endl
-                  << "Reservas: " << std::endl;
+        std::cout << std::endl;
+        std::cout << "Reservas: " << std::endl;
         std::list<Reserva *>::iterator it;
         for (it = reservas.begin(); it != reservas.end(); ++it)
         {
-            std::cout << "=====================================================================================" << std::endl;
+            // std::cout << "=====================================================================================" << std::endl;
             (*it)->imprimirDadosReserva();
         }
-        std::cout << "=====================================================================================" << std::endl;
+        // std::cout << "=====================================================================================" << std::endl;
         std::cout << "Quantidade de reservas: " << reservas.size() << std::endl;
     }
     else
@@ -244,13 +244,21 @@ unsigned long Utils::lerTelefoneTratado(std::string mensagem)
     {
         if (retorno.compare("") != 0)
         {
-            try
+            if (retorno.size() == 11)
             {
-                return stoul(retorno);
+
+                try
+                {
+                    return stoul(retorno);
+                }
+                catch (std::exception &e)
+                {
+                    std::cout << "Falha ao ler número de telefone!" << std::endl;
+                }
             }
-            catch (std::exception &e)
+            else
             {
-                std::cout << "Falha ao ler número de telefone!" << std::endl;
+                std::cout << "O telefone precisa ser 41XXXXXXXXX" << std::endl;
             }
         }
         else
@@ -287,7 +295,8 @@ bool Utils::assentoOcupado(const std::string &assento, std::list<std::string> as
 
 bool Utils::formatoData(const std::string &data)
 {
-    if (data.at(2) == '/' && data.at(5) == '/')
+
+    if (data.size() == 10 && data.at(2) == '/' && data.at(5) == '/')
     {
         try
         {
@@ -412,4 +421,12 @@ bool Utils::mensagemConfirmacao(std::string mensagem)
     }
 
     return false;
+}
+
+bool Utils::eh_numero(const std::string &s)
+{
+    std::string::const_iterator it = s.begin();
+    while (it != s.end() && std::isdigit(*it))
+        ++it;
+    return !s.empty() && it == s.end();
 }

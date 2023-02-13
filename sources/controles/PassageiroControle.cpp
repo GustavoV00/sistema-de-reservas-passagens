@@ -30,14 +30,17 @@ Passageiro *PassageiroControle::obterPassageiroPorId(const unsigned int id)
     return nullptr;
 }
 
-Passageiro *PassageiroControle::obterPassageiroPorEmail(std::string &email)
+Passageiro *PassageiroControle::obterPassageiroPorCPF(CPF &cpf)
 {
     std::list<Passageiro *> passageiros = this->passageiroRepositorio.getPassageiros();
     std::list<Passageiro *>::iterator it;
     for (it = passageiros.begin(); it != passageiros.end(); ++it)
     {
-        if ((*it)->getEmail() == email)
+        // std::to_string((*it)->getCpf().getNumero()) ==
+        if (std::to_string((*it)->getCpf().getNumero()).compare(std::to_string(cpf.getNumero())) == 0)
+        {
             return *it;
+        }
     }
 
     return nullptr;
@@ -62,8 +65,9 @@ bool PassageiroControle::cadastrarPassageiro(Passageiro *passageiro)
 {
     try
     {
+        passageiro->setId(this->passageiroRepositorio.getNewId());
         this->passageiroRepositorio.getPassageiros().push_back(passageiro);
-        std::cout << "Sucesso ao cadastrar passageiro!" << std::endl;
+        std::cout << "Sucesso ao cadastrar passageiro! ID: [" << passageiro->getId() << "]" << std::endl;
         return true;
     }
     catch (std::exception &e)
@@ -80,9 +84,17 @@ bool PassageiroControle::excluirPassageiroPorId(const unsigned int id)
     {
         if ((*it)->getId() == id)
         {
-            this->passageiroRepositorio.getPassageiros().erase(it);
-            delete *it;
-            return true;
+            try
+            {
+                this->passageiroRepositorio.getPassageiros().erase(it);
+                delete *it;
+                return true;
+            }
+            catch (std::exception &e)
+            {
+                std::cout << "Falha ao deletar o passageiro pelo id! " << e.what() << std::endl;
+                return false;
+            }
         }
         it++;
     }

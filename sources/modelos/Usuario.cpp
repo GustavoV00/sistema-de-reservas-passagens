@@ -1,6 +1,6 @@
 #include "../../includes/modelos/Usuario.hpp"
 #include "../../includes/consoles/ConsoleSistema.hpp"
-// #include "../../includes/modelos/Pessoa.hpp"
+#include "../../includes/utils/Utils.hpp"
 
 Usuario::Usuario()
 {
@@ -21,6 +21,5 @@ std::string Usuario::getSessionID() const
 
 void Usuario::gerarSessionId()
 {
-    this->sessionID = "abcd1234";
-    // this->setSessionID(função que vai gerar o session id);
+    this->sessionID = "sessID" + Utils::geradorNumeroAleatorio();
 }

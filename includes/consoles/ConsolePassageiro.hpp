@@ -5,6 +5,7 @@
 #include "ConsoleSistema.hpp"
 #include "../modelos/Voo.hpp"
 #include "../modelos/GerarDados.hpp"
+#include "../exceptions/FormatoInvalidoException.hpp"
 
 class ConsolePassageiro : public ConsoleSistema
 {
@@ -16,12 +17,9 @@ public:
 
     virtual void imprimirOpcoesGerenciamentoDeReservas();
     virtual void rodarGerenciamentoDeReservas(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle, Usuario *usuario);
-
-    // void cadastrarVooInterface(VooControle *vooControle);
-    void cadastrarReservaInterface(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle, Passageiro *passageiro, std::list<Reserva *> reservas);
-
-    void removerReservaInterface(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle, Passageiro *passageiro);
-    void atualizarReservaInterface(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle);
+    virtual void cadastrarReservaInterface(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle, Passageiro *passageiro, std::list<Reserva *> reservas);
+    virtual void removerReservaInterface(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle, Passageiro *passageiro);
+    virtual void atualizarReservaInterface(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle);
 
 private:
 };

@@ -13,7 +13,10 @@ public:
 
     std::list<Passageiro *> &getPassageiros();
 
+    unsigned int getNewId();
+
 private:
     std::list<Passageiro *> passageiros;
+    unsigned int lastId;
 };
 #endif

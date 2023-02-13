@@ -20,8 +20,8 @@ public:
     ~Reserva() = default;
 
     // getters and setters
-    unsigned long getId() const;
-    void setId(unsigned long id);
+    int getId() const;
+    void setId(int id);
 
     std::string getLocalizador() const;
     void setLocalizador(const std::string &localizador);
@@ -41,7 +41,7 @@ public:
     static Reserva *verificaSeAssentoExiste(const std::string &numAssento, std::list<Reserva *> reservas);
 
 private:
-    unsigned long id;
+    int id;
     std::string localizador;
     Passageiro *passageiro;
     Voo *voo;

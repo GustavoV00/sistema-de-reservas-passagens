@@ -15,12 +15,12 @@ Reserva::Reserva(std::string &localizador, Passageiro *passageiro, Voo *voo, std
 {
 }
 
-unsigned long Reserva::getId() const
+int Reserva::getId() const
 {
     return this->id;
 }
 
-void Reserva::setId(unsigned long id)
+void Reserva::setId(int id)
 {
     this->id = id;
 }
@@ -70,7 +70,7 @@ void Reserva::imprimirDadosReserva()
               << " - CPF: " << this->getPassageiro()->getCpf().getNumero() << std::endl;
     std::cout << "Voo: " << this->getVoo()->getNumeroDoVoo() << " - Partida: " << this->getVoo()->getPartida() << " - Destino: " << this->getVoo()->getDestino() << " - Data: " << this->getVoo()->getData() << " - Horário Partida: " << this->getVoo()->getHorarioPartida() << " - Horário Chegada: " << this->getVoo()->getHorarioChegada() << std::endl;
     std::cout << "Assento: " << this->getNumeroDoAssento() << std::endl;
-    // std::cout << "=================================================================================" << std::endl;
+    std::cout << "=============================================================================================================================" << std::endl;
 }
 
 Reserva *Reserva::verificaSeAssentoExiste(const std::string &numAssento, std::list<Reserva *> reservas)

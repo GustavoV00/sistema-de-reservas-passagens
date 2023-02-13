@@ -3,7 +3,7 @@
 
 VooRepositorio::VooRepositorio()
 {
-    this->lastId = 0;
+    this->lastId = -1;
 }
 
 std::list<Voo *> &VooRepositorio::getVoos()
@@ -13,7 +13,6 @@ std::list<Voo *> &VooRepositorio::getVoos()
 
 unsigned int VooRepositorio::getNewId()
 {
-
     this->lastId += 1;
     return this->lastId;
 }

@@ -84,10 +84,10 @@ bool ReservaControle::excluirReservaPorLocalizador(std::string &localizador)
     std::list<Reserva *>::iterator it{this->reservaRepositorio.getReservas().begin()};
     while (it != this->reservaRepositorio.getReservas().end())
     {
-        // std::cout << (*it)->getNumeroDoVoo() << std::endl;
         if ((*it)->getLocalizador() == localizador)
         {
-            // voos.erase(it);
+            std::cout << "Removendo reserva do voo " << std::endl;
+            (*it)->getVoo()->removerReserva(*it);
             this->reservaRepositorio.getReservas().erase(it);
             delete *it;
             return true;
@@ -106,9 +106,6 @@ std::list<Reserva *> ReservaControle::obterReservasDoPassageiro(Usuario *usuario
     {
         if ((*it)->getPassageiro() == usuario)
         {
-            std::cout << "dentro do if da função boterReservasDoPassageiro" << std::endl;
-            // std::cout << (*it)->getPassageiro()->getNome() << std::endl;
-            // std::cout << (*it)->getLocalizador() << std::endl;
             reservasUsuario.push_back((*it));
         }
     }

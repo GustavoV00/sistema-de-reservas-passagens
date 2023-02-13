@@ -272,5 +272,11 @@ void Voo::adicionarReserva(Reserva *reserva)
         throw VooCheioException("Voo já está cheio!");
     }
     this->reservas.push_back(reserva);
-    this->assentosDisponiveis = (assentosDisponiveis - 1);
+    this->assentosDisponiveis = (this->assentosDisponiveis - 1);
+}
+
+void Voo::removerReserva(Reserva *reserva)
+{
+    this->reservas.remove(reserva);
+    this->assentosDisponiveis = (this->assentosDisponiveis + 1);
 }

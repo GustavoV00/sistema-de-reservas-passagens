@@ -20,11 +20,13 @@ public:
     void imprimirOpcoesDadosEditarVoo();
 
     virtual void imprimirOpcoesGerenciamentoDeReservas();
-    virtual void rodarGerenciamentoDeReservas();
+    virtual void rodarGerenciamentoDeReservas(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle, Usuario *usuario);
+    virtual void cadastrarReservaInterface(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle);
+    virtual void removerReservaInterface(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle);
+    virtual void atualizarReservaInterface(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle);
 
-    void imprimirOpcoesGerenciamentoPassageiros();
+    virtual void imprimirOpcoesGerenciamentoPassageiros();
     void rodarGerenciamentoDePassageiros(PassageiroControle *passageiroControle, Usuario *usuario, ReservaControle *reservaControle);
-    void cadastrarPassageiroInterface(PassageiroControle *passageiroControle);
     void atualizarPassageiroInterface(PassageiroControle *passageiroControle);
     void excluirPassageiroInterface(PassageiroControle *passageiroControle, ReservaControle *reservaControle);
     void imprimirOpcoesDadosEditarPassageiro();

@@ -25,8 +25,8 @@ void ConsolePassageiro::imprimirOpcoesGerenciamentoDeReservas()
     std::cout << std::endl;
     std::cout << "-------------------------GERENCIAMENTO DE RESERVAS------------------------" << std::endl;
     std::cout << "--------------------------------OPÇÕES--------------------------------" << std::endl;
-    std::cout << "1) LISTAR RESERVAS" << std::endl;
-    std::cout << "2) LISTAR RESERVA POR ID: Entre 1 e 30" << std::endl;
+    std::cout << "1) LISTAR MINHAS RESERVAS" << std::endl;
+    std::cout << "2) LISTAR MINHAS RESERVA POR CÓDIGO" << std::endl;
     std::cout << "3) CRIAR  RESERVAS" << std::endl;
     std::cout << "4) EDITAR RESERVAS" << std::endl;
     std::cout << "5) EXCLUIR  RESERVAS" << std::endl;
@@ -42,15 +42,14 @@ void ConsolePassageiro::rodarGerenciamentoDeReservas(ReservaControle *reservaCon
     std::list<Reserva *>::iterator it;
     for (it = reservas.begin(); it != reservas.end(); ++it)
     {
-
-        std::cout << "Estou entrando aqui!" << std::endl;
         std::cout << (*it)->getPassageiro()->getNome() << std::endl;
         std::cout << (*it)->getLocalizador() << std::endl;
     }
 
-    // isso aqui vai dar problema quando a lista for fazia
-    std::string email = usuario->getEmail();
-    Passageiro *passageiro = passageiroControle->obterPassageiroPorEmail(email);
+    CPF cpfBusca = usuario->getCpf();
+    Passageiro *passageiro = passageiroControle->obterPassageiroPorCPF(cpfBusca);
+    char locL{'L'};
+    char locR{'R'};
     while (comando.compare("6") != 0)
     {
         this->imprimirOpcoesGerenciamentoDeReservas();
@@ -64,16 +63,22 @@ void ConsolePassageiro::rodarGerenciamentoDeReservas(ReservaControle *reservaCon
         // buscar apenas uma reserva
         else if (comando.compare("2") == 0)
         {
+            if (reservas.empty())
+            {
+                std::cout << "Você não possui nenhuma reserva!" << std::endl;
+                continue;
+            }
+
             std::string comando{""};
             comando = Utils::lerStringTratada("Digite o localizador da reserva");
-            if (comando.size() == 6)
+            if (comando.size() == 6 && comando.at(0) == locL && comando.at(1) == locR)
             {
                 Reserva *reserva = reservaControle->obterReservaPorLocalizador(comando);
                 reserva->imprimirDadosReserva();
             }
             else
             {
-                std::cout << "Número do localizador está incorreto! " << std::endl;
+                std::cout << "Número do código está incorreto! " << std::endl;
             }
         }
         // Cadastrar reserva
@@ -84,10 +89,20 @@ void ConsolePassageiro::rodarGerenciamentoDeReservas(ReservaControle *reservaCon
         }
         else if (comando.compare("4") == 0)
         {
+            if (reservas.empty())
+            {
+                std::cout << "Você não possui nenhuma reserva!" << std::endl;
+                continue;
+            }
             this->atualizarReservaInterface(reservaControle, passageiroControle, vooControle);
         }
         else if (comando.compare("5") == 0)
         {
+            if (reservas.empty())
+            {
+                std::cout << "Você não possui nenhuma reserva!" << std::endl;
+                continue;
+            }
             this->removerReservaInterface(reservaControle, passageiroControle, vooControle, passageiro);
             reservas = reservaControle->obterReservasDoPassageiro(usuario);
         }
@@ -99,49 +114,47 @@ void ConsolePassageiro::rodarGerenciamentoDeReservas(ReservaControle *reservaCon
     }
 }
 
-// Verificar se um Passageiro já pertence ao voo e não deixar ele se cadastrar dnv
 void ConsolePassageiro::cadastrarReservaInterface(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle, Passageiro *passageiro, std::list<Reserva *> resevasDoPassageiro)
 {
-    // Passageiro *passageiro = passageiroControle->obterPassageiroPorId(1);
-    // std::cout << passageiro->getNome();
     Voo *voo{nullptr};
-    std::list<Voo *> voos;
     std::string comando{""};
     int numeroDoVoo{0};
 
-    // std::list<Voo *> voos = vooControle->obterTodosOsVoos();
+    std::list<Voo *> voos = vooControle->obterTodosOsVoos();
+    Utils::imprimirListaVoos(voos);
     while (voo == nullptr)
     {
-        comando = Utils::lerStringTratada("Digite SAIR para sair, LISTAR para mostrar os VOOS ou o NUMERO DO VOO para criar a reserva");
-        if (comando.compare("LISTAR") == 0)
-        {
-            voos = vooControle->obterTodosOsVoos();
-            Utils::imprimirListaVoos(voos);
-        }
-        else if (comando.compare("SAIR") == 0)
+        comando = Utils::lerStringTratada("Digite SAIR para sair ou um NUMERO DO VOO para criar a reserva");
+        if (comando.compare("SAIR") == 0)
         {
             return;
         }
         else
         {
-            numeroDoVoo = stoi(comando);
-            // if (isdigit(numeroDoVoo))
-            // {
-            voo = vooControle->obterVooPorNumeroDoVoo(numeroDoVoo);
-            if (voo == nullptr)
-                std::cout << "NUMERO do VOO inválido" << std::endl;
+            if (Utils::eh_numero(comando))
+            {
+                numeroDoVoo = stoi(comando);
+                voo = vooControle->obterVooPorNumeroDoVoo(numeroDoVoo);
+                if (voo == nullptr)
+                    std::cout << "Numero do VOO inválido" << std::endl;
+                else
+                {
 
-            // std::list<Reserva *>::iterator it;
-            // for (it = reservas.begin(); it != reservas.end(); ++it)
-            // {
-            //     if ((*it)->getVoo() == voo)
-            //     {
-            //         std::cout << "Não pode fazer a reserva desse PASSAGEIRO nesse mesmo VOO" << std::endl;
-            //         voo = nullptr;
-            //     }
-            // }
-
-            // }
+                    std::list<Reserva *>::iterator it;
+                    for (it = resevasDoPassageiro.begin(); it != resevasDoPassageiro.end(); ++it)
+                    {
+                        if ((*it)->getVoo() == voo)
+                        {
+                            std::cout << "Não pode fazer a reserva desse PASSAGEIRO nesse mesmo VOO" << std::endl;
+                            voo = nullptr;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                std::cout << "Numero do VOO inválido" << std::endl;
+            }
         }
     }
 
@@ -184,35 +197,62 @@ void ConsolePassageiro::removerReservaInterface(ReservaControle *reservaControle
 
     // Reserva *reserva = reservaControle->obterReservaPorLocalizador(comando);
     // reserva->getPassageiro();
-    reservaControle->excluirReservaPorLocalizador(comando);
+    char locL{'L'};
+    char locR{'R'};
+    if (comando.size() == 6 && comando.at(0) == locL && comando.at(1) == locR)
+    {
+
+        if (Utils::mensagemConfirmacao("Tem certeza que deseja excluir a reserva acima?"))
+        {
+            reservaControle->excluirReservaPorLocalizador(comando);
+        }
+    }
+    else
+    {
+        std::cout << "Esse código não existe" << std::endl;
+    }
 }
 
 void ConsolePassageiro::atualizarReservaInterface(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle)
 {
     std::string comando{""};
+    char locL{'L'};
+    char locR{'R'};
     while (comando.compare("SAIR") != 0)
     {
         comando = Utils::lerStringTratada("Digite o CÓDIGO da reserva que deseja atualizar ou SAIR para sair");
-        if (comando.size() == 6)
+        if (comando.size() == 6 && comando.at(0) == locL && comando.at(1) == locR)
         {
+
             Reserva *reserva = reservaControle->obterReservaPorLocalizador(comando);
             if (reserva != nullptr)
             {
-                comando = Utils::lerStringTratada("Digite VOO para mudar o VOO e ASSENTO para mudar o ASSENTO do VOO atual");
-                if (comando.compare("VOO") == 0)
+                reserva->imprimirDadosReserva();
+                if (Utils::mensagemConfirmacao("Tem certeza que deseja atualizar a reserva acima?"))
                 {
-                    std::list<Voo *> voos = vooControle->obterTodosOsVoos();
-                    Utils::imprimirListaVoos(voos);
-                    comando = Utils::lerStringTratada("Digite o NUMERO do novo VOO");
-                    int numVoo = stoi(comando);
-                    Voo *voo = vooControle->obterVooPorNumeroDoVoo(numVoo);
-                    reserva->setVoo(voo);
-                }
-                else if (comando.compare("ASSENTO") == 0)
-                {
-                    std::cout << "Foi gerado um novo assento com sucesso!" << std::endl;
-                    std::string novoAssento = GerarDados::gerarNovoNumeroDoAssento(reservaControle);
-                    reserva->setNumeroDoAssento(novoAssento);
+                    comando = Utils::lerStringTratada("Digite VOO para mudar o VOO e ASSENTO para mudar o ASSENTO do VOO atual");
+                    if (comando.compare("VOO") == 0 || comando.compare("voo") == 0)
+                    {
+                        std::list<Voo *> voos = vooControle->obterTodosOsVoos();
+                        Utils::imprimirListaVoos(voos);
+                        comando = Utils::lerStringTratada("Digite o NUMERO do novo VOO");
+                        int numVoo = stoi(comando);
+                        Voo *vooAntigo = reserva->getVoo();
+                        Voo *voo = vooControle->obterVooPorNumeroDoVoo(numVoo);
+                        reserva->setVoo(voo);
+                        std::cout << "VOO foi atualizado com sucesso" << std::endl;
+                        vooAntigo->removerReserva(reserva);
+                    }
+                    else if (comando.compare("ASSENTO") == 0 || comando.compare("assento") == 0)
+                    {
+                        std::cout << "Foi gerado um novo assento com sucesso!" << std::endl;
+                        std::string novoAssento = GerarDados::gerarNovoNumeroDoAssento(reservaControle);
+                        reserva->setNumeroDoAssento(novoAssento);
+                    }
+                    else
+                    {
+                        std::cout << "VOO ou ASSENTO foi digitado incorreto, tente novamente" << std::endl;
+                    }
                 }
             }
             else
@@ -222,7 +262,7 @@ void ConsolePassageiro::atualizarReservaInterface(ReservaControle *reservaContro
         }
         else
         {
-            std::cout << "Código incorreto!" << std::endl;
+            std::cout << "Entrada incorreta!" << std::endl;
         }
     }
 }

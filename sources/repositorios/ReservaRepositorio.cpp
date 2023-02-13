@@ -3,6 +3,7 @@
 
 ReservaRepositorio::ReservaRepositorio()
 {
+    this->lastId = -1;
 }
 
 ReservaRepositorio::~ReservaRepositorio()

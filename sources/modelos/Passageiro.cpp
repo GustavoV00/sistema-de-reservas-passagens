@@ -10,14 +10,13 @@
 #include "../../includes/modelos/Reserva.hpp"
 #include "../../includes/modelos/Voo.hpp"
 
-Passageiro::Passageiro(unsigned int id, const std::string &nome, const CPF &cpf, const RG &rg,
+Passageiro::Passageiro(const std::string &nome, const CPF &cpf, const RG &rg,
                        const std::string &dataDeNascimento, const unsigned long &contato, const std::string &email)
     : Usuario(nome, cpf, rg, dataDeNascimento, contato, email)
 {
-    this->id = id;
 }
 
-unsigned int Passageiro::getId()
+unsigned int Passageiro::getId() const
 {
     return this->id;
 }
