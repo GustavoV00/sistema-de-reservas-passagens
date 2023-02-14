@@ -53,9 +53,7 @@ public:
     std::list<Reserva *> &getReservas();
     void setReservas(std::list<Reserva *> reservas);
 
-    // setters
     void imprimirDadosVoo();
-    void imprimirMapaDeAssentos();
 
     void adicionarReserva(Reserva *reserva);
     void removerReserva(Reserva *reserva);

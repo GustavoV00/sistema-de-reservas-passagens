@@ -2,8 +2,8 @@
 #include "../../includes/consoles/ConsoleSistema.hpp"
 #include "../../includes/utils/Utils.hpp"
 
-#include "../../includes/modelos/AgenteViagem.hpp" //forward declaration
-#include "../../includes/modelos/Passageiro.hpp"   //forward declaration
+#include "../../includes/modelos/AgenteViagem.hpp"
+#include "../../includes/modelos/Passageiro.hpp"
 
 ConsoleSistema::ConsoleSistema()
 {
@@ -23,7 +23,6 @@ void ConsoleSistema::imprimirMensagemInicioExecucao()
 // imprime opções de comando quando o usuário é convidado
 void ConsoleSistema::imprimirComandosTelaPrincipal()
 {
-    // imprimeStatusLogin();
     std::cout << "--------------------------------OPÇÕES--------------------------------" << std::endl;
     std::cout << " 1) FAZER LOGIN COMO PASSAGEIRO" << std::endl;
     std::cout << " 2) FAZER LOGIN COMO AGENTE" << std::endl;

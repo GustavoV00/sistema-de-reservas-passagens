@@ -472,8 +472,6 @@ void ConsoleAgente::rodarGerenciamentoDeReservas(ReservaControle *reservaControl
     std::string comando{""};
     std::list<Reserva *> reservas = reservaControle->obterTodosAsReservas();
 
-    // char locL{'L'};
-    // char locR{'R'};
     while (comando.compare("5") != 0)
     {
         this->imprimirOpcoesGerenciamentoDeReservas();
@@ -497,8 +495,6 @@ void ConsoleAgente::rodarGerenciamentoDeReservas(ReservaControle *reservaControl
         {
             this->removerReservaInterface(reservaControle, passageiroControle, vooControle);
         }
-
-        // std::cout << std::endl;
     }
 }
 

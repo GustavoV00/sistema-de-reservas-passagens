@@ -195,8 +195,6 @@ void ConsolePassageiro::removerReservaInterface(ReservaControle *reservaControle
     if (comando.compare("SAIR") == 0)
         return;
 
-    // Reserva *reserva = reservaControle->obterReservaPorLocalizador(comando);
-    // reserva->getPassageiro();
     char locL{'L'};
     char locR{'R'};
     if (comando.size() == 6 && comando.at(0) == locL && comando.at(1) == locR)

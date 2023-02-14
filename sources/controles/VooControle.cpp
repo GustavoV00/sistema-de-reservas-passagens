@@ -46,21 +46,6 @@ Voo *VooControle::obterVooPorNumeroDoVoo(int numeroDoVoo)
     return nullptr;
 }
 
-bool VooControle::atualizarVooPorId(unsigned int id, Voo vooNovo)
-{
-    try
-    {
-        // Voo *voo = this->obterVooPorId(id);
-        // voo = &vooNovo;
-        return true;
-    }
-    catch (std::exception &e)
-    {
-        std::cout << "Voo não existe ou o id está errado: " << e.what() << std::endl;
-    }
-    return false;
-}
-
 bool VooControle::cadastrarVoo(Voo *voo)
 {
     try

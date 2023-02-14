@@ -48,21 +48,6 @@ Reserva *ReservaControle::obterReservaPorLocalizador(std::string &localizador)
     return nullptr;
 }
 
-bool ReservaControle::atualizarReservaPorId(unsigned long id, Reserva reservaNova)
-{
-    try
-    {
-        // Reserva *reserva = this->obterReservaPorId(id);
-        // reserva = &reservaNova;
-        return true;
-    }
-    catch (std::exception &e)
-    {
-        std::cout << "Reserva não existe ou o id está errado: " << e.what() << std::endl;
-    }
-    return false;
-}
-
 bool ReservaControle::cadastrarReserva(Reserva *reserva)
 {
     try

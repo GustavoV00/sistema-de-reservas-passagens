@@ -18,7 +18,6 @@ public:
     std::list<Reserva *> &obterTodosAsReservas();
     Reserva *obterReservaPorId(int id);
     Reserva *obterReservaPorLocalizador(std::string &localizador);
-    bool atualizarReservaPorId(unsigned long id, Reserva reservaNovo);
     bool cadastrarReserva(Reserva *Reserva);
     bool excluirReservaPorLocalizador(std::string &localizador);
     std::list<Reserva *> obterReservasDoPassageiro(Usuario *usuario);

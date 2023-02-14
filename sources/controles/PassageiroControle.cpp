@@ -36,7 +36,6 @@ Passageiro *PassageiroControle::obterPassageiroPorCPF(CPF &cpf)
     std::list<Passageiro *>::iterator it;
     for (it = passageiros.begin(); it != passageiros.end(); ++it)
     {
-        // std::to_string((*it)->getCpf().getNumero()) ==
         if (std::to_string((*it)->getCpf().getNumero()).compare(std::to_string(cpf.getNumero())) == 0)
         {
             return *it;
@@ -44,21 +43,6 @@ Passageiro *PassageiroControle::obterPassageiroPorCPF(CPF &cpf)
     }
 
     return nullptr;
-}
-
-bool PassageiroControle::atualizarPassageiroPorId(unsigned long id, Passageiro passageiroNovo)
-{
-    try
-    {
-        // Passageiro *passageiro = this->obterPassageiroPorId(id);
-        // passageiro = &passageiroNovo;
-        return true;
-    }
-    catch (std::exception &e)
-    {
-        std::cout << "Passageiro não existe ou o id está errado: " << e.what() << std::endl;
-    }
-    return false;
 }
 
 bool PassageiroControle::cadastrarPassageiro(Passageiro *passageiro)

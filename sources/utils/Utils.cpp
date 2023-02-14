@@ -231,7 +231,6 @@ std::string Utils::lerDataTratada(std::string mensagem)
     }
 
     throw FormatoInvalidoException{"Data inválida!"};
-    // return retorno;
 }
 
 unsigned long Utils::lerTelefoneTratado(std::string mensagem)
@@ -275,7 +274,6 @@ unsigned long Utils::lerTelefoneTratado(std::string mensagem)
 // gera um número aleatório entre 1000 e 1999
 int Utils::geradorNumeroAleatorio()
 {
-    // srand((unsigned)time(NULL));
     return rand() % 9000 + 1000;
 }
 
@@ -386,7 +384,6 @@ std::string Utils::lerHorarioTratado(std::string mensagem)
     }
 
     throw FormatoInvalidoException{"Data inválida!"};
-    // return retorno;
 }
 
 bool Utils::existeVooNumero(std::list<Voo *> &voos, int numeroDoVoo)

@@ -9,7 +9,3 @@ UsuarioConvidado::UsuarioConvidado()
     : Usuario()
 {
 }
-
-// UsuarioConvidado::~UsuarioConvidado()
-// {
-// }
