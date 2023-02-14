@@ -1,5 +1,12 @@
-#ifndef VOOREPOSITORIO_H
-#define VOOREPOSITORIO_H
+/**
+ *
+ * Autores: Bruno Farias e Gustavo Valente
+ * 2022/2 - UFPR - PRÁTICA EM DESENVOLVIMENTO DE SOFTWARE
+ * PROF. PAULO ALMEIDA
+ *
+ */
+#ifndef VOO_REPOSITORIO_H
+#define VOO_REPOSITORIO_H
 
 #include <string>
 #include "../modelos/Voo.hpp"

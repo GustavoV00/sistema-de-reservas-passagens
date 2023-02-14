@@ -1,3 +1,10 @@
+/**
+ *
+ * Autores: Bruno Farias e Gustavo Valente
+ * 2022/2 - UFPR - PRÁTICA EM DESENVOLVIMENTO DE SOFTWARE
+ * PROF. PAULO ALMEIDA
+ *
+ */
 #include <iostream>
 #include <string>
 #include "../../includes/consoles/ConsolePassageiro.hpp"
@@ -26,7 +33,7 @@ void ConsolePassageiro::imprimirOpcoesGerenciamentoDeReservas()
     std::cout << "-------------------------GERENCIAMENTO DE RESERVAS------------------------" << std::endl;
     std::cout << "--------------------------------OPÇÕES--------------------------------" << std::endl;
     std::cout << "1) LISTAR MINHAS RESERVAS" << std::endl;
-    std::cout << "2) LISTAR MINHAS RESERVA POR CÓDIGO" << std::endl;
+    std::cout << "2) LISTAR MINHAS RESERVAS POR CÓDIGO" << std::endl;
     std::cout << "3) CRIAR  RESERVAS" << std::endl;
     std::cout << "4) EDITAR RESERVAS" << std::endl;
     std::cout << "5) EXCLUIR  RESERVAS" << std::endl;

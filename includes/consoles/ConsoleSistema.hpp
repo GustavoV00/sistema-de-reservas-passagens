@@ -1,7 +1,13 @@
+/**
+ *
+ * Autores: Bruno Farias e Gustavo Valente
+ * 2022/2 - UFPR - PRÁTICA EM DESENVOLVIMENTO DE SOFTWARE
+ * PROF. PAULO ALMEIDA
+ *
+ */
 #ifndef CONSOLE_SISTEMA_HPP
 #define CONSOLE_SISTEMA_HPP
 
-// #include "../modelos/AgenteViagem.hpp"
 #include <list>
 
 #include "../controles/VooControle.hpp"

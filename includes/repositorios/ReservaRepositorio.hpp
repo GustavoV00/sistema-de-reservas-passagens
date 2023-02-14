@@ -1,5 +1,12 @@
-#ifndef RESERVAREPOSITORIO_H
-#define RESERVAREPOSITORIO_H
+/**
+ *
+ * Autores: Bruno Farias e Gustavo Valente
+ * 2022/2 - UFPR - PRÁTICA EM DESENVOLVIMENTO DE SOFTWARE
+ * PROF. PAULO ALMEIDA
+ *
+ */
+#ifndef RESERVA_REPOSITORIO_H
+#define RESERVA_REPOSITORIO_H
 
 #include <string>
 #include "../modelos/Voo.hpp"

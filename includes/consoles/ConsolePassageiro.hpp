@@ -1,4 +1,11 @@
 
+/**
+ *
+ * Autores: Bruno Farias e Gustavo Valente
+ * 2022/2 - UFPR - PRÁTICA EM DESENVOLVIMENTO DE SOFTWARE
+ * PROF. PAULO ALMEIDA
+ *
+ */
 #ifndef CONSOLE_PASSAGEIRO_HPP
 #define CONSOLE_PASSAGEIRO_HPP
 

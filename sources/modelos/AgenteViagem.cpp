@@ -1,3 +1,10 @@
+/**
+ *
+ * Autores: Bruno Farias e Gustavo Valente
+ * 2022/2 - UFPR - PRÁTICA EM DESENVOLVIMENTO DE SOFTWARE
+ * PROF. PAULO ALMEIDA
+ *
+ */
 #include "../../includes/modelos/AgenteViagem.hpp"
 
 AgenteViagem::AgenteViagem(const std::string &nome, const CPF &cpf, const RG &rg,

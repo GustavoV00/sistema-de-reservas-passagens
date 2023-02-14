@@ -14,7 +14,6 @@
 
 #include "../modelos/Pessoa.hpp"
 #include "../modelos/AgenteViagem.hpp"
-// #include "../modelos/Passageiro.hpp"
 #include "../modelos/Reserva.hpp"
 #include "../modelos/CPF.hpp"
 #include "../modelos/RG.hpp"

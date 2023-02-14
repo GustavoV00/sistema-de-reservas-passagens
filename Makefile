@@ -5,9 +5,6 @@ parametrosCompilacao=-Wall -std=c++17 #-Wshadow
 
 all: $(nomePrograma)
 
-# $(nomePrograma): main.o Pessoa.o CPF.o RG.o DocumentoInvalidoException.o Utils.o Reserva.o Passageiro.o Voo.o AgenteViagem.o Console.o DadoIncorretoException.o CapacidadeIncorretaException.o FormatoInvalidoException.o
-# 	$(compilador) -o $(nomePrograma) main.o Pessoa.o CPF.o RG.o DocumentoInvalidoException.o Utils.o Reserva.o Passageiro.o Voo.o AgenteViagem.o Console.o DadoIncorretoException.o CapacidadeIncorretaException.o FormatoInvalidoException.o $(parametrosCompilacao)
-
 $(nomePrograma): main.o Pessoa.o CPF.o RG.o DocumentoInvalidoException.o Utils.o Reserva.o Passageiro.o Voo.o AgenteViagem.o UsuarioConvidado.o Usuario.o  ConsoleSistema.o ConsoleAgente.o ConsolePassageiro.o GerarDados.o VooControle.o ReservaControle.o PassageiroControle.o VooRepositorio.o ReservaRepositorio.o PassageiroRepositorio.o DadoIncorretoException.o CapacidadeIncorretaException.o FormatoInvalidoException.o VooCheioException.o
 	$(compilador) -o $(nomePrograma) main.o Pessoa.o CPF.o RG.o DocumentoInvalidoException.o Utils.o Reserva.o Passageiro.o Voo.o AgenteViagem.o UsuarioConvidado.o Usuario.o ConsoleSistema.o ConsoleAgente.o ConsolePassageiro.o GerarDados.o VooControle.o ReservaControle.o PassageiroControle.o VooRepositorio.o ReservaRepositorio.o PassageiroRepositorio.o DadoIncorretoException.o CapacidadeIncorretaException.o FormatoInvalidoException.o VooCheioException.o $(parametrosCompilacao)
 

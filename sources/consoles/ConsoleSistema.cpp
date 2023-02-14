@@ -1,3 +1,10 @@
+/**
+ *
+ * Autores: Bruno Farias e Gustavo Valente
+ * 2022/2 - UFPR - PRÁTICA EM DESENVOLVIMENTO DE SOFTWARE
+ * PROF. PAULO ALMEIDA
+ *
+ */
 #include <iostream>
 #include "../../includes/consoles/ConsoleSistema.hpp"
 #include "../../includes/utils/Utils.hpp"

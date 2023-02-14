@@ -1,3 +1,10 @@
+/**
+ *
+ * Autores: Bruno Farias e Gustavo Valente
+ * 2022/2 - UFPR - PRÁTICA EM DESENVOLVIMENTO DE SOFTWARE
+ * PROF. PAULO ALMEIDA
+ *
+ */
 #ifndef VOO_CONTROLE_H
 #define VOO_CONTROLE_H
 
