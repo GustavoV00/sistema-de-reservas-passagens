@@ -40,7 +40,6 @@ public:
 
     void imprimirDadosReserva();
     static Reserva *buscaReservaLocalizador(const std::string &localizador, std::list<Reserva *> reservas);
-
     static Reserva *verificaSeAssentoExiste(const std::string &numAssento, std::list<Reserva *> reservas);
 
 private:

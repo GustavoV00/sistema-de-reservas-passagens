@@ -25,7 +25,6 @@ public:
 
 private:
     std::string sessionID;
-
     void gerarSessionId();
 };
 

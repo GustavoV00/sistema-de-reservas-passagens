@@ -26,9 +26,9 @@ public:
     Reserva *obterReservaPorId(int id);
     Reserva *obterReservaPorLocalizador(std::string &localizador);
     bool cadastrarReserva(Reserva *Reserva);
-    bool excluirReservaPorLocalizador(std::string &localizador);
     std::list<Reserva *> obterReservasDoPassageiro(Usuario *usuario);
     Passageiro *obterPassageiroDasReservas(std::list<Reserva *> &reservas);
+    bool excluirReservaPorLocalizador(std::string &localizador);
 
 private:
     ReservaRepositorio reservaRepositorio;
