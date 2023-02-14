@@ -6,7 +6,7 @@ VooControle::VooControle()
 {
 }
 
-VooRepositorio VooControle::getVooRepositorio()
+VooRepositorio VooControle::getVooRepositorio() const
 {
     return this->vooRepositorio;
 }

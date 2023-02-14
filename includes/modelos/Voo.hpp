@@ -15,6 +15,8 @@
 class Reserva; // Forward Declaration
 class Voo
 {
+    friend std::ostream &operator<<(std::ostream &stream, const Voo &voo);
+
 public:
     // constructor
     Voo(int numeroDoVoo, std::string partida, std::string chegada, int capacidade, std::string data, std::string horarioPartida, std::string horarioChegada);
@@ -42,7 +44,7 @@ public:
     std::string getData() const;
     void setData(const std::string &data);
 
-    int getCapacidade();
+    int getCapacidade() const;
     void setCapacidade(const int capacidade);
 
     int getAssentosDisponiveis() const;

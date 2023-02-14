@@ -1,4 +1,7 @@
+
+#include <list>
 #include <vector>
+
 #include "../../includes/modelos/GerarDados.hpp"
 #include "../../includes/utils/Utils.hpp"
 #include "../../includes/modelos/Voo.hpp"
@@ -219,4 +222,34 @@ int GerarDados::gerarCapacidade()
         capacidade = (rand() % 200) + 50;
     } while ((capacidade % 4 != 0) || (capacidade <= 0) || (capacidade > 200));
     return capacidade;
+}
+
+void GerarDados::gerarListaDeAgentes(std::list<AgenteViagem *> &agentes)
+{
+
+    unsigned long arraysCpfValidos[5] = {
+        53118958707,
+        92893956564,
+        34681867624,
+        76024460201,
+        91882674405};
+
+    unsigned long arrayRgsValidos[5] = {
+        149081352,
+        363665213,
+        320331003,
+        430039888,
+        317889837};
+
+    for (unsigned int i = 0; i < 5; i++)
+    {
+        CPF cpfAgente{arraysCpfValidos[i]};
+        RG rgAgente{arrayRgsValidos[i]};
+        std::string nome = "AgenteViagem" + std::to_string(i);
+        std::string data = this->gerarNovaData();
+        unsigned long celular = (rand() % 99999999999) + 10000000000;
+        std::string email = "email" + std::to_string(i) + "@email" + std::to_string(i) + ".com";
+        std::string codigoAgente = "AV" + std::to_string(Utils::geradorNumeroAleatorio());
+        agentes.push_back(new AgenteViagem{nome, cpfAgente, rgAgente, data, celular, email, codigoAgente});
+    }
 }

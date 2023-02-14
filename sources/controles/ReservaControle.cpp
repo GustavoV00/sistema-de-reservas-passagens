@@ -12,7 +12,7 @@ ReservaControle::ReservaControle()
 {
 }
 
-ReservaRepositorio ReservaControle::getReservaRepositorio()
+ReservaRepositorio ReservaControle::getReservaRepositorio() const
 {
     return this->reservaRepositorio;
 }

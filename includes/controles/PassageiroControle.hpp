@@ -13,7 +13,7 @@ public:
     PassageiroControle();
     ~PassageiroControle() = default;
 
-    PassageiroRepositorio getPassageiroRepositorio();
+    PassageiroRepositorio getPassageiroRepositorio() const;
 
     std::list<Passageiro *> &obterTodosOsPassageiros();
     Passageiro *obterPassageiroPorId(const unsigned int id);

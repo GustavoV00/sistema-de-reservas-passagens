@@ -9,11 +9,14 @@
 #define RESERVA_HPP
 
 #include <string>
+#include <memory>
 #include "Voo.hpp"
 #include "Passageiro.hpp"
 
 class Reserva
 {
+    friend std::ostream &operator<<(std::ostream &stream, const Reserva &reserva);
+
 public:
     // Construtores
     Reserva(std::string &localizador, Passageiro *passageiro, Voo *voo, std::string numeroDoAssento);
@@ -29,7 +32,7 @@ public:
     Passageiro *getPassageiro() const;
     void setPassageiro(Passageiro *passageiro);
 
-    Voo *getVoo();
+    Voo *getVoo() const;
     void setVoo(Voo *voo);
 
     std::string getNumeroDoAssento() const;

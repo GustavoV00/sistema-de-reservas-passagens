@@ -74,7 +74,8 @@ void ConsolePassageiro::rodarGerenciamentoDeReservas(ReservaControle *reservaCon
             if (comando.size() == 6 && comando.at(0) == locL && comando.at(1) == locR)
             {
                 Reserva *reserva = reservaControle->obterReservaPorLocalizador(comando);
-                reserva->imprimirDadosReserva();
+                // reserva->imprimirDadosReserva();
+                std::cout << *reserva << std::endl;
             }
             else
             {
@@ -110,7 +111,6 @@ void ConsolePassageiro::rodarGerenciamentoDeReservas(ReservaControle *reservaCon
         {
             comando = "6";
         }
-        // std::cout << std::endl;
     }
 }
 
@@ -227,7 +227,8 @@ void ConsolePassageiro::atualizarReservaInterface(ReservaControle *reservaContro
             Reserva *reserva = reservaControle->obterReservaPorLocalizador(comando);
             if (reserva != nullptr)
             {
-                reserva->imprimirDadosReserva();
+                // reserva->imprimirDadosReserva();
+                std::cout << *reserva << std::endl;
                 if (Utils::mensagemConfirmacao("Tem certeza que deseja atualizar a reserva acima?"))
                 {
                     comando = Utils::lerStringTratada("Digite VOO para mudar o VOO e ASSENTO para mudar o ASSENTO do VOO atual");
@@ -239,9 +240,18 @@ void ConsolePassageiro::atualizarReservaInterface(ReservaControle *reservaContro
                         int numVoo = stoi(comando);
                         Voo *vooAntigo = reserva->getVoo();
                         Voo *voo = vooControle->obterVooPorNumeroDoVoo(numVoo);
-                        reserva->setVoo(voo);
-                        std::cout << "VOO foi atualizado com sucesso" << std::endl;
-                        vooAntigo->removerReserva(reserva);
+                        if (vooAntigo->getNumeroDoVoo() != voo->getNumeroDoVoo())
+                        {
+                            reserva->setVoo(voo);
+                            voo->adicionarReserva(reserva);
+                            std::cout << "VOO foi atualizado com sucesso" << std::endl;
+                            vooAntigo->removerReserva(reserva);
+                        }
+                        else
+                        {
+                            std::cout << "O Voo novo não pode ser igual ao atual" << std::endl;
+                            break;
+                        }
                     }
                     else if (comando.compare("ASSENTO") == 0 || comando.compare("assento") == 0)
                     {

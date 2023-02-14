@@ -14,16 +14,18 @@
 
 class Passageiro : public Usuario
 {
+    friend std::ostream &operator<<(std::ostream &stream, const Passageiro &passageiro);
+
 public:
     // constructor
     Passageiro(const std::string &nome, const CPF &cpf, const RG &rg,
                const std::string &dataDeNascimento, const unsigned long &contato, const std::string &email);
 
     // destructor
-    ~Passageiro() = default;
+    virtual ~Passageiro() = default;
 
     unsigned int getId() const;
-    void setId(unsigned int id);
+    void setId(const unsigned int id);
 
     void imprimirDadosPassageiro();
 

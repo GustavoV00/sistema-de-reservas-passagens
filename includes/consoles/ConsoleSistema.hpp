@@ -10,8 +10,6 @@
 #include "../modelos/GerarDados.hpp"
 
 class AgenteViagem;
-// class Passageiro;
-// class Usuario;
 
 class ConsoleSistema
 {
@@ -26,7 +24,6 @@ public:
     virtual void imprimirOpcoesGerenciamentoVoos();
 
     virtual void rodarGerenciamentoDeReservas(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle, Usuario *usuario);
-    // void cadastrarReservaInterface(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle, Passageiro *passageiro, std::list<Reserva *> resevasDoPassageiro);
 
     virtual void rodarGerenciamentoDePassageiros(PassageiroControle *passageiroControle, Usuario *usuario, ReservaControle *reservaControle);
     virtual void imprimirOpcoesGerenciamentoPassageiros();

@@ -7,7 +7,7 @@ PassageiroControle::PassageiroControle()
 {
 }
 
-PassageiroRepositorio PassageiroControle::getPassageiroRepositorio()
+PassageiroRepositorio PassageiroControle::getPassageiroRepositorio() const
 {
     return this->passageiroRepositorio;
 }

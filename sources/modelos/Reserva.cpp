@@ -6,6 +6,7 @@
  *
  */
 #include <iostream>
+#include <memory>
 #include "../../includes/modelos/Reserva.hpp"
 #include "../../includes/modelos/Passageiro.hpp"
 #include "../../includes/modelos/Voo.hpp"
@@ -44,7 +45,7 @@ void Reserva::setPassageiro(Passageiro *passageiro)
     this->passageiro = passageiro;
 }
 
-Voo *Reserva::getVoo()
+Voo *Reserva::getVoo() const
 {
     return this->voo;
 }
@@ -97,4 +98,17 @@ Reserva *Reserva::buscaReservaLocalizador(const std::string &localizador, std::l
         }
     }
     return nullptr;
+}
+
+std::ostream &operator<<(std::ostream &stream, const Reserva &reserva)
+{
+    stream << "=============================================================================================================================" << std::endl;
+    stream << "Código: " << reserva.getLocalizador() << std::endl;
+    stream << "Passageiro: " << reserva.getPassageiro()->getNome() << " - Email: " << reserva.getPassageiro()->getEmail()
+           << " - CPF: " << reserva.getPassageiro()->getCpf().getNumero() << std::endl;
+    stream << "Voo: " << reserva.getVoo()->getNumeroDoVoo() << " - Partida: " << reserva.getVoo()->getPartida() << " - Destino: " << reserva.getVoo()->getDestino() << " - Data: " << reserva.getVoo()->getData() << " - Horário Partida: " << reserva.getVoo()->getHorarioPartida() << " - Horário Chegada: " << reserva.getVoo()->getHorarioChegada() << std::endl;
+    stream << "Assento: " << reserva.getNumeroDoAssento() << std::endl;
+    stream << "=============================================================================================================================" << std::endl;
+
+    return stream;
 }

@@ -105,7 +105,7 @@ void Voo::setData(const std::string &data)
     this->data = data;
 }
 
-int Voo::getCapacidade()
+int Voo::getCapacidade() const
 {
     return this->capacidade;
 }
@@ -279,4 +279,19 @@ void Voo::removerReserva(Reserva *reserva)
 {
     this->reservas.remove(reserva);
     this->assentosDisponiveis = (this->assentosDisponiveis + 1);
+}
+
+std::ostream &operator<<(std::ostream &stream, const Voo &voo)
+{
+    stream << "=================================================================================" << std::endl;
+    stream << "Número: " << voo.getNumeroDoVoo() << std::endl;
+    stream << "Partida: " << voo.getPartida() << std::endl;
+    stream << "Destino: " << voo.getDestino() << std::endl;
+    stream << "Data: " << voo.getData() << std::endl;
+    stream << "Horário de Partida: " << voo.getHorarioPartida() << std::endl;
+    stream << "Horário de Chegada: " << voo.getHorarioChegada() << std::endl;
+    stream << "Capacidade: " << voo.getCapacidade() << std::endl;
+    stream << "Assentos Disponíveis: " << voo.getAssentosDisponiveis() << std::endl;
+    stream << "=================================================================================" << std::endl;
+    return stream;
 }

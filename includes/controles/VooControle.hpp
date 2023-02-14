@@ -13,7 +13,7 @@ public:
     VooControle();
     ~VooControle() = default;
 
-    VooRepositorio getVooRepositorio();
+    VooRepositorio getVooRepositorio() const;
 
     std::list<Voo *> &obterTodosOsVoos();
     Voo *obterVooPorId(const unsigned int id);

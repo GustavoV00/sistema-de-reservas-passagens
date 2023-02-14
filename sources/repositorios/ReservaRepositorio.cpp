@@ -6,9 +6,15 @@ ReservaRepositorio::ReservaRepositorio()
     this->lastId = -1;
 }
 
-ReservaRepositorio::~ReservaRepositorio()
-{
-}
+// ReservaRepositorio::~ReservaRepositorio()
+// {
+//     std::list<Reserva *>::iterator it{this->reservas.begin()};
+//     while (it != this->reservas.end())
+//     {
+//         delete *it;
+//         it = this->reservas.erase(it);
+//     }
+// }
 
 std::list<Reserva *> &ReservaRepositorio::getReservas()
 {

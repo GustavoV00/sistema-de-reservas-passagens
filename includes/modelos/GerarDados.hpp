@@ -4,6 +4,7 @@
 #include "../controles/PassageiroControle.hpp"
 #include "../controles/VooControle.hpp"
 #include "../controles/ReservaControle.hpp"
+#include "../modelos/AgenteViagem.hpp"
 
 class GerarDados
 {
@@ -19,6 +20,8 @@ public:
     std::string gerarNovaData();
     std::string gerarNovoHorario();
     int gerarCapacidade();
+
+    void gerarListaDeAgentes(std::list<AgenteViagem *> &agentes);
 
 private:
     VooControle vooControle;

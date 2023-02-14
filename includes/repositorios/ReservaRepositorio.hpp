@@ -8,7 +8,7 @@ class ReservaRepositorio
 {
 public:
     ReservaRepositorio();
-    ~ReservaRepositorio();
+    ~ReservaRepositorio() = default;
 
     std::list<Reserva *> &getReservas();
     unsigned int getNewId();

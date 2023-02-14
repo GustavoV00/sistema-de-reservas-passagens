@@ -1,3 +1,4 @@
+#include <iostream>
 #include "../../includes/repositorios/PassageiroRepositorio.hpp"
 
 PassageiroRepositorio::PassageiroRepositorio()

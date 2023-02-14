@@ -539,6 +539,11 @@ void ConsoleAgente::cadastrarReservaInterface(ReservaControle *reservaControle, 
         termoBusca = Utils::lerStringTratada("Digite o Nome completo, CPF, RG ou Email do passageiro a ser adicionado na reserva ou 'SAIR'");
     }
 
+    if (termoBusca.compare("SAIR") == 0)
+    {
+        return;
+    }
+
     if (!adicionouPassageiro)
     {
         std::cout << "Falha ao encontrar passageiro para a reserva... " << std::endl;
@@ -630,11 +635,12 @@ void ConsoleAgente::atualizarReservaInterface(ReservaControle *reservaControle, 
             Reserva *reserva = reservaControle->obterReservaPorLocalizador(comando);
             if (reserva != nullptr)
             {
-                reserva->imprimirDadosReserva();
+                // reserva->imprimirDadosReserva();
+                std::cout << *reserva << std::endl;
                 if (Utils::mensagemConfirmacao("Tem certeza que deseja atualizar a reserva acima?"))
                 {
                     comando = Utils::lerStringTratada("Digite VOO para mudar o VOO e ASSENTO para mudar o ASSENTO do VOO atual");
-                    if (comando.compare("VOO") == 0)
+                    if (comando.compare("VOO") == 0 || comando.compare("voo") == 0)
                     {
                         std::list<Voo *> voos = vooControle->obterTodosOsVoos();
                         Utils::imprimirListaVoos(voos);
@@ -642,11 +648,19 @@ void ConsoleAgente::atualizarReservaInterface(ReservaControle *reservaControle, 
                         int numVoo = stoi(comando);
                         Voo *vooAntigo = reserva->getVoo();
                         Voo *voo = vooControle->obterVooPorNumeroDoVoo(numVoo);
-                        reserva->setVoo(voo);
-                        std::cout << "VOO foi atualizado com sucesso" << std::endl;
-                        vooAntigo->removerReserva(reserva);
+                        if (vooAntigo->getNumeroDoVoo() != voo->getNumeroDoVoo())
+                        {
+                            reserva->setVoo(voo);
+                            voo->adicionarReserva(reserva);
+                            std::cout << "VOO foi atualizado com sucesso" << std::endl;
+                            vooAntigo->removerReserva(reserva);
+                        }
+                        else
+                        {
+                            std::cout << "O Voo novo não pode ser igual ao atual" << std::endl;
+                        }
                     }
-                    else if (comando.compare("ASSENTO") == 0)
+                    else if (comando.compare("ASSENTO") == 0 || comando.compare("assento") == 0)
                     {
                         std::cout << "Foi gerado um novo assento com sucesso!" << std::endl;
                         std::string novoAssento = GerarDados::gerarNovoNumeroDoAssento(reservaControle);
@@ -717,92 +731,6 @@ void ConsoleAgente::rodarGerenciamentoDePassageiros(PassageiroControle *passagei
         std::cout << std::endl;
     }
 }
-
-// void ConsoleAgente::cadastrarPassageiroInterface(PassageiroControle *passageiroControle)
-// {
-//     std::list<Passageiro *> passageiros = passageiroControle->obterTodosOsPassageiros();
-//     std::string nomePassageiro = Utils::lerStringTratada("Digite o nome do passageiro a ser adicionado ou 'SAIR'");
-//     if (nomePassageiro.compare("SAIR") == 0)
-//     {
-//         return;
-//     }
-
-//     CPF *cpfPassageiro = Utils::lerCPFTratado("Digite o CPF (sem pontuação) do passageiro a ser adicionado ou 'SAIR'");
-//     if (cpfPassageiro == nullptr)
-//     {
-//         std::cout << "CPF não é válido! Encerrando cadastro de passageiro..." << std::endl;
-//         return;
-//     }
-//     RG *rgPassageiro = Utils::lerRGTratado("Digite o RG (sem pontuação) do passageiro a ser adicionado ou 'SAIR'");
-//     if (rgPassageiro == nullptr)
-//     {
-//         std::cout << "RG não é válido! Encerrando cadastro de passageiro..." << std::endl;
-//         return;
-//     }
-
-//     std::string dataDeNascimento;
-//     try
-//     {
-//         dataDeNascimento = Utils::lerDataTratada("Digite a data de nascimento (dd/MM/yyyy) do passageiro a ser adicionado ou 'SAIR'");
-//     }
-//     catch (FormatoInvalidoException &fie)
-//     {
-//         std::cout << "Formato da data de nascimento é inválido! Encerrando cadastro do passageiro..." << std::endl;
-//         return;
-//     }
-
-//     unsigned long contato;
-//     try
-//     {
-//         contato = Utils::lerTelefoneTratado("Digite o telefone de contato (apenas números) do passageiro a ser adicionado ou 'SAIR'");
-//     }
-//     catch (FormatoInvalidoException &fie)
-//     {
-//         std::cout << "Formato do telefone é inválido!  Encerrando cadastro do passageiro..." << std::endl;
-//         return;
-//     }
-
-//     std::string email = Utils::lerStringTratada("Digite o email do passageiro a ser adicionado ou 'SAIR'");
-//     if (email.compare("SAIR") == 0)
-//     {
-//         return;
-//     }
-
-//     // verifica se já não existe passageiro com esse CPF, RG ou email
-//     std::list<Passageiro *>::iterator it;
-//     for (it = passageiros.begin(); it != passageiros.end(); ++it)
-//     {
-//         if ((*it)->getCpf() == *cpfPassageiro || (*it)->getRg() == *rgPassageiro || (*it)->getEmail().compare(email) == 0)
-//         {
-//             std::cout << std::endl
-//                       << "\tATENÇÃO! Já existe passageiro com esse CPF, RG ou email! Passageiro não vai ser cadastrado!" << std::endl;
-//             return;
-//         }
-//     }
-
-//     Passageiro *novoPas{nullptr};
-//     try
-//     {
-//         novoPas = new Passageiro{nomePassageiro, *cpfPassageiro, *rgPassageiro, dataDeNascimento, contato, email};
-//     }
-//     catch (DocumentoInvalidoException &die)
-//     {
-//         std::cout << "Falha ao cadastrar passageiro por documento inválido: " << die.what() << std::endl;
-//         return;
-//     }
-//     catch (std::exception &e)
-//     {
-//         std::cout << "Falha ao cadastrar passageiro: " << e.what() << std::endl;
-//         return;
-//     }
-
-//     if (!passageiroControle->cadastrarPassageiro(novoPas))
-//     {
-//         return;
-//     }
-
-//     std::cout << "Passageiro '" << novoPas->getNome() << "' adicionado com sucesso!" << std::endl;
-// }
 
 void ConsoleAgente::atualizarPassageiroInterface(PassageiroControle *passageiroControle)
 {

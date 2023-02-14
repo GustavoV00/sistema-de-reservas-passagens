@@ -182,23 +182,7 @@ void ConsoleSistema::rodarGerenciamentoDeVoo(VooControle *vooControle)
 
 void ConsoleSistema::rodarGerenciamentoDeReservas(ReservaControle *reservaControle, PassageiroControle *passageiroControle, VooControle *vooControle, Usuario *usuario)
 {
-    // std::string comando{""};
-    // std::list<Reserva *> reservas = reservaControle->obterReservasDoPassageiro(usuario);
-
-    // CPF cpfBusca = usuario->getCpf();
-    // Passageiro *passageiro = passageiroControle->obterPassageiroPorCPF(cpfBusca);
-    // while (comando.compare("2") != 0)
-    // {
-    //     this->imprimirOpcoesGerenciamentoDeReservas();
-    //     comando = Utils::lerStringTratada("Digite o número da opção escolhida");
-    //     // Listar
-    //     if (comando.compare("1") == 0)
-    //     {
-    //         this->cadastrarReservaInterface(reservaControle, passageiroControle, vooControle, passageiro, reservas);
-    //     }
-
-    //     std::cout << std::endl;
-    // }
+    return;
 }
 
 void ConsoleSistema::imprimirOpcoesGerenciamentoPassageiros()
@@ -208,8 +192,6 @@ void ConsoleSistema::imprimirOpcoesGerenciamentoPassageiros()
     std::cout << "--------------------------------OPÇÕES--------------------------------" << std::endl;
     std::cout << "1) LISTAR PASSAGEIROS" << std::endl;
     std::cout << "2) CRIAR PASSAGEIRO" << std::endl;
-    // std::cout << "3) EDITAR PASSAGEIRO" << std::endl;
-    // std::cout << "4) EXCLUIR PASSAGEIRO" << std::endl;
     std::cout << "5) VOLTAR" << std::endl;
     std::cout << "----------------------------------------------------------------------------" << std::endl;
     std::cout << std::endl;

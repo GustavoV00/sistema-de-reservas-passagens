@@ -25,6 +25,7 @@ int main()
     ReservaControle *reservaControle{nullptr};
     Usuario *usuario{nullptr};
     ConsoleSistema *console{nullptr};
+    std::list<AgenteViagem *> agentes;
 
     try
     {
@@ -45,8 +46,8 @@ int main()
     gerarDados.gerarDadosVoos(vooControle);
     gerarDados.gerarDadosPassageiros(passageiroControle);
     gerarDados.gerarDadosReservas(reservaControle, passageiroControle, vooControle);
+    gerarDados.gerarListaDeAgentes(agentes);
 
-    // Pode ser logado como passageiro ou como agente
     std::string comando{""};
 
     console->imprimirMensagemInicioExecucao();
@@ -89,11 +90,6 @@ int main()
         }
         else if (comando.compare("2") == 0) // login como agente
         {
-            std::list<AgenteViagem *> agentes;
-            CPF cpfAgente{11111111111};
-            RG rgAgente{111111111};
-            agentes.push_back(new AgenteViagem{"Bruno", cpfAgente, rgAgente, "25/01/2001", 41998877875, "bruno43ist@gmail.com", "AV12345"});
-
             Usuario *novoUsuarioAgente = console->loginAgente(agentes);
             if (novoUsuarioAgente != nullptr)
             {
@@ -128,10 +124,29 @@ int main()
         }
     }
 
-    // liberar memória
+    console->finalizarSistema();
+
+    // deletes
+    std::list<AgenteViagem *>::iterator it{agentes.begin()};
+    while (it != agentes.end())
+    {
+        // se estiver logado como esse agente não faz o delete para não dar double free
+        if (usuario == (*it))
+        {
+            it++;
+        }
+        else
+        {
+            delete *it;
+            it = agentes.erase(it);
+        }
+    }
+
+    delete reservaControle;
+    delete vooControle;
+    delete passageiroControle;
     delete console;
     delete usuario;
 
-    console->finalizarSistema();
     return 0;
 }

@@ -21,7 +21,7 @@ unsigned int Passageiro::getId() const
     return this->id;
 }
 
-void Passageiro::setId(unsigned int id)
+void Passageiro::setId(const unsigned int id)
 {
     this->id = id;
 }
@@ -33,4 +33,14 @@ void Passageiro::imprimirDadosPassageiro()
     std::cout << "Nome: " << this->getNome() << " - CPF: " << this->getCpf().getNumero() << " - RG: " << this->getRg().getNumero() << std::endl;
     std::cout << "Email: " << this->getEmail() << " - Telefone: " << this->getContato() << " - Data de Nascimento: " << this->getDataDeNascimento() << std::endl;
     std::cout << "=====================================================================================================" << std::endl;
+}
+
+std::ostream &operator<<(std::ostream &stream, const Passageiro &passageiro)
+{
+
+    stream << "=====================================================================================================" << std::endl;
+    stream << "Nome: " << passageiro.getNome() << " - CPF: " << passageiro.getCpf().getNumero() << " - RG: " << passageiro.getRg().getNumero() << std::endl;
+    stream << "Email: " << passageiro.getEmail() << " - Telefone: " << passageiro.getContato() << " - Data de Nascimento: " << passageiro.getDataDeNascimento() << std::endl;
+    stream << "=====================================================================================================" << std::endl;
+    return stream;
 }

@@ -687,7 +687,9 @@ void Console::cadastrarReserva(std::list<AgenteViagem *> &agentes, std::list<Pas
     std::cout << std::endl
               << std::endl
               << "Resumo Reserva: " << std::endl;
-    reserva->imprimirDadosReserva();
+
+    // reserva->imprimirDadosReserva();s
+    std::cout << *reserva << ;
 }
 
 void Console::gerenciarReservas(std::list<AgenteViagem *> &agentes, std::list<Passageiro *> &passageiros, std::list<Reserva *> &reservas, std::list<Voo *> voos)

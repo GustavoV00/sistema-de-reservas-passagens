@@ -13,7 +13,7 @@ public:
     ReservaControle();
     ~ReservaControle() = default;
 
-    ReservaRepositorio getReservaRepositorio();
+    ReservaRepositorio getReservaRepositorio() const;
 
     std::list<Reserva *> &obterTodosAsReservas();
     Reserva *obterReservaPorId(int id);

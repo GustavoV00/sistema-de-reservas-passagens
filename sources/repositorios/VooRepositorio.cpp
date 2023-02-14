@@ -6,6 +6,10 @@ VooRepositorio::VooRepositorio()
     this->lastId = -1;
 }
 
+VooRepositorio::~VooRepositorio()
+{
+}
+
 std::list<Voo *> &VooRepositorio::getVoos()
 {
     return this->voos;

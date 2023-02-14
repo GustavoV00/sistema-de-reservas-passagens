@@ -84,10 +84,8 @@ void Utils::imprimirListaReservas(std::list<Reserva *> reservas)
         std::list<Reserva *>::iterator it;
         for (it = reservas.begin(); it != reservas.end(); ++it)
         {
-            // std::cout << "=====================================================================================" << std::endl;
             (*it)->imprimirDadosReserva();
         }
-        // std::cout << "=====================================================================================" << std::endl;
         std::cout << "Quantidade de reservas: " << reservas.size() << std::endl;
     }
     else
@@ -104,6 +102,7 @@ void Utils::imprimirListaVoos(std::list<Voo *> &voos)
     std::list<Voo *>::iterator it;
     for (it = voos.begin(); it != voos.end(); ++it)
     {
+        // std::cout << *it;
         (*it)->imprimirDadosVoo();
     }
     std::cout << "Quantidade de voos: " << voos.size() << std::endl;

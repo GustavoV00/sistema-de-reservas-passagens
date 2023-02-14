@@ -8,7 +8,7 @@ class VooRepositorio
 {
 public:
     VooRepositorio();
-    ~VooRepositorio() = default;
+    ~VooRepositorio();
 
     std::list<Voo *> &getVoos();
 
